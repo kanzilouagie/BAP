@@ -1,19 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react';
+import app from './Authentication/base';
 
-class Home extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-
-  render() {
-    return (
-      <div className="col-md-6">
-        <h1>You are home.</h1>
-      </div>
-    )
-  }
+function Home() {
+  return (
+    <>
+      <h1>Home</h1>
+      <button onClick={() => app.auth().signOut()}>Sign out</button>
+    </>
+  )
 }
 
 export default Home;
