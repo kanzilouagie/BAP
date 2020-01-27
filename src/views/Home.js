@@ -1,5 +1,5 @@
-import React from "react";
-import app from "./Authentication/base";
+import React from 'react';
+import app from '../authentication/base';
 
 const Home = () => {
   return (

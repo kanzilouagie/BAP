@@ -1,7 +1,7 @@
-import React, { useCallback, useContext } from "react";
-import { Redirect, useHistory } from "react-router";
-import app from "./base";
-import { AuthContext } from "./Auth";
+import React, { useCallback, useContext } from 'react';
+import { Redirect, useHistory } from 'react-router';
+import app from '../authentication/base';
+import { AuthContext } from '../authentication/Auth';
 
 const Login = () => {
   const history = useHistory();
@@ -13,7 +13,7 @@ const Login = () => {
         await app
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
-        history.push("/");
+        history.push('/');
       } catch (error) {
         alert(error);
       }
