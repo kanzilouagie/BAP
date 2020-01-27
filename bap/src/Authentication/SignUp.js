@@ -1,26 +1,30 @@
-import React, {useCallback} from 'react';
-import {withRouter} from 'react-router';
-import app from './base';
+import React, { useCallback } from "react";
+import { useHistory } from "react-router";
+import app from "./base";
 
-function SignUp({history}) {
-  const handleSignUp = useCallback(async event => {
-    event.preventDefault();
-    const {email, password} = event.target.elements;
-    try {
-      await app
-      .auth()
-      .createUserWithEmailAndPassword(email.value, password.value);
-      history.push('/');
-    } catch (error) {
-      alert(error);
-    }
-  }, [history]);
+const SignUp = () => {
+  const history = useHistory();
+  const handleSignUp = useCallback(
+    async event => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      try {
+        await app
+          .auth()
+          .createUserWithEmailAndPassword(email.value, password.value);
+        history.push("/");
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
 
   return (
     <div>
       <h1>Sign up</h1>
       <form onSubmit={handleSignUp}>
-      <label>
+        <label>
           Email
           <input name="email" type="email" placeholder="Email" />
         </label>
@@ -34,4 +38,4 @@ function SignUp({history}) {
   );
 };
 
-export default withRouter(SignUp);
+export default SignUp;
