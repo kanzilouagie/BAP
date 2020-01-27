@@ -1,6 +1,6 @@
-import React, { useCallback } from "react";
-import { useHistory } from "react-router";
-import app from "./base";
+import React, { useCallback } from 'react';
+import { useHistory } from 'react-router';
+import app from '../authentication/base';
 
 const SignUp = () => {
   const history = useHistory();
@@ -12,7 +12,7 @@ const SignUp = () => {
         await app
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
-        history.push("/");
+        history.push('/');
       } catch (error) {
         alert(error);
       }
