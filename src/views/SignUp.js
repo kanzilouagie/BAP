@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
-import app from '../authentication/base';
+import app from '../Authentication/base';
 
 const SignUp = () => {
   const history = useHistory();

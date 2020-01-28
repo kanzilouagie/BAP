@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { Redirect, useHistory } from 'react-router';
-import app from '../authentication/base';
-import { AuthContext } from '../authentication/Auth';
+import app from '../Authentication/base';
+import { AuthContext } from '../Authentication/Auth';
 
 const Login = () => {
   const history = useHistory();
