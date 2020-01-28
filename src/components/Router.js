@@ -4,7 +4,7 @@ import Home from '../views/Home';
 import Login from '../views/Login';
 import SignUp from '../views/SignUp';
 import PrivateRoute from './PrivateRoute';
-import { AuthProvider } from '../Authentication/Auth';
+import { AuthProvider } from '../authentication/Auth';
 
 const Router = () => {
   return (
