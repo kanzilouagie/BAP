@@ -1,11 +1,15 @@
 import React from 'react';
 import Router from './components/Router';
+import ThreeCanvas from './components/ThreeCanvas';
 
 const App = () => {
   return (
     <>
       {/* ThreeJS canvas */}
-      <Router />
+      <div style={{ position: 'relative', zIndex: '2' }}>
+        <Router />
+      </div>
+      <ThreeCanvas />
     </>
   );
 };
