@@ -1,0 +1,19 @@
+{
+  "runners": [
+    {
+      "name": "Maxime Verhoeve",
+      "color": "#3430f0",
+      "message": "Ik ben Maxime"
+    },
+    {
+      "name": "Quy Vu",
+      "color": "#ff00ff",
+      "message": "Ik ben Quy"
+    },
+    {
+      "name": "Kanzi",
+      "color": "#11aaff",
+      "message": "Ik ben Kanzi"
+    }
+  ]
+}
