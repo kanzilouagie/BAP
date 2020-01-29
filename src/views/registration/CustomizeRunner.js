@@ -1,11 +1,13 @@
 import React from 'react';
-import app from '../Authentication/base';
-
+import app from '../../Authentication/base';
+import { Link } from 'react-router-dom';
 const CustomizeRunner = () => {
   return (
     <>
       <h1>CustomizeRunner</h1>
-      <button onClick={() => app.auth().signOut()}>Sign out</button>
+      <button>
+        <Link to="/step3">Step3</Link>
+      </button>
     </>
   );
 };

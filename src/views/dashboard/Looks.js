@@ -1,11 +1,11 @@
 import React from 'react';
-import app from '../Authentication/base';
+import SideNavigation from '../../components/SideNavigation';
 
 const Looks = () => {
   return (
     <>
       <h1>Looks</h1>
-      <button onClick={() => app.auth().signOut()}>Sign out</button>
+      <SideNavigation />
     </>
   );
 };

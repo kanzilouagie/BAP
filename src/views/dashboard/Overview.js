@@ -1,11 +1,11 @@
 import React from 'react';
-import app from '../Authentication/base';
+import SideNavigation from '../../components/SideNavigation';
 
 const Overview = () => {
   return (
     <>
       <h1>Overview</h1>
-      <button onClick={() => app.auth().signOut()}>Sign out</button>
+      <SideNavigation />
     </>
   );
 };
