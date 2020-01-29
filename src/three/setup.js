@@ -6,7 +6,7 @@ import {
   Raycaster,
   Vector2
 } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { setScene, setCamera, setIntersects } from './store';
 
 let renderer;

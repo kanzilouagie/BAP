@@ -12,8 +12,18 @@
     },
     {
       "name": "Kanzi",
-      "color": "#11aaff",
+      "color": "#ffaa00",
       "message": "Ik ben Kanzi"
+    },
+    {
+      "name": "Raf",
+      "color": "#11aaff",
+      "message": "Ik ben Raf"
+    },
+    {
+      "name": "Arno",
+      "color": "#11aaff",
+      "message": "Ik ben Arno"
     }
   ]
 }

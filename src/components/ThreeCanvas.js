@@ -2,10 +2,12 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { loadThree, detectMouseMove } from '../three/setup';
 import { getIntersects } from '../three/store';
+import { objectIsClicked } from '../three/runnersWorld';
+import { useHistory } from 'react-router';
 
 const ThreeCanvas = () => {
   const threeCanvas = useRef(null);
-
+  const history = useHistory();
   useEffect(() => {
     loadThree(threeCanvas);
   }, []);
@@ -13,7 +15,8 @@ const ThreeCanvas = () => {
   const handleClick = () => {
     const intersects = getIntersects();
     if (intersects && intersects.length > 0) {
-      console.log(intersects[0].object.message);
+      //runnersWorld
+      objectIsClicked(intersects[0], history);
     }
   };
 

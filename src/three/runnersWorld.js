@@ -3,7 +3,6 @@ import {
   Mesh,
   BoxGeometry,
   HemisphereLight,
-  CameraHelper,
   MeshLambertMaterial,
   ShadowMaterial,
   PointLight
@@ -25,7 +24,7 @@ export const loadRunnersWorld = () => {
 export const moveCamera = direction => {
   const camera = getCamera();
   const lastPosition = camera.position.x;
-  const movingValue = 20;
+  const movingValue = 5;
   switch (direction) {
     case 'LEFT': {
       const val = lastPosition + movingValue;
@@ -87,6 +86,11 @@ const drawFloor = scene => {
   scene.add(plane);
   plane.rotation.x -= Math.PI / 2;
   plane.position.y = -0.51;
+};
+
+export const objectIsClicked = (obj, history) => {
+  console.log(obj.object);
+  history.push(`/detail/${obj.object.uuid}`);
 };
 
 const drawRunner = (scene, xpos, runner) => {
