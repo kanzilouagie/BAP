@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import { Redirect, useHistory } from 'react-router';
 import app from '../authentication/base';
 import { AuthContext } from '../authentication/Auth';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const history = useHistory();
@@ -40,6 +41,9 @@ const Login = () => {
           <input name="password" type="password" placeholder="Password" />
         </label>
         <button type="submit">Log in</button>
+        <button>
+          <Link to="/step1">Register</Link>
+        </button>
       </form>
     </div>
   );

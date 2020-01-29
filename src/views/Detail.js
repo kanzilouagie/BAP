@@ -4,9 +4,10 @@ import { getScene } from '../three/store';
 
 const Detail = () => {
   const { id } = useParams();
-  const scene = getScene();
   const [model, setModel] = useState();
+
   useEffect(() => {
+    const scene = getScene();
     if (scene) {
       const object = scene.getObjectById(parseInt(id), true);
       setModel(object);
