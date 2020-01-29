@@ -1,20 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import app from '../authentication/base';
-import { loadRunnersWorld, moveCamera } from '../three/runnersWorld';
-import { StoreContext } from '../store/StoreProvider';
-import { useObserver } from 'mobx-react';
+import { moveCamera } from '../three/runnersWorld';
 
 const Home = () => {
-  const store = useContext(StoreContext);
-
-  useEffect(() => {
-    if (!store.isWorldLoaded) {
-      loadRunnersWorld(store);
-      store.setIsWorldLoaded(true);
-    }
-  }, [store.isWorldLoaded]);
-
-  return useObserver(() => (
+  return (
     <>
       <h1>Home</h1>
       <button onClick={() => app.auth().signOut()}>Sign out</button>
@@ -23,7 +12,7 @@ const Home = () => {
         <button onClick={() => moveCamera('RIGHT')}>Move right</button>
       </>
     </>
-  ));
+  );
 };
 
 export default Home;

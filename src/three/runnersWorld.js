@@ -19,6 +19,8 @@ export const loadRunnersWorld = () => {
   runners.forEach((runner, key) => {
     drawRunner(scene, key * 2, runner);
   });
+
+  console.log(scene.getObjectById(15));
 };
 
 export const moveCamera = direction => {
@@ -90,7 +92,7 @@ const drawFloor = scene => {
 
 export const objectIsClicked = (obj, history) => {
   console.log(obj.object);
-  history.push(`/detail/${obj.object.uuid}`);
+  history.push(`/detail/${obj.object.id}`);
 };
 
 const drawRunner = (scene, xpos, runner) => {
@@ -106,7 +108,7 @@ const drawRunner = (scene, xpos, runner) => {
   cube.update = () => {
     cube.rotation.y += 0.01;
   };
-
+  cube.name = cube.id;
   cube.message = runner.message;
 
   scene.add(cube);
