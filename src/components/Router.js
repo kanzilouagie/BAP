@@ -4,7 +4,7 @@ import Overview from '../views/dashboard/Overview';
 import Login from '../views/Login';
 import SignUp from '../views/SignUp';
 import PrivateRoute from './PrivateRoute';
-import { AuthProvider } from '../Authentication/Auth';
+import { AuthProvider } from '../authentication/Auth';
 import MyTeam from '../views/dashboard/MyTeam';
 import Looks from '../views/dashboard/Looks';
 import Messages from '../views/dashboard/Messages';
@@ -19,7 +19,7 @@ const Router = () => {
     <AuthProvider>
       <BrowserRouter>
         <Switch>
-          <PrivateRoute exact path="/" component={Overview} />
+          <Route exact path="/" component={Overview} />
           <PrivateRoute exact path="/myteam" component={MyTeam} />
           <PrivateRoute exact path="/looks" component={Looks} />
           <PrivateRoute exact path="/messages" component={Messages} />

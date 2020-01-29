@@ -1,5 +1,5 @@
 import React from 'react';
-import app from '../Authentication/base';
+import app from '../authentication/base';
 import { Link } from 'react-router-dom';
 const SideNavigation = () => {
   return (
