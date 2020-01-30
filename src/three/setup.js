@@ -4,15 +4,18 @@ import {
   WebGLRenderer,
   sRGBEncoding,
   Raycaster,
-  Vector2
+  Vector2,
+  Object3D
 } from 'three';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import {
   setScene,
   setCamera,
   setIntersects,
-  setCameraDefaultPos
+  setCameraDefaultPos,
+  getObjects
 } from './store';
+import { setSelectedObject } from '../store';
 
 let renderer;
 let scene;
@@ -44,9 +47,19 @@ export const loadThree = threeCanvas => {
   render();
 };
 
-export const detectMouseMove = (event, canvas) => {
+export const clickedCanvas = (event, canvas) => {
   mouse.x = (event.clientX / canvas.current.offsetWidth) * 2 - 1;
   mouse.y = -(event.clientY / canvas.current.offsetHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const tmpobjects = getObjects();
+  let selectedScene;
+  tmpobjects.forEach(objScene => {
+    const tmpIntersects = raycaster.intersectObjects(objScene.children, true);
+    if (tmpIntersects.length > 0) {
+      selectedScene = objScene;
+    }
+    setSelectedObject(selectedScene);
+  });
 };
 
 const initializeRenderer = canvas => {
@@ -62,9 +75,6 @@ const initializeRenderer = canvas => {
 // deze func wordt geupdate aan 60fps
 const render = () => {
   requestAnimationFrame(render);
-  raycaster.setFromCamera(mouse, camera);
-  intersects = raycaster.intersectObjects(scene.children);
-  setIntersects(intersects);
   // run update function if an object has one
   scene.traverse(obj => {
     if (typeof obj.update === 'function') {
