@@ -7,7 +7,12 @@ import {
   Vector2
 } from 'three';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { setScene, setCamera, setIntersects } from './store';
+import {
+  setScene,
+  setCamera,
+  setIntersects,
+  setCameraDefaultPos
+} from './store';
 
 let renderer;
 let scene;
@@ -26,6 +31,8 @@ export const loadThree = threeCanvas => {
   );
   // initial camera position
   camera.position.set(5, 1, 5);
+  setCameraDefaultPos({ x: 5, y: 1, z: 5 });
+
   camera.rotation.y = 0.5;
   initializeRenderer(threeCanvas);
   setScene(scene);

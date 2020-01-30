@@ -5,9 +5,9 @@ import {
   HemisphereLight,
   MeshLambertMaterial,
   ShadowMaterial,
-  PointLight
+  PointLight,
+  Fog
 } from 'three';
-import gsap from 'gsap';
 import { getScene, getCamera } from './store';
 import runnersData from './store/dataExample.json';
 
@@ -20,27 +20,8 @@ export const loadRunnersWorld = () => {
     drawRunner(scene, key * 2, runner);
   });
 
-  console.log(scene.getObjectById(15));
-};
-
-export const moveCamera = direction => {
-  const camera = getCamera();
-  const lastPosition = camera.position.x;
-  const movingValue = 5;
-  switch (direction) {
-    case 'LEFT': {
-      const val = lastPosition + movingValue;
-      gsap.to(camera.position, 1, { x: val });
-      break;
-    }
-    case 'RIGHT': {
-      const val = lastPosition - movingValue;
-      gsap.to(camera.position, 1, { x: val });
-      break;
-    }
-    default:
-      break;
-  }
+  //fog
+  scene.fog = new Fog('#ffffff', 5, 10);
 };
 
 const addLights = scene => {
