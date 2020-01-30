@@ -34,7 +34,7 @@ const Router = () => {
         <ThreeCanvas />
         <div style={{ position: 'relative', zIndex: '2' }}>
           <Switch>
-            <Route exact path="/" component={Overview} />
+            <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path="/messages" component={Messages} />
             <PrivateRoute exact path="/looks" component={Looks} />
             <PrivateRoute exact path="/myteam" component={MyTeam} />
