@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { loadThree, detectMouseMove } from '../three/setup';
-import { getIntersects } from '../three/store';
+import { loadThree, clickedCanvas } from '../three/setup';
 import { objectIsClicked } from '../three/runnersWorld';
 import { useHistory } from 'react-router';
+import { getSelectedObject } from '../store';
 
 const ThreeCanvas = () => {
   const threeCanvas = useRef(null);
@@ -12,21 +12,16 @@ const ThreeCanvas = () => {
     loadThree(threeCanvas);
   }, []);
 
-  const handleClick = () => {
-    const intersects = getIntersects();
-    if (intersects && intersects.length > 0) {
-      //runnersWorld
-      objectIsClicked(intersects[0], history);
+  const handleClick = e => {
+    clickedCanvas(e, threeCanvas);
+    // console.log(intersects[0].object);
+    const interectedScene = getSelectedObject();
+    if (interectedScene) {
+      objectIsClicked(interectedScene, history);
     }
   };
 
-  return (
-    <Canvas
-      ref={threeCanvas}
-      onMouseMove={e => detectMouseMove(e, threeCanvas)}
-      onClick={() => handleClick()}
-    />
-  );
+  return <Canvas ref={threeCanvas} onClick={e => handleClick(e)} />;
 };
 
 const Canvas = styled.div`

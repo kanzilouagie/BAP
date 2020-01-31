@@ -6,10 +6,18 @@ import {
   MeshLambertMaterial,
   ShadowMaterial,
   PointLight,
-  Fog
+  Fog,
+  AnimationMixer,
+  LoopOnce,
+  Box3,
+  Vector3
 } from 'three';
-import { getScene, getCamera } from './store';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { getScene, getCamera, addToObjects } from './store';
 import runnersData from './store/dataExample.json';
+import gltfModel from '../assets/models/character.gltf';
+
+const loader = new GLTFLoader();
 
 export const loadRunnersWorld = () => {
   const scene = getScene();
@@ -17,6 +25,7 @@ export const loadRunnersWorld = () => {
   drawFloor(scene);
   const runners = runnersData.runners;
   runners.forEach((runner, key) => {
+    // drawRunner(scene, key * 2, runner);
     drawRunner(scene, key * 2, runner);
   });
 
@@ -61,7 +70,7 @@ const drawFloor = scene => {
   planeMaterial.opacity = 0.2;
   const plane = new Mesh(planeGeometry, planeMaterial);
   plane.receiveShadow = true;
-
+  plane.name = 'floor';
   // make sure plane moves along with camera.
   plane.update = () => {
     plane.position.x = camera.position.x;
@@ -72,25 +81,43 @@ const drawFloor = scene => {
 };
 
 export const objectIsClicked = (obj, history) => {
-  console.log(obj.object);
-  history.push(`/detail/${obj.object.id}`);
+  history.push(`/detail/${obj.id}`);
 };
 
-const drawRunner = (scene, xpos, runner) => {
-  const geometry = new BoxGeometry(1, 1, 1);
-  const material = new MeshLambertMaterial({
-    color: runner.color,
-    wireframe: false
+const drawRunner = (scene, xpos, runnerData) => {
+  loader.load(gltfModel, model => {
+    repositionModel(model.scene);
+    // model.scene.position.set(0, 0, 0);
+    model.scene.position.x = xpos;
+    model.scene.position.y = 0.2;
+    model.scene.update = () => {
+      // model.scene.rotation.y += 0.01;
+    };
+    model.scene.traverse(node => {
+      if (node instanceof Mesh) {
+        node.castShadow = true;
+        // node.position.set(0, 290, 0);
+      }
+    });
+    model.scene.message = runnerData.message;
+    scene.add(model.scene);
+    addToObjects(model.scene);
   });
-  const cube = new Mesh(geometry, material);
-  cube.castShadow = true;
-  // cube.rotation.x += 0.5;
-  cube.position.x = xpos;
-  cube.update = () => {
-    cube.rotation.y += 0.01;
-  };
-  cube.name = cube.id;
-  cube.message = runner.message;
+};
 
-  scene.add(cube);
+const repositionModel = mroot => {
+  const bbox = new Box3().setFromObject(mroot);
+  const cent = bbox.getCenter(new Vector3());
+  const size = bbox.getSize(new Vector3());
+
+  //Rescale the object to normalized space
+  // const maxAxis = Math.max(size.x, size.y, size.z);
+  mroot.scale.multiplyScalar(1.0 / 200);
+  bbox.setFromObject(mroot);
+  bbox.getCenter(cent);
+  bbox.getSize(size);
+
+  //Reposition to 0,halfY,0
+  mroot.position.copy(cent).multiplyScalar(-1);
+  mroot.position.y -= size.y * 0.5;
 };

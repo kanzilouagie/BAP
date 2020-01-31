@@ -16,7 +16,7 @@ export const loadDetailView = object => {
     });
 
     // add more fog to the scene
-    gsap.to(scene.fog, 0.5, { near: 1.5, far: 3 });
+    gsap.to(scene.fog, 0.5, { near: 2, far: 3 });
   }
 };
 
