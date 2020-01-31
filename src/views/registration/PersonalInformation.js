@@ -10,13 +10,14 @@ const PersonalInformation = () => {
       const { email, password, username, repeat } = event.target.elements;
       if (repeat.value === password.value) {
         try {
-          await firebase
+          const authResult = await firebase
             .auth()
             .createUserWithEmailAndPassword(email.value, password.value);
           firebase
             .firestore()
             .collection('users')
-            .add({
+            .doc(authResult.user.uid)
+            .set({
               username: username.value,
               email: email.value
             });
