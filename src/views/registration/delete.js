@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import firebase from '../../authentication/base';
 import { StoreContext } from '../../store/StoreProvider';
@@ -11,48 +11,33 @@ const PersonalInformation = () => {
     async event => {
       event.preventDefault();
       const { email, password, username, repeat } = event.target.elements;
-
-      const checkEmailExist = await firebase
-        .firestore()
-        .collection('users')
-        .where('email', '==', email.value)
-        .get()
-        .then(function(querySnapshot) {
-          return querySnapshot.size;
-        });
-
-      const checkUsernameExist = await firebase
-        .firestore()
-        .collection('users')
-        .where('username', '==', username.value)
-        .get()
-        .then(function(querySnapshot) {
-          return querySnapshot.size;
-        });
-
       if (repeat.value === password.value) {
-        console.log('passwords match');
+        try {
+          // const authResult = await firebase
+          //   .auth()
+          //   .createUserWithEmailAndPassword(email.value, password.value);
+          // firebase
+          //   .firestore()
+          //   .collection('users')
+          //   .doc(authResult.user.uid)
+          //   .set({
+          //     username: username.value,
+          //     email: email.value
+          //   });
+          const checkEmailExist = await firebase
+            .firestore()
+            .collection('users')
+            .where('email', '==', email.value)
+            .get()
+            .then(function(querySnapshot) {
+              return querySnapshot.size;
+            });
+          // history.push('/step4');
+        } catch (error) {
+          alert(error);
+        }
       } else {
-        console.log("passwords don't match");
-        return;
-      }
-
-      if (checkEmailExist === 0) {
-        console.log('email bestaat nog niet');
-      } else {
-        console.log('email bestaat al');
-        return;
-      }
-
-      if (checkUsernameExist === 0) {
-        console.log('username bestaat nog niet');
-        store.setUserUsername(username.value);
-        store.setUserEmail(email.value);
-        store.setUserPassword(password.value);
-        history.push('/step4');
-      } else {
-        console.log('username bestaat al');
-        return;
+        alert("passwords don't match");
       }
     },
     [history]
