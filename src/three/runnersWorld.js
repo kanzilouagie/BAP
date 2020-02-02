@@ -1,21 +1,17 @@
 import {
   PlaneBufferGeometry,
   Mesh,
-  BoxGeometry,
   HemisphereLight,
-  MeshLambertMaterial,
   ShadowMaterial,
   PointLight,
   Fog,
-  AnimationMixer,
-  LoopOnce,
   Box3,
   Vector3
 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { getScene, getCamera, addToObjects } from './store';
-import runnersData from './store/dataExample.json';
 import gltfModel from '../assets/models/character.gltf';
+import firebase from '../authentication/base';
 
 const loader = new GLTFLoader();
 
@@ -23,14 +19,20 @@ export const loadRunnersWorld = () => {
   const scene = getScene();
   addLights(scene);
   drawFloor(scene);
-  const runners = runnersData.runners;
-  runners.forEach((runner, key) => {
-    // drawRunner(scene, key * 2, runner);
-    drawRunner(scene, key * 2, runner);
-  });
+  loadRunners(scene);
 
   //fog
   scene.fog = new Fog('#ffffff', 5, 10);
+};
+
+const loadRunners = async scene => {
+  const runners = await firebase
+    .firestore()
+    .collection('users')
+    .get();
+  runners.docs.forEach((runner, key) => {
+    drawRunner(scene, key * 2, runner);
+  });
 };
 
 const addLights = scene => {
@@ -99,7 +101,7 @@ const drawRunner = (scene, xpos, runnerData) => {
         // node.position.set(0, 290, 0);
       }
     });
-    model.scene.message = runnerData.message;
+    model.scene.userId = runnerData.id;
     scene.add(model.scene);
     addToObjects(model.scene);
   });

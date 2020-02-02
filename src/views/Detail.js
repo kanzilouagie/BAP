@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router';
 import { getScene } from '../three/store';
 import { loadDetailView, exitDetailView } from '../three/detailView';
+import firebase from '../authentication/base';
 
 const Detail = () => {
   const { id } = useParams();
   const [model, setModel] = useState();
+  const [userData, setUserData] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -21,7 +23,22 @@ const Detail = () => {
     if (model) {
       loadDetailView(model);
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    if (model) {
+      loadUserData();
+    }
+  }, [model]);
+
+  const loadUserData = async () => {
+    const userDataSnapshot = await firebase
+      .firestore()
+      .collection('users')
+      .doc(model.userId)
+      .get();
+    setUserData(userDataSnapshot.data());
+  };
 
   const handleExit = () => {
     exitDetailView();
@@ -30,7 +47,12 @@ const Detail = () => {
 
   return (
     <div>
-      <p>Dit is de detailpagina van: {model ? model.message : null}</p>
+      {userData ? (
+        <p>
+          Dit is {userData.username || ''}. Deze gebruiker zijn email is{' '}
+          {userData.email}.
+        </p>
+      ) : null}
       <button onClick={() => handleExit()}>Terug</button>
     </div>
   );
