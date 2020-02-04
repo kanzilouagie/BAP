@@ -39,7 +39,7 @@ const ShareMessage = () => {
         alert(error);
       }
     },
-    [history]
+    [store, history]
   );
   return (
     <>

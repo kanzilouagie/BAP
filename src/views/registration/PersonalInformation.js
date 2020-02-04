@@ -46,16 +46,16 @@ const PersonalInformation = () => {
 
       if (checkUsernameExist === 0) {
         console.log('username bestaat nog niet');
-        store.setUserUsername(username.value);
-        store.setUserEmail(email.value);
-        store.setUserPassword(password.value);
+        store.addUserInfo('username', username.value);
+        store.addUserInfo('email', email.value);
+        store.addUserInfo('password', password.value);
         history.push('/step4');
       } else {
         console.log('username bestaat al');
         return;
       }
     },
-    [history]
+    [history, store]
   );
 
   return (

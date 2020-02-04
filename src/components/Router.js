@@ -26,7 +26,7 @@ const Router = () => {
       loadRunnersWorld(store);
       store.setIsWorldLoaded(true);
     }
-  }, [store.isWorldLoaded]);
+  }, [store]);
 
   return (
     <AuthProvider>

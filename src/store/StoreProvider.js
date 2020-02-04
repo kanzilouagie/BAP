@@ -19,23 +19,8 @@ export const StoreProvider = ({ children }) => {
       message: '',
       timestamp: ''
     },
-    setUserId: id => {
-      store.userInfo.id = id;
-    },
-    setUserEmail: email => {
-      store.userInfo.email = email;
-    },
-    setUserUsername: username => {
-      store.userInfo.username = username;
-    },
-    setUserPassword: password => {
-      store.userInfo.password = password;
-    },
-    setUserMessage: message => {
-      store.userInfo.message = message;
-    },
-    setUserTimestamp: timestamp => {
-      store.userInfo.timestamp = timestamp;
+    addUserInfo: (key, value) => {
+      store.userInfo[key] = value;
     }
   }));
 
