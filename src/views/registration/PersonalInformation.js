@@ -7,7 +7,7 @@ const PersonalInformation = () => {
   const store = useContext(StoreContext);
 
   const history = useHistory();
-  const handleSignUp = useCallback(
+  const handleSubmit = useCallback(
     async event => {
       event.preventDefault();
       const { email, password, username, repeat } = event.target.elements;
@@ -61,7 +61,7 @@ const PersonalInformation = () => {
   return (
     <>
       <h1>PersonalInformation</h1>
-      <form onSubmit={handleSignUp}>
+      <form onSubmit={handleSubmit}>
         <label>
           Gebruikersnaam
           <input name="username" type="text" placeholder="johnsmith12" />
