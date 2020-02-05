@@ -23,22 +23,21 @@ const Detail = () => {
     if (model) {
       loadDetailView(model);
     }
-  }, []);
+  }, [model]);
 
   useEffect(() => {
     if (model) {
+      const loadUserData = async () => {
+        const userDataSnapshot = await firebase
+          .firestore()
+          .collection('users')
+          .doc(model.userId)
+          .get();
+        setUserData(userDataSnapshot.data());
+      };
       loadUserData();
     }
   }, [model]);
-
-  const loadUserData = async () => {
-    const userDataSnapshot = await firebase
-      .firestore()
-      .collection('users')
-      .doc(model.userId)
-      .get();
-    setUserData(userDataSnapshot.data());
-  };
 
   const handleExit = () => {
     exitDetailView();

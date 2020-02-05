@@ -17,6 +17,7 @@ import ThreeCanvas from './ThreeCanvas';
 import Detail from '../views/Detail';
 import { StoreContext } from '../store/StoreProvider';
 import { loadRunnersWorld } from '../three/runnersWorld';
+import NewMessage from '../views/dashboard/NewMessage';
 
 const Router = () => {
   const store = useContext(StoreContext);
@@ -35,6 +36,7 @@ const Router = () => {
         <div style={{ position: 'relative', zIndex: '2' }}>
           <Switch>
             <PrivateRoute exact path="/" component={Overview} />
+            <PrivateRoute exact path="/newmessage" component={NewMessage} />
             <PrivateRoute exact path="/messages" component={Messages} />
             <PrivateRoute exact path="/looks" component={Looks} />
             <PrivateRoute exact path="/myteam" component={MyTeam} />
