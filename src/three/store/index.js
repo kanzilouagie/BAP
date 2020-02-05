@@ -2,7 +2,11 @@ let scene;
 let camera;
 let intersects;
 let cameraDefaultPos;
+let selectedObject;
 const objects = [];
+
+export const getSelectedObject = () => selectedObject;
+export const setSelectedObject = obj => (selectedObject = obj);
 
 export const setCameraDefaultPos = pos => (cameraDefaultPos = pos);
 export const getCameraDefaultPos = () => cameraDefaultPos;

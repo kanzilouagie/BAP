@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { loadThree, clickedCanvas } from '../three/setup';
 import { objectIsClicked } from '../three/runnersWorld';
 import { useHistory } from 'react-router';
-import { getSelectedObject } from '../store';
+import { getSelectedObject } from '../three/store';
 
 const ThreeCanvas = () => {
   const threeCanvas = useRef(null);
