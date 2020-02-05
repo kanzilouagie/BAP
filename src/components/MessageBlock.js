@@ -23,7 +23,8 @@ const MessageBody = styled.p`
   font-size: 1.6rem;
 `;
 
-const MessageBlock = () => {
+const MessageBlock = data => {
+  console.log(data);
   return (
     <>
       <h1>Reposted berichten</h1>
@@ -33,7 +34,7 @@ const MessageBlock = () => {
       </p>
       {}
       <MessageWrapper>
-        <MessageTitle>titel</MessageTitle>
+        <MessageTitle>{data.message}</MessageTitle>
         <MessageBody>
           nskdfnskjdnfk jsdn kjkjnkj nkjsnkjnkjn jknkfj nsdlk nksld g sdn
           sjkngjkdsngkjsdndfjskjdfsjkfnksjnf kjsnkjsn kjfndsk jndskj nsdkj

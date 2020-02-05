@@ -11,7 +11,7 @@ export const loadMessages = async userId => {
     .get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        messageData.push(doc.data());
+        messageData.push(doc);
       });
     })
     .catch(function(error) {

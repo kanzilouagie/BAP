@@ -14,29 +14,37 @@ const MessagesWrapper = styled.div`
     width: '50%';
   }
 `;
-
+// setMessagesData(r)
 const Messages = () => {
-  const [messagesData, setMessagesData] = useState();
-
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    loadMessages(firebase.auth().currentUser.uid).then(r => setMessagesData(r));
+    loadMessages(firebase.auth().currentUser.uid)
+      .then(posts => {
+        setPosts(posts);
+      })
+      .catch(error => {
+        setError(error);
+      });
   }, []);
 
   return (
     <>
-      <SideNavigation />
-      <MessagesWrapper>
-        {messagesData != null
-          ? messagesData.forEach(element => {
-              console.log(element['message']);
-              return <p>{element['message']}</p>;
-            })
-          : null}
-        <MessageBlock />
-        <RepostBlock />
-      </MessagesWrapper>
+      {posts.map(post => (
+        <p key={post.id}>{post.data().message}</p>
+      ))}
     </>
   );
 };
 
 export default Messages;
+
+{
+  /* <>
+<SideNavigation />
+<MessagesWrapper>
+  <MessageBlock data={messagesData} />
+  <RepostBlock />
+</MessagesWrapper>
+</> */
+}
