@@ -1,12 +1,10 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import SideNavigation from '../../components/SideNavigation';
-import { StoreContext } from '../../store/StoreProvider';
 import firebase from '../../authentication/base';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 
 const NewMessage = () => {
-  const store = useContext(StoreContext);
   const history = useHistory();
   const handleAddMessage = useCallback(
     async event => {
@@ -27,7 +25,7 @@ const NewMessage = () => {
         alert(error);
       }
     },
-    [store]
+    [history]
   );
 
   return (
