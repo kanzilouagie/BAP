@@ -4,23 +4,20 @@ import {
   WebGLRenderer,
   sRGBEncoding,
   Raycaster,
-  Vector2,
-  Object3D
+  Vector2
 } from 'three';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import {
   setScene,
   setCamera,
-  setIntersects,
   setCameraDefaultPos,
-  getObjects
+  getObjects,
+  setSelectedObject
 } from './store';
-import { setSelectedObject } from '../store';
 
 let renderer;
 let scene;
 let camera;
-let intersects = [];
 let raycaster = new Raycaster();
 const mouse = new Vector2();
 
