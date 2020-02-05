@@ -10,8 +10,20 @@ export const StoreProvider = ({ children }) => {
     isWorldLoaded: false,
     setIsWorldLoaded: bool => {
       store.isWorldLoaded = bool;
+    },
+    userInfo: {
+      id: '',
+      email: '',
+      username: '',
+      password: '',
+      message: '',
+      timestamp: ''
+    },
+    addUserInfo: (key, value) => {
+      store.userInfo[key] = value;
     }
   }));
+
   return (
     <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
   );
