@@ -1,31 +1,41 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useCallback } from 'react';
 import SideNavigation from '../../components/SideNavigation';
-// import { StoreContext } from '../store/StoreProvider';
+import { StoreContext } from '../../store/StoreProvider';
+import firebase from '../../authentication/base';
+import moment from 'moment';
+import { useHistory } from 'react-router';
 
 const NewMessage = () => {
-  // const store = useContext(StoreContext);
-
-  // useEffect(() => {
-  //   async event => {
-  //     event.preventDefault();
-  //     const { email, password } = event.target.elements;
-  //     try {
-  //       await app
-  //         .auth()
-  //         .signInWithEmailAndPassword(email.value, password.value);
-  //       history.push('/');
-  //     } catch (error) {
-  //       alert(error);
-  //     }
-  //   };
-  // }, [store]);
+  const store = useContext(StoreContext);
+  const history = useHistory();
+  const handleAddMessage = useCallback(
+    async event => {
+      event.preventDefault();
+      const { message } = event.target.elements;
+      try {
+        await firebase
+          .firestore()
+          .collection('users')
+          .doc(firebase.auth().currentUser.uid)
+          .collection('messages')
+          .add({
+            timestamp: moment().format('DD/MM/YYYY HH:mm:ss'),
+            message: message.value
+          });
+        history.push('/messages');
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [store]
+  );
 
   return (
     <>
       <h1>Nieuw bericht</h1>
       <SideNavigation />
-      <form>
-        <textarea cols="80" rows="10" />
+      <form onSubmit={handleAddMessage}>
+        <textarea name="message" cols="80" rows="10" />
         <button type="submit">Log in</button>
       </form>
     </>
