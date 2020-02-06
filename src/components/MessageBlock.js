@@ -1,5 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { PropTypes } from 'mobx-react';
+import { getUserWithId } from '../views/dashboard/store/index';
+import firebase from 'firebase';
 
 const MessageWrapper = styled.div`
   width: 60rem;
@@ -23,27 +26,24 @@ const MessageBody = styled.p`
   font-size: 1.6rem;
 `;
 
-const MessageBlock = data => {
-  console.log(data);
+const MessageBlock = ({ post }) => {
+  const [userInfo, setUserInfo] = useState([]);
+
+  useEffect(() => {
+    getUserWithId(firebase.auth().currentUser.uid).then(info => {
+      setUserInfo(info);
+    });
+  }, []);
   return (
-    <>
-      <h1>Reposted berichten</h1>
-      <p>
-        Repost een bericht van de deelnemers om hen zo een extra duwtje in de
-        rug te geven!
-      </p>
-      {}
-      <MessageWrapper>
-        <MessageTitle>{data.message}</MessageTitle>
-        <MessageBody>
-          nskdfnskjdnfk jsdn kjkjnkj nkjsnkjnkjn jknkfj nsdlk nksld g sdn
-          sjkngjkdsngkjsdndfjskjdfsjkfnksjnf kjsnkjsn kjfndsk jndskj nsdkj
-          fnkjsdnf kjsdnf kjdsnf kjsdnf kjsdnf kjsdnfkj nsdkjfn skfnsldgsdn
-          fjdsnfj ksdnf kjsdnfns jknkfj snkjfn kjdns jkng
-        </MessageBody>
-      </MessageWrapper>
-    </>
+    <MessageWrapper>
+      <MessageTitle>{userInfo.username}</MessageTitle>
+      <MessageBody>{post.message}</MessageBody>
+    </MessageWrapper>
   );
+};
+
+MessageBlock.propTypes = {
+  post: PropTypes.any
 };
 
 export default MessageBlock;

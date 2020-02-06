@@ -39,3 +39,12 @@ export const loadReposts = async userId => {
       console.log('Error getting documents: ', error);
     });
 };
+
+export const getUserWithId = async userId => {
+  const userInfo = await firebase
+    .firestore()
+    .collection('users')
+    .doc(userId)
+    .get();
+  return userInfo.data();
+};
