@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { PropTypes } from 'mobx-react';
-import { getUserWithId } from '../views/dashboard/store/index';
-import firebase from 'firebase';
 
 const MessageWrapper = styled.div`
   width: 60rem;

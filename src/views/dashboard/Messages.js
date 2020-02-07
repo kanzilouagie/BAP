@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SideNavigation from '../../components/SideNavigation';
 import MessageBlock from '../../components/MessageBlock';
-import RepostBlock from '../../components/RepostBlock';
 import styled from 'styled-components';
 import {
   loadMessages,
@@ -52,17 +51,6 @@ const Messages = () => {
       setCurrentUserInfo(info);
     });
   }, []);
-
-  // const getPostData = async post => {
-  //   let data;
-  //   await getPostWithUserId(post.data().userId, post.data().postId).then(
-  //     post => {
-  //       data = post;
-  //     }
-  //   );
-  //   console.log('data: ' + data.message);
-  //   return data;
-  // };
 
   return (
     <>
