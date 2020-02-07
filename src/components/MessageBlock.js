@@ -26,24 +26,26 @@ const MessageBody = styled.p`
   font-size: 1.6rem;
 `;
 
-const MessageBlock = ({ post }) => {
-  const [userInfo, setUserInfo] = useState([]);
+const MessageBlock = ({ post, userinfo }) => {
+  // const [userInfo, setUserInfo] = useState([]);
 
-  useEffect(() => {
-    getUserWithId(firebase.auth().currentUser.uid).then(info => {
-      setUserInfo(info);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getUserWithId(firebase.auth().currentUser.uid).then(info => {
+  //     setUserInfo(info);
+  //   });
+  // }, []);
+  // console.log('messageblok: ' + post.message);
   return (
     <MessageWrapper>
-      <MessageTitle>{userInfo.username}</MessageTitle>
+      <MessageTitle>{userinfo.username}</MessageTitle>
       <MessageBody>{post.message}</MessageBody>
     </MessageWrapper>
   );
 };
 
 MessageBlock.propTypes = {
-  post: PropTypes.any
+  post: PropTypes.array,
+  userinfo: PropTypes.array
 };
 
 export default MessageBlock;
