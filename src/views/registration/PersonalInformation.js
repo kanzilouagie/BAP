@@ -7,6 +7,7 @@ const PersonalInformation = () => {
   const store = useContext(StoreContext);
 
   const history = useHistory();
+  
   const handleSubmit = useCallback(
     async event => {
       event.preventDefault();

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import firebase from '../../authentication/base';
 import { StoreContext } from '../../store/StoreProvider';
 import moment from 'moment';
+
 const ShareMessage = () => {
   const history = useHistory();
   const store = useContext(StoreContext);

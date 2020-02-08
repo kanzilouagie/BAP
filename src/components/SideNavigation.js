@@ -6,6 +6,9 @@ const SideNavigation = () => {
     <nav>
       <h1>Home</h1>
       <button>
+        <Link to="/newmessage">Nieuw bericht</Link>
+      </button>
+      <button>
         <Link to="/">Overzicht</Link>
       </button>
       <button>
