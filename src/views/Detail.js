@@ -3,11 +3,14 @@ import { useParams, useHistory } from 'react-router';
 import { getScene } from '../three/store';
 import { loadDetailView, exitDetailView } from '../three/detailView';
 import firebase from '../authentication/base';
+import MessageBlock from '../components/MessageBlock';
+import { getUserWithId } from './dashboard/store';
 
 const Detail = () => {
   const { id } = useParams();
   const [model, setModel] = useState();
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState([]);
+  const [selectedUserInfo, setSelectedUserInfo] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -32,8 +35,15 @@ const Detail = () => {
           .firestore()
           .collection('users')
           .doc(model.userId)
+          .collection('messages')
           .get();
-        setUserData(userDataSnapshot.data());
+        const tmpUserData = [];
+        userDataSnapshot.forEach(post => {
+          tmpUserData.push(post);
+        });
+        setUserData(tmpUserData);
+        const user = await getUserWithId(model.userId);
+        setSelectedUserInfo(user);
       };
       loadUserData();
     }
@@ -46,13 +56,14 @@ const Detail = () => {
 
   return (
     <div>
-      {userData ? (
-        <p>
-          Dit is {userData.username || ''}. Deze gebruiker zijn email is{' '}
-          {userData.email}.
-        </p>
-      ) : null}
       <button onClick={() => handleExit()}>Terug</button>
+      {userData.map(post => (
+        <MessageBlock
+          key={post.id}
+          post={post.data()}
+          userinfo={selectedUserInfo}
+        />
+      ))}
     </div>
   );
 };

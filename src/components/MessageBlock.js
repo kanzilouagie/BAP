@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PropTypes } from 'mobx-react';
+import { FacebookShareButton, FacebookShareCount } from 'react-share';
 
 const MessageWrapper = styled.div`
   width: 60rem;
@@ -37,9 +38,21 @@ const MessageBlock = ({ post, userinfo }) => {
     <MessageWrapper>
       <MessageTitle>{userinfo.username}</MessageTitle>
       <MessageBody>{post.message}</MessageBody>
+      <StyledShareButton>
+        <FacebookShareButton url="https://www.think-pink.be">
+          share: <FacebookShareCount url="https://www.think-pink.be" />
+        </FacebookShareButton>
+      </StyledShareButton>
     </MessageWrapper>
   );
 };
+
+const StyledShareButton = styled.div`
+  background-color: #3b5998;
+  color: white;
+  padding: 1rem;
+  display: inline-block;
+`;
 
 MessageBlock.propTypes = {
   post: PropTypes.array,
