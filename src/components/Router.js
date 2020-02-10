@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Overview from '../views/dashboard/Overview';
 import Login from '../views/Login';
@@ -13,27 +13,21 @@ import ChooseRunner from '../views/registration/ChooseRunner';
 import CustomizeRunner from '../views/registration/CustomizeRunner';
 import PersonalInformation from '../views/registration/PersonalInformation';
 import ShareMessage from '../views/registration/ShareMessage';
-import ThreeCanvas from './ThreeCanvas';
+// import ThreeCanvas from './ThreeCanvas';
 import Detail from '../views/Detail';
-import { StoreContext } from '../store/StoreProvider';
-import { loadRunnersWorld } from '../three/runnersWorld';
 import NewMessage from '../views/dashboard/NewMessage';
 
 const Router = () => {
-  const store = useContext(StoreContext);
-
-  useEffect(() => {
-    if (!store.isWorldLoaded) {
-      loadRunnersWorld(store);
-      store.setIsWorldLoaded(true);
-    }
-  }, [store]);
-
   return (
     <AuthProvider>
       <BrowserRouter>
-        <ThreeCanvas />
+        {/* <ThreeCanvas /> */}
+        <canvas
+          id="three-canvas"
+          style={{ width: '100vw', height: '100vh', position: 'absolute' }}
+        ></canvas>
         <div style={{ position: 'relative', zIndex: '2' }}>
+          {' '}
           <Switch>
             <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path="/newmessage" component={NewMessage} />
