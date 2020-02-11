@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import Router from './components/Router';
 import { StoreProvider } from './store/StoreProvider';
-
+import loadThree from './three/setup';
 const App = () => {
+  useEffect(() => {
+    loadThree();
+  }, []);
   return (
     <StoreProvider>
       <div style={{ position: 'relative', zIndex: '2' }}>

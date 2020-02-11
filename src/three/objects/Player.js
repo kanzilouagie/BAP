@@ -8,7 +8,7 @@ const kForward = new THREE.Vector3(0, 0, 0);
 class Player extends Component {
   constructor(gameObject, models) {
     super(gameObject);
-    const model = models.breast;
+    const model = models.runner;
     this.skinInstance = gameObject.addComponent(SkinInstance, model);
     // this.skinInstance.setAnimation('Run');
     this.turnSpeed = globals.moveSpeed;

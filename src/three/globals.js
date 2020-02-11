@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import player from '../assets/models/character.gltf';
 
 const globals = {
   /*  camera,
@@ -13,6 +14,10 @@ const globals = {
   labelContainerElem: '#labels', // document.querySelector("#labels")
   kForward: new THREE.Vector3(0, 0, 1),
   congaLine: [],
-  closeCharacter: []
+  closeCharacter: [],
+  models: {
+    runner: { file: player },
+    stretcher: { file: player }
+  }
 };
 export default globals;

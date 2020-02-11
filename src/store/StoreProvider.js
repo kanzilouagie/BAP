@@ -7,9 +7,17 @@ export const StoreContext = createContext();
 
 export const StoreProvider = ({ children }) => {
   const store = useLocalStore(() => ({
-    isWorldLoaded: false,
-    setIsWorldLoaded: bool => {
-      store.isWorldLoaded = bool;
+    isOverviewLoaded: false,
+    isProfileLoaded: false,
+    setIsOverviewLoaded: bool => {
+      store.isOverviewLoaded = bool;
+    },
+    setIsProfileLoaded: bool => {
+      store.isProfileLoaded = bool;
+    },
+    resetLoadedScenes: () => {
+      store.isOverviewLoaded = false;
+      store.isProfileLoaded = false;
     },
     userInfo: {
       id: '',

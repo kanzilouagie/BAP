@@ -1,21 +1,21 @@
 import React, { useEffect, useContext } from 'react';
 import SideNavigation from '../../components/SideNavigation';
-import { useHistory } from 'react-router';
 import globals from '../../three/globals';
-import loadThree from '../../three/setup';
+import { useHistory } from 'react-router';
+import OverviewScene from '../../three/scenes/OverviewScene';
 import { StoreContext } from '../../store/StoreProvider';
 
 const Overview = () => {
-  // pass history to threejs scene
+  const store = useContext(StoreContext);
   const history = useHistory();
   globals.history = history;
 
-  const store = useContext(StoreContext);
-
   useEffect(() => {
-    if (!store.isWorldLoaded) {
-      loadThree();
-      store.setIsWorldLoaded(true);
+    if (!store.isOverviewLoaded) {
+      store.resetLoadedScenes();
+      if (globals.currentScene) globals.currentScene.scene.dispose();
+      globals.currentScene = new OverviewScene();
+      store.setIsOverviewLoaded(true);
     }
   }, [store]);
   return (
