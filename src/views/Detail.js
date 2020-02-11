@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router';
-import { getScene } from '../three/store';
-import { loadDetailView, exitDetailView } from '../three/detailView';
 import firebase from '../authentication/base';
 import styled from 'styled-components';
 import { FacebookIcon, TwitterIcon } from 'react-share';
@@ -9,25 +7,9 @@ import { loadMessages } from '../views/dashboard/store/index';
 
 const Detail = () => {
   const { id } = useParams();
-  const [model, setModel] = useState();
   const [userData, setUserData] = useState();
   const [messagesData, setMessagesData] = useState([]);
   const history = useHistory();
-
-  useEffect(() => {
-    const scene = getScene();
-    if (scene) {
-      const object = scene.getObjectById(parseInt(id), true);
-      setModel(object);
-      loadDetailView(object);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (model) {
-      loadDetailView(model);
-    }
-  }, [model]);
 
   useEffect(() => {
     if (id) {
@@ -50,7 +32,6 @@ const Detail = () => {
   }, [id]);
 
   const handleExit = () => {
-    exitDetailView();
     history.push('/');
   };
 
