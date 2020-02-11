@@ -64,7 +64,8 @@ const Detail = () => {
                 style={{
                   color: '#405B8E',
                   fontSize: '30px',
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  marginBottom: '10px'
                 }}
               >
                 {messagesData[0].title}
@@ -158,9 +159,10 @@ const PopupRight = styled.div`
 `;
 
 const DetailBody = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   flex: 3;
 `;
@@ -175,6 +177,7 @@ const DetailTitle = styled.h1`
 `;
 
 const DetailText = styled.p`
+  margin-bottom: 20px;
   font-size: 16px;
   line-height: 2.8rem;
 `;
