@@ -8,14 +8,19 @@ import GameObjectManager from './objects/GameObjectManager';
 import InputManager from './objects/InputManager';
 import CameraInfo from './objects/CameraInfo';
 import WorldManager from './objects/WorldManager';
+import Stats from 'stats.js';
 
 const main = () => {
   console.log('three loaded');
+  const stats = new Stats();
+  stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+  document.body.appendChild(stats.dom);
+
   // SETUP THREEJS //
   const canvas = document.querySelector('#three-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas });
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  // renderer.shadowMap.enabled = true;
+  // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const fov = 75;
   const aspect = window.innerWidth / window.innerHeight; // the canvas default
   const near = 0.1;
@@ -177,6 +182,8 @@ const main = () => {
   };
   let then = 0;
   const render = now => {
+    stats.begin();
+
     // convert to seconds
     globals.time = now * 0.001;
     // make sure delta time isn't too big.
@@ -195,9 +202,14 @@ const main = () => {
 
     renderer.render(scene, camera);
 
-    requestAnimationFrame(render);
+    stats.end();
+
+    // limit fps
+    setTimeout(() => {
+      requestAnimationFrame(render);
+    }, 1000 / 80);
   };
-  requestAnimationFrame(render);
+  render();
 };
 
 export default main;
