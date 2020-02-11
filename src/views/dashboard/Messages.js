@@ -10,19 +10,6 @@ import {
 } from './store/index';
 import firebase from 'firebase';
 
-const MessagesWrapper = styled.div`
-  width: 50%;
-`;
-
-const RepostsWrapper = styled.div`
-  width: 50%;
-`;
-
-const MessageContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-`;
 // setMessagesData(r)
 const Messages = () => {
   const [posts, setPosts] = useState([]);
@@ -56,7 +43,7 @@ const Messages = () => {
     <>
       <SideNavigation />
       <MessageContainer>
-        <MessagesWrapper>
+        <MessagesWrapper pressed={true}>
           {posts.map(post => (
             <MessageBlock
               key={post.id}
@@ -84,3 +71,17 @@ const Messages = () => {
 };
 
 export default Messages;
+
+const MessagesWrapper = styled.div`
+  width: 50%;
+`;
+
+const RepostsWrapper = styled.div`
+  width: 50%;
+`;
+
+const MessageContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+`;

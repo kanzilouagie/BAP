@@ -30,7 +30,7 @@ class WorldManager {
       }
     });
 
-    if (this.aliveParticipants.length < 20 && this.allParticipants.length > 0) {
+    if (this.aliveParticipants.length < 6 && this.allParticipants.length > 0) {
       if (this.loadedParticipants === this.allParticipants.length)
         this.loadedParticipants = 0;
       const gameObject = this.gameObjectManager.createGameObject(

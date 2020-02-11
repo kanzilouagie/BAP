@@ -19,8 +19,8 @@ const main = () => {
   // SETUP THREEJS //
   const canvas = document.querySelector('#three-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas });
-  // renderer.shadowMap.enabled = true;
-  // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const fov = 75;
   const aspect = window.innerWidth / window.innerHeight; // the canvas default
   const near = 0.1;
@@ -207,7 +207,7 @@ const main = () => {
     // limit fps
     setTimeout(() => {
       requestAnimationFrame(render);
-    }, 1000 / 80);
+    }, 1000 / 110);
   };
   render();
 };

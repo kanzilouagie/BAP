@@ -11,12 +11,13 @@ export const loadMessages = async userId => {
     .get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        messageData.push(doc);
+        messageData.push(doc.data());
       });
     })
     .catch(function(error) {
       console.log('Error getting documents: ', error);
     });
+    // console.log(messageData);
   return messageData;
 };
 
