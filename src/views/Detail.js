@@ -41,8 +41,15 @@ const Detail = () => {
     <>
       <FadedWrapper></FadedWrapper>
       <DarkWrapper></DarkWrapper>
-      <SecondaryButton onClick={() => handleExit()}>x</SecondaryButton>
       <PopupWrapper>
+        <SecondaryButton
+          style={{ position: 'absolute', right: 20, top: 20, fontSize: '30px' }}
+          width={'auto'}
+          padding={'0 20px'}
+          onClick={() => handleExit()}
+        >
+          x
+        </SecondaryButton>
         <PopupLeft>
           <p>test</p>
         </PopupLeft>
@@ -73,14 +80,14 @@ const Detail = () => {
             ) : null}
           </DetailBody>
           <SocialMediaButtons>
-            <SecondaryButton>
+            <SecondaryButton padding={'0'}>
               <FacebookIcon
                 width={'40px'}
                 height={'40px'}
                 bgStyle={{ fill: 'none' }}
               />
             </SecondaryButton>
-            <SecondaryButton>
+            <SecondaryButton padding={'0'}>
               <TwitterIcon
                 width={'40px'}
                 height={'40px'}

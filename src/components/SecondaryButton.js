@@ -13,6 +13,7 @@ cursor: pointer;
    line-height: ${props => props.height || '40px'};
 	 display: inline-block;
    width: ${props => props.width || '40px'};
+   padding: ${props => props.padding || '40px'};
 	 background: linear-gradient(to bottom, #222ee6 0%, #323bc7 26%, #343988 100%);
 	 border-radius: 5px;
 	 border-top: 1px solid #676dc5;
