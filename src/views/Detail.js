@@ -4,6 +4,8 @@ import firebase from '../authentication/base';
 import styled from 'styled-components';
 import { FacebookIcon, TwitterIcon } from 'react-share';
 import { loadMessages } from '../views/dashboard/store/index';
+import PrimaryButton from '../components/PrimaryButton';
+import SecondaryButton from '../components/SecondaryButton';
 
 const Detail = () => {
   const { id } = useParams();
@@ -36,30 +38,84 @@ const Detail = () => {
   };
 
   return (
-    <PopupWrapper>
-      {userData ? (
-        <DetailTitle>{userData.username || ''}'s verhaal.</DetailTitle>
-      ) : null}
-      {messagesData.length > 0 ? (
-        <DetailBody>{messagesData[0].message}</DetailBody>
-      ) : null}
-      {userData ? (
-        <PrimaryButton>Ik loop voor {userData.username || ''}!</PrimaryButton>
-      ) : null}
+    <>
+      <FadedWrapper></FadedWrapper>
+      <DarkWrapper></DarkWrapper>
       <SecondaryButton onClick={() => handleExit()}>x</SecondaryButton>
-      <SecondaryButton>
-        <FacebookIcon bgStyle={{ fill: 'none' }} />
-      </SecondaryButton>
-      <SecondaryButton>
-        <TwitterIcon bgStyle={{ fill: 'none' }} />
-      </SecondaryButton>
-    </PopupWrapper>
+      <PopupWrapper>
+        <PopupLeft>
+          <p>test</p>
+        </PopupLeft>
+
+        <PopupRight>
+          {userData ? (
+            <DetailTitle>{userData.username || ''}'s verhaal.</DetailTitle>
+          ) : null}
+          <DetailBody>
+            {messagesData.length > 0 ? (
+              <h2
+                style={{
+                  color: '#405B8E',
+                  fontSize: '30px',
+                  fontWeight: 'bold'
+                }}
+              >
+                {messagesData[0].title}
+              </h2>
+            ) : null}
+            {messagesData.length > 0 ? (
+              <DetailText>{messagesData[0].message}</DetailText>
+            ) : null}
+            {userData ? (
+              <PrimaryButton width={'auto'} height={'40px'} padding={'0 20px'}>
+                Ik loop voor {userData.username || ''}!
+              </PrimaryButton>
+            ) : null}
+          </DetailBody>
+          <SocialMediaButtons>
+            <SecondaryButton>
+              <FacebookIcon
+                width={'40px'}
+                height={'40px'}
+                bgStyle={{ fill: 'none' }}
+              />
+            </SecondaryButton>
+            <SecondaryButton>
+              <TwitterIcon
+                width={'40px'}
+                height={'40px'}
+                bgStyle={{ fill: 'none' }}
+              />
+            </SecondaryButton>
+          </SocialMediaButtons>
+        </PopupRight>
+      </PopupWrapper>
+    </>
   );
 };
 
 export default Detail;
 
+const FadedWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+`;
+
+const DarkWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.4;
+`;
+
 const PopupWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -67,130 +123,59 @@ const PopupWrapper = styled.div`
   width: 80vw;
   height: 80vh;
   background: #f69796;
+  border-radius: 30px;
 `;
 
-const PrimaryButton = styled.a`
-  cursor: pointer;
-  margin-left: 5px;
-  margin-bottom: 15px;
-  text-shadow: 0 -2px 0 #ff3353, 0 1px 1px #fff;
+const PopupLeft = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  height: 100%;
+  background-color: #f69796;
+  border-radius: 30px;
+`;
+
+const PopupRight = styled.div`
   box-sizing: border-box;
-  font-size: 2em;
-  font-family: Helvetica, Arial, Sans-Serif;
-  text-decoration: none;
-  font-weight: bold;
-  color: #ff667e;
-  height: 65px;
-  line-height: 65px;
-  padding: 0 32.5px;
-  display: inline-block;
-  width: auto;
-  background: linear-gradient(to bottom, #ffe6ea 0%, #ffd6dd 26%, #ff99a9 100%);
-  border-radius: 5px;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  top: 0;
-  transition: all 0.06s ease-out;
-  position: relative;
-
-  &:visited {
-    color: #ff667e;
-  }
-  &:hover {
-    background: linear-gradient(
-      to bottom,
-      #fff0f2 0%,
-      #ffe0e5 26%,
-      #ffa3b2 100%
-    );
-  }
-  &:active {
-    top: 6px;
-    text-shadow: 0 -2px 0 #ff99a9, 0 1px 1px #fff, 0 0 4px white;
-    color: #ffb3bf;
-  }
-  &:active:before {
-    top: 0;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.7), 0 3px 9px rgba(0, 0, 0, 0.2);
-  }
-  &:before {
-    display: inline-block;
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    top: 6px;
-    border-radius: 5px;
-    height: 65px;
-    background: linear-gradient(to top, #cc0020 0%, #ff1a3e 6px);
-    transition: all 0.078s ease-out;
-    box-shadow: 0 1px 0 2px rgba(0, 0, 0, 0.3), 0 5px 2.4px rgba(0, 0, 0, 0.5),
-      0 10.8px 9px rgba(0, 0, 0, 0.2);
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 3;
+  height: 100%;
+  padding: 100px 40px;
+  background-color: #ffdde1;
+  z-index: -1000;
+  border-radius: 30px;
 `;
 
-const SecondaryButton = styled.a`
-cursor: pointer;
-	 margin-left: 5px;
-	 margin-bottom: 15px;
-	 text-shadow: 0 -2px 0 #181a3e, 0 1px 1px #6066c2;
-	 box-sizing: border-box;
-	 font-size: 2em;
-	 font-family: Helvetica, Arial, Sans-Serif;
-	 text-decoration: none;
-	 font-weight: bold;
-	 color: #262a63;
-	 height: 65px;
-	 line-height: 65px;
-	 padding: 0 32.5px;
-	 display: inline-block;
-	 width: auto;
-	 background: linear-gradient(to bottom, #222ee6 0%, #323bc7 26%, #343988 100%);
-	 border-radius: 5px;
-	 border-top: 1px solid #676dc5;
-	 border-bottom: 1px solid #6066c2;
-	 top: 0;
-	 transition: all 0.06s ease-out;
-	 position: relative;
-}
- &:visited {
-	 color: #262a63;
-}
- &:hover {
-	 background: linear-gradient(to bottom, #2c37e7 0%, #3740cc 26%, #373c8f 100%);
-}
- &:active {
-	 top: 6px;
-	 text-shadow: 0 -2px 0 #343988, 0 1px 1px #6066c2, 0 0 4px white;
-	 color: #3b419a;
-}
- &:active:before {
-	 top: 0;
-	 box-shadow: 0 3px 3px rgba(0, 0, 0, .7), 0 3px 9px rgba(0, 0, 0, .2);
-}
- &:before {
-	 display: inline-block;
-	 content: '';
-	 position: absolute;
-	 left: 0;
-	 right: 0;
-	 z-index: -1;
-	 top: 6px;
-	 border-radius: 5px;
-	 height: 65px;
-	 background: linear-gradient(to top, #000 0%, #0e102f 6px);
-	 transition: all 0.078s ease-out;
-	 box-shadow: 0 1px 0 2px rgba(0, 0, 0, .3), 0 5px 2.4px rgba(0, 0, 0, .5), 0 10.8px 9px rgba(0, 0, 0, .2);
-}
+const DetailBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 3;
 `;
 
-const DetailTitle = styled.p`
+const DetailTitle = styled.h1`
   color: #e86565;
   font-size: 35px;
   text-transform: capitalize;
+  font-weight: bold;
+  align-self: start;
+  flex: 1;
 `;
 
-const DetailBody = styled.p`
-  font-size: 20px;
+const DetailText = styled.p`
+  font-size: 16px;
+  line-height: 2.8rem;
+`;
+
+const SocialMediaButtons = styled.div`
+  width: 100px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
