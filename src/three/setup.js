@@ -1,19 +1,21 @@
 import * as THREE from 'three';
 import globals from './globals';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // import { SkeletonUtils } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import Player from './objects/Player';
 import breast from '../assets/models/character.gltf';
 import GameObjectManager from './objects/GameObjectManager';
 import InputManager from './objects/InputManager';
 import CameraInfo from './objects/CameraInfo';
+import WorldManager from './objects/WorldManager';
 
 const main = () => {
+  console.log('three loaded');
   // SETUP THREEJS //
-
   const canvas = document.querySelector('#three-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas });
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const fov = 75;
   const aspect = window.innerWidth / window.innerHeight; // the canvas default
   const near = 0.1;
@@ -25,27 +27,27 @@ const main = () => {
 
   camera.position.set(0, 2, 10);
 
-  const controls = new OrbitControls(camera, canvas);
-  controls.enableKeys = false;
-  //   controls.target.set(0, 5, 0);
-  controls.update();
-
   const scene = new THREE.Scene();
+  globals.scene = scene;
   scene.background = new THREE.Color('#ffdde1');
 
   // ADD LIGHTS //
 
   const addLight = (...pos) => {
     const color = 0xffffff;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
+    const intensity = 0.8;
+    const light = new THREE.PointLight(color, intensity);
     light.position.set(...pos);
+    light.castShadow = true;
     scene.add(light);
-    scene.add(light.target);
+    // scene.add(light.target);
+    globals.light = light;
   };
-
-  addLight(5, 5, 2);
-  addLight(-5, 5, 5);
+  // global light
+  const hemiLight = new THREE.HemisphereLight();
+  hemiLight.intensity = 0.4;
+  scene.add(hemiLight);
+  addLight(2, 3, 2);
 
   // LOAD MODELS //
 
@@ -63,9 +65,35 @@ const main = () => {
   for (const model of Object.values(models)) {
     gltfLoader.load(model.file, gltf => {
       repositionModel(gltf.scene);
+
+      gltf.scene.traverse(node => {
+        if (node instanceof THREE.Mesh) {
+          node.castShadow = true;
+        }
+      });
       model.gltf = gltf;
     });
   }
+
+  const prepModelsAndAnimations = () => {
+    const box = new THREE.Box3();
+    const size = new THREE.Vector3();
+    Object.values(models).forEach(model => {
+      box.setFromObject(model.gltf.scene);
+      box.getSize(size);
+      model.size = size.length();
+      const animsByName = {};
+      model.gltf.animations.forEach(clip => {
+        animsByName[clip.name] = clip;
+        // Should really fix this in .blend file
+        if (clip.name === 'Walk') {
+          clip.duration /= 2;
+        }
+      });
+      model.animations = animsByName;
+    });
+  };
+
   const repositionModel = mroot => {
     const bbox = new THREE.Box3().setFromObject(mroot);
     const cent = bbox.getCenter(new THREE.Vector3());
@@ -86,9 +114,9 @@ const main = () => {
   // ADD FLOOR //
 
   const planeGeometry = new THREE.PlaneBufferGeometry(20, 20, 32, 32);
-  const planeMaterial = new THREE.MeshLambertMaterial({
-    color: '#ffdde1',
-    wireframe: true
+  const planeMaterial = new THREE.ShadowMaterial({
+    color: '#111111',
+    wireframe: false
   });
 
   planeMaterial.opacity = 0.2;
@@ -102,21 +130,27 @@ const main = () => {
   scene.add(plane);
   plane.rotation.x -= Math.PI / 2;
   plane.position.y = -1.25;
+  globals.floor = plane;
 
+  let modelsLoaded = false;
   const gameObjectManager = new GameObjectManager();
   const inputManager = new InputManager();
+  const World = new WorldManager(gameObjectManager, models.breast);
+  globals.inputManager = inputManager;
 
   const init = () => {
-    console.log('init');
+    modelsLoaded = true;
+    prepModelsAndAnimations();
+    // add camera object
     {
       const gameObject = gameObjectManager.createGameObject(
-        camera,
+        globals.camera,
         'camera',
         globals
       );
       globals.cameraInfo = gameObject.addComponent(CameraInfo);
     }
-
+    // add player object
     {
       const gameObject = gameObjectManager.createGameObject(
         scene,
@@ -126,13 +160,6 @@ const main = () => {
       globals.player = gameObject.addComponent(Player, models);
       globals.player.inputManager = inputManager;
     }
-    // Object.values(models).forEach(model => {
-    //   const clonedScene = SkeletonUtils.clone(model.gltf.scene);
-    //   const root = new THREE.Object3D();
-    //   root.add(clonedScene);
-    //   console.log(root);
-    //   scene.add(root);
-    // });
   };
   manager.onLoad = init;
 
@@ -162,6 +189,9 @@ const main = () => {
     }
     gameObjectManager.update();
     inputManager.update();
+    if (modelsLoaded) {
+      World.update();
+    }
 
     renderer.render(scene, camera);
 

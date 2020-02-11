@@ -12,6 +12,7 @@ const globals = {
   player: null,
   labelContainerElem: '#labels', // document.querySelector("#labels")
   kForward: new THREE.Vector3(0, 0, 1),
-  congaLine: []
+  congaLine: [],
+  closeCharacter: []
 };
 export default globals;

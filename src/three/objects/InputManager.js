@@ -40,6 +40,7 @@ class InputManager {
     addKey(39, 'right');
     addKey(38, 'up');
     addKey(40, 'down');
+    addKey(32, 'spacebar');
     addKey(90, 'a');
     addKey(88, 'b');
 

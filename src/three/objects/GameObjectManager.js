@@ -1,5 +1,6 @@
 import GameObject from './GameObject';
 import SafeArray from './SafeArray';
+import globals from '../globals';
 
 class GameObjectManager {
   constructor() {
@@ -14,6 +15,8 @@ class GameObjectManager {
 
   removeGameObject(gameObject) {
     this.gameObjects.remove(gameObject);
+    const removeObject = globals.scene.getObjectByName(gameObject.name);
+    globals.scene.remove(removeObject);
   }
 
   update() {

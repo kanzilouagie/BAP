@@ -15,10 +15,11 @@ class Player extends Component {
     this.offscreenTimer = 0;
     this.maxTimeOffScreen = 1;
     this.maxDistanceFromCamera = -20;
+    globals.playerRadius = model.size / 2;
   }
 
   update() {
-    const { deltaTime, moveSpeed, camera, cameraInfo } = globals;
+    const { deltaTime, moveSpeed, camera, cameraInfo, floor } = globals;
     const { transform } = this.gameObject;
     const { inputManager } = this;
     const delta =
@@ -28,9 +29,19 @@ class Player extends Component {
 
     if (inputManager.keys.up.down ? kForward.setZ(1) : kForward.setZ(0))
       transform.translateOnAxis(kForward, moveSpeed * deltaTime);
-    camera.position.x = transform.position.x;
-    camera.position.y = transform.position.y + 2;
+
+    // move camera with player
+    camera.position.x = transform.position.x + 1;
+    camera.position.y = transform.position.y + 4;
     camera.position.z = transform.position.z + 5;
+    camera.rotation.x = -0.5;
+
+    globals.light.position.x = transform.position.x + 2;
+    globals.light.position.y = transform.position.y + 3;
+    globals.light.position.z = transform.position.z + 3;
+    // move floor with player
+    floor.position.x = transform.position.x;
+    floor.position.z = transform.position.z;
 
     // If object is too far from camera;
     const zPos = transform.position.z;
