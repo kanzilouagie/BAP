@@ -6,16 +6,28 @@ import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import logo from '../assets/images/logo_think_pink.png';
 import { FacebookIcon, TwitterIcon } from 'react-share';
+import { AuthContext } from '../authentication/Auth';
 
 const Home = () => {
   const history = useHistory();
+
+  const { currentUser } = useContext(AuthContext);
+
+  if (currentUser) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Background>
       <TopNavigation>
         <img src={logo} />
         <RightNav>
-          <PrimaryButton height={'50px'} width={'auto'} padding={'0 20px'}>
+          <PrimaryButton
+            height={'50px'}
+            width={'auto'}
+            padding={'0 20px'}
+            onClick={() => history.push('/login')}
+          >
             Login / registreer
           </PrimaryButton>
           <SecondaryNav>
