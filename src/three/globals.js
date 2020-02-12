@@ -18,6 +18,12 @@ const globals = {
   models: {
     runner: { file: player },
     stretcher: { file: player }
+  },
+  character: {
+    head: 0
+  },
+  looks: {
+    head: ['eye', 'Mouth', 'nipple']
   }
 };
 export default globals;

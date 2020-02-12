@@ -6,6 +6,7 @@ import InputManager from '../objects/InputManager';
 import WorldManager from '../objects/WorldManager';
 import CameraInfo from '../objects/CameraInfo';
 import Player from '../objects/Player';
+import gsap from 'gsap';
 
 class OverviewScene {
   constructor() {
@@ -117,6 +118,8 @@ class OverviewScene {
     const init = () => {
       // add camera object
       prepModelsAndAnimations();
+      globals.camera.rotation.x = 0;
+      gsap.to(globals.camera.rotation, 0.25, { x: -0.5 });
       {
         const gameObject = this.gameObjectManager.createGameObject(
           globals.camera,
@@ -137,10 +140,6 @@ class OverviewScene {
       }
     };
     manager.onLoad = init;
-  }
-
-  remove() {
-    this.scene.dispose();
   }
 
   update() {

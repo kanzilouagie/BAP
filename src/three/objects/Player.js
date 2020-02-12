@@ -32,9 +32,8 @@ class Player extends Component {
 
     // move camera with player
     camera.position.x = transform.position.x + 1;
-    camera.position.y = transform.position.y + 4;
-    camera.position.z = transform.position.z + 5;
-    camera.rotation.x = -0.5;
+    camera.position.y = transform.position.y + 5;
+    camera.position.z = transform.position.z + 8;
 
     globals.light.position.x = transform.position.x + 2;
     globals.light.position.y = transform.position.y + 3;

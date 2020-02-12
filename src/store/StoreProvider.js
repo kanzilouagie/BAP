@@ -15,10 +15,7 @@ export const StoreProvider = ({ children }) => {
     setIsProfileLoaded: bool => {
       store.isProfileLoaded = bool;
     },
-    resetLoadedScenes: () => {
-      store.isOverviewLoaded = false;
-      store.isProfileLoaded = false;
-    },
+
     userInfo: {
       id: '',
       email: '',

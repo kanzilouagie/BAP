@@ -4,6 +4,7 @@ import globals from '../../three/globals';
 import { useHistory } from 'react-router';
 import OverviewScene from '../../three/scenes/OverviewScene';
 import { StoreContext } from '../../store/StoreProvider';
+import gsap from 'gsap';
 
 const Overview = () => {
   const store = useContext(StoreContext);
@@ -12,12 +13,22 @@ const Overview = () => {
 
   useEffect(() => {
     if (!store.isOverviewLoaded) {
-      store.resetLoadedScenes();
-      if (globals.currentScene) globals.currentScene.scene.dispose();
-      globals.currentScene = new OverviewScene();
+      gsap.to(globals.camera.rotation, 0.25, { x: -1 });
+      setTimeout(() => {
+        globals.currentScene = new OverviewScene();
+      }, 250);
       store.setIsOverviewLoaded(true);
     }
   }, [store]);
+
+  useEffect(() => {
+    return () => {
+      if (history.location.pathname === '/looks') {
+        store.setIsOverviewLoaded(false);
+        globals.currentScene.scene.dispose();
+      }
+    };
+  }, [history]);
   return (
     <>
       <h1>Overview</h1>
