@@ -30,7 +30,6 @@ const NewMessage = () => {
 
   return (
     <>
-      <h1>Nieuw bericht</h1>
       <SideNavigation />
       <form onSubmit={handleAddMessage}>
         <textarea name="message" cols="80" rows="10" />

@@ -20,7 +20,6 @@ const Overview = () => {
   }, [store]);
   return (
     <>
-      <h1>Overview</h1>
       <SideNavigation />
     </>
   );

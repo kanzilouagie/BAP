@@ -7,6 +7,7 @@ import SecondaryButton from '../components/SecondaryButton';
 import logo from '../assets/images/logo_think_pink.png';
 import { FacebookIcon, TwitterIcon } from 'react-share';
 import { AuthContext } from '../authentication/Auth';
+import SideNavigation from '../components/SideNavigation';
 
 const Home = () => {
   const history = useHistory();
@@ -18,92 +19,67 @@ const Home = () => {
   }
 
   return (
-    <Background>
-      <TopNavigation>
-        <img src={logo} />
-        <RightNav>
-          <PrimaryButton
-            height={'50px'}
-            width={'auto'}
-            padding={'0 20px'}
-            onClick={() => history.push('/login')}
-          >
-            Login / registreer
-          </PrimaryButton>
-          <SecondaryNav>
-            <SecondaryButton
-              height={'30px'}
+    <>
+      <SideNavigation />
+      <Background>
+        <TopNavigation>
+          <img src={logo} />
+        </TopNavigation>
+        <HomeBody>
+          <h1>Verhalen delen, elkaar inspireren.</h1>
+          <h2>Een campagne in samenwerking met Race for the Cure</h2>
+          <p>
+            500.000 mensen in Europa krijgen jaarlijks borstkanker.
+            <br /> Hiermee willen wij bewustzijn creëren door mensen de
+            doelstelling te geven om samen met 500.000 mensen doorheen Europa
+            deel te nemen aan #CheckMijnBorst. <br />
+            Je creëert je eigen deelnemer en kan rondlopen en andere deelnemers
+            ontmoeten. Elke deelnemer vertegenwoordigt een inspirerend verhaal
+            en/of motiverende woorden. Als we onze verhalen delen, inspireren we
+            mekaar om samen tegen borstkanker te vechten.
+          </p>
+        </HomeBody>
+        <BottomNavigation>
+          <LeftBottomNav>
+            <PrimaryButton
+              height={'50px'}
               width={'auto'}
-              padding={'0 10px'}
+              padding={'0 20px'}
+              style={{ fontSize: '16px' }}
+              onClick={() => history.push('/step1')}
+            >
+              Ik wil meedoen
+            </PrimaryButton>
+            <SecondaryButton
+              height={'50px'}
+              width={'auto'}
+              padding={'0 20px'}
               style={{ fontSize: '16px' }}
             >
-              Help &amp; FAQ's
+              Hoe werkt het?
             </SecondaryButton>
-            <SecondaryButton
-              height={'30px'}
-              width={'auto'}
-              padding={'0 10px'}
-              style={{ fontSize: '16px' }}
-            >
-              Taal
-            </SecondaryButton>
-          </SecondaryNav>
-        </RightNav>
-      </TopNavigation>
-      <HomeBody>
-        <h1>Verhalen delen, elkaar inspireren.</h1>
-        <h2>Een campagne in samenwerking met Race for the Cure</h2>
-        <p>
-          500.000 mensen in Europa krijgen jaarlijks borstkanker.
-          <br /> Hiermee willen wij bewustzijn creëren door mensen de
-          doelstelling te geven om samen met 500.000 mensen doorheen Europa deel
-          te nemen aan #CheckMijnBorst. <br />
-          Je creëert je eigen deelnemer en kan rondlopen en andere deelnemers
-          ontmoeten. Elke deelnemer vertegenwoordigt een inspirerend verhaal
-          en/of motiverende woorden. Als we onze verhalen delen, inspireren we
-          mekaar om samen tegen borstkanker te vechten.
-        </p>
-      </HomeBody>
-      <BottomNavigation>
-        <LeftBottomNav>
-          <PrimaryButton
-            height={'50px'}
-            width={'auto'}
-            padding={'0 20px'}
-            style={{ fontSize: '16px' }}
-            onClick={() => history.push('/step1')}
-          >
-            Ik wil meedoen
-          </PrimaryButton>
-          <SecondaryButton
-            height={'50px'}
-            width={'auto'}
-            padding={'0 20px'}
-            style={{ fontSize: '16px' }}
-          >
-            Hoe werkt het?
-          </SecondaryButton>
-        </LeftBottomNav>
-        <RightBottomNav>
-          <SocialMediaButtons>
-            <SecondaryButton padding={'0'}>
-              <FacebookIcon
-                width={'40px'}
-                height={'40px'}
-                bgStyle={{ fill: 'none' }}
-              />
-            </SecondaryButton>
-            <SecondaryButton padding={'0'}>
-              <TwitterIcon
-                width={'40px'}
-                height={'40px'}
-                bgStyle={{ fill: 'none' }}
-              />
-            </SecondaryButton>
-          </SocialMediaButtons>
-        </RightBottomNav>
-      </BottomNavigation>
-    </Background>
+          </LeftBottomNav>
+          <RightBottomNav>
+            <SocialMediaButtons>
+              <SecondaryButton padding={'0'}>
+                <FacebookIcon
+                  width={'40px'}
+                  height={'40px'}
+                  bgStyle={{ fill: 'none' }}
+                />
+              </SecondaryButton>
+              <SecondaryButton padding={'0'}>
+                <TwitterIcon
+                  width={'40px'}
+                  height={'40px'}
+                  bgStyle={{ fill: 'none' }}
+                />
+              </SecondaryButton>
+            </SocialMediaButtons>
+          </RightBottomNav>
+        </BottomNavigation>
+      </Background>
+    </>
   );
 };
 
