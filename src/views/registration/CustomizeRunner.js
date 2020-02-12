@@ -22,7 +22,7 @@ const CustomizeRunner = () => {
       </TopNavigation>
       <HomeBody>
         <SecondaryButton
-          onClick={() => history.push('/step1')}
+          onClick={() => history.push('/step2')}
           height={'30px'}
           width={'auto'}
           padding={'0 10px'}
@@ -34,7 +34,7 @@ const CustomizeRunner = () => {
         >
           Terug
         </SecondaryButton>
-        <h2>STAP 2/5</h2>
+        <h2>STAP 3/5</h2>
         <Steps>
           <h1>
             Deelnemer gekozen? <br />

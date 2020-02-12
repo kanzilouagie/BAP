@@ -133,7 +133,7 @@ const PersonalInformation = () => {
       </TopNavigation>
       <HomeBody>
         <SecondaryButton
-          onClick={() => history.push('/step1')}
+          onClick={() => history.push('/step4')}
           height={'30px'}
           width={'auto'}
           padding={'0 10px'}
@@ -145,7 +145,7 @@ const PersonalInformation = () => {
         >
           Terug
         </SecondaryButton>
-        <h2>STAP 2/5</h2>
+        <h2>STAP 5/5</h2>
         <Steps>
           <ImageDiv>
             <p>Hier komt een image</p>
