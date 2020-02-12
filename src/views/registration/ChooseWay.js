@@ -7,7 +7,7 @@ import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo_think_pink.png';
 import { FacebookIcon, TwitterIcon } from 'react-share';
 
-const CustomizeRunner = () => {
+const ChooseWay = () => {
   const history = useHistory();
 
   return (
@@ -22,7 +22,7 @@ const CustomizeRunner = () => {
       </TopNavigation>
       <HomeBody>
         <SecondaryButton
-          onClick={() => history.push('/step1')}
+          onClick={() => history.push('/home')}
           height={'30px'}
           width={'auto'}
           padding={'0 10px'}
@@ -34,15 +34,13 @@ const CustomizeRunner = () => {
         >
           Terug
         </SecondaryButton>
-        <h2>STAP 2/5</h2>
+        <h2>STAP 1/5</h2>
         <Steps>
-          <h1>
-            Deelnemer gekozen? <br />
-            Tijd voor een leuke outfit te kiezen.
-          </h1>
+          <h1>Wandelen of toch liever lopen?</h1>
           <p>
-            Net zoals elke borst, ben jij uniek!
-            <br /> Personaliseer jouw deelnemer naar de stijl die jij wilt.
+            Net zoals op Race for the Cure kan je kiezen om te wandelen of te
+            lopen. <br />
+            Waar heb jij zin in?
           </p>
           <Choices>
             <div>
@@ -51,9 +49,20 @@ const CustomizeRunner = () => {
                 height={'50px'}
                 width={'auto'}
                 padding={'0 20px'}
-                onClick={() => history.push('/step4')}
+                onClick={() => history.push('/step2')}
               >
-                Volgende
+                Hup, wandeling.
+              </PrimaryButton>
+            </div>
+            <div>
+              <div>hier komt een image</div>
+              <PrimaryButton
+                height={'50px'}
+                width={'auto'}
+                padding={'0 20px'}
+                onClick={() => history.push('/step2')}
+              >
+                vroem, lopen!
               </PrimaryButton>
             </div>
           </Choices>
@@ -63,7 +72,7 @@ const CustomizeRunner = () => {
   );
 };
 
-export default CustomizeRunner;
+export default ChooseWay;
 
 const Background = styled.div`
   position: absolute;
@@ -117,8 +126,6 @@ const Steps = styled.div`
     font-weight: bold;
     color: #e86565;
     margin-bottom: 2rem;
-    text-align: center;
-    line-height: 3.8rem;
   }
 
   p {
@@ -129,9 +136,9 @@ const Steps = styled.div`
 
 const Choices = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 90vw;
+  width: 70vw;
   height: auto;
 
   & div {
