@@ -23,7 +23,7 @@ const Overview = () => {
 
   useEffect(() => {
     return () => {
-      if (history.location.pathname === '/looks') {
+      if (history.location.pathname !== '/detail') {
         store.setIsOverviewLoaded(false);
         globals.currentScene.scene.dispose();
       }

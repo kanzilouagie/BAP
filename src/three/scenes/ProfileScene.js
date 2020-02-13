@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import stageModel from '../../assets/models/stage.gltf';
 import globals from '../globals';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import GameObjectManager from '../objects/GameObjectManager';
@@ -8,6 +9,8 @@ import CameraInfo from '../objects/CameraInfo';
 import Player from '../objects/Player';
 import User from '../objects/User';
 import gsap from 'gsap';
+import ContainerMount from '../objects/ContainerMount';
+import { Power1 } from 'gsap/gsap-core';
 
 class ProfileScene {
   constructor() {
@@ -18,15 +21,19 @@ class ProfileScene {
 
     const addLight = (...pos) => {
       const color = 0xffffff;
-      const intensity = 0.8;
+      const intensity = 0.4;
       const light = new THREE.PointLight(color, intensity);
       light.position.set(...pos);
       light.castShadow = true;
+      console.log(light.shadow);
       this.scene.add(light);
       // scene.add(light.target);
       globals.light = light;
     };
-    addLight(2, 3, 2);
+    addLight(1, 3, 2);
+    const light = new THREE.PointLight(0xffffff, 0.4);
+    light.position.set(-1, 2, 2);
+    this.scene.add(light);
 
     const addFloor = () => {
       const planeGeometry = new THREE.PlaneBufferGeometry(20, 20, 32, 32);
@@ -66,6 +73,36 @@ class ProfileScene {
       mroot.position.copy(cent).multiplyScalar(-1);
       mroot.position.y -= size.y * 0.5;
     };
+    // add cube
+    let stage;
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load(stageModel, gltf => {
+      repositionModel(gltf.scene);
+
+      gltf.scene.traverse(node => {
+        if (node instanceof THREE.Mesh) {
+          node.castShadow = true;
+          node.receiveShadow = true;
+        }
+      });
+      stage = gltf.scene;
+      stage.scale.x = 0.01;
+      stage.scale.y = 0.01;
+      stage.scale.z = 0.01;
+      stage.position.x = 0.5;
+      stage.position.y = -1.2;
+      stage.position.z = -0.5;
+      console.log(stage);
+      globals.scene.add(gltf.scene);
+      this.containerMount = new ContainerMount(stage);
+    });
+    // var geometry = new THREE.BoxGeometry(2.5, 2, 1);
+    // var material = new THREE.MeshBasicMaterial({ color: 0x555555 });
+    // var cube = new THREE.Mesh(geometry, material);
+    // cube.position.set(2.5, -0.3, 0);
+    // cube.castShadow = true;
+    // cube.receiveShadow = true;
+    // globals.scene.add(cube);
 
     // load model
 
@@ -115,7 +152,9 @@ class ProfileScene {
         globals.looks[lookCat].forEach((itemName, key) => {
           if (key !== wearedItemKey) {
             const object = this.scene.getObjectByName(itemName, true);
-            object.visible = false;
+            if (object) {
+              object.visible = false;
+            }
           }
         });
       });
@@ -130,7 +169,7 @@ class ProfileScene {
       globals.camera.rotation.x = 0;
       globals.camera.position.set(1.5, -2.5, 5);
 
-      gsap.to(globals.camera.position, 0.25, { y: -0.5 });
+      gsap.to(globals.camera.position, 0.8, { ease: Power1.easeOut, y: 0 });
       {
         const gameObject = this.gameObjectManager.createGameObject(
           globals.camera,
@@ -159,10 +198,10 @@ class ProfileScene {
   }
 
   changeLook() {
+    console.log(globals.character);
     Object.keys(globals.looks).forEach(lookCat => {
-      const currentName = globals.looks[lookCat][globals.character.head];
-
       globals.looks[lookCat].forEach(lookName => {
+        const currentName = globals.looks[lookCat][globals.character[lookCat]];
         if (lookName !== currentName) {
           const object = this.scene.getObjectByName(lookName, true);
           if (object) {
@@ -178,7 +217,12 @@ class ProfileScene {
     });
   }
 
-  update() {}
+  update() {
+    if (this.containerMount) {
+      this.containerMount.update();
+    }
+    globals.user.update();
+  }
 }
 
 export default ProfileScene;

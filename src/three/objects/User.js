@@ -8,11 +8,13 @@ class User extends Component {
     super(gameObject);
     this.skinInstance = gameObject.addComponent(SkinInstance, model);
     // this.skinInstance.setAnimation('Run');
+    this.gameObject.transform.position.y = 0.55;
+    this.gameObject.transform.position.x = 0.5;
   }
 
   update() {
-    const { transform } = this.gameObject;
-    transform.rotation.y += 1;
+    // const { transform } = this.gameObject;
+    // transform.rotation.y += 0.01;
   }
 }
 

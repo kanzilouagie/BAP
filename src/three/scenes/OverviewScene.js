@@ -10,6 +10,7 @@ import gsap from 'gsap';
 
 class OverviewScene {
   constructor() {
+    console.log('loadScene');
     this.name = 'overview';
     this.scene = new THREE.Scene();
     globals.scene = this.scene;
@@ -51,7 +52,7 @@ class OverviewScene {
 
     // Load models
     const manager = new THREE.LoadingManager();
-
+    console.log('testjes');
     manager.onProgress = (url, itemsLoaded, itemsTotal) => {
       const percent = ((itemsLoaded / itemsTotal) * 100) | 0;
       console.log('loading:', `${percent}%`);
@@ -106,10 +107,6 @@ class OverviewScene {
         const animsByName = {};
         model.gltf.animations.forEach(clip => {
           animsByName[clip.name] = clip;
-          // Should really fix this in .blend file
-          if (clip.name === 'Walk') {
-            clip.duration /= 2;
-          }
         });
         model.animations = animsByName;
       });

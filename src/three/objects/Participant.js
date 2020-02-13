@@ -69,9 +69,9 @@ class Participant extends Component {
         globals.playerRadius
       )
     ) {
-      gsap.to(this.transform.position, 1, { y: 0.5 });
+      gsap.to(this.transform.position, 1, { y: 1 });
     } else {
-      gsap.to(this.transform.position, 1, { y: 0 });
+      gsap.to(this.transform.position, 1, { y: 0.4 });
     }
 
     //check if player is close

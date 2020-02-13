@@ -1,13 +1,7 @@
 import * as THREE from 'three';
 import globals from './globals';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-// import { SkeletonUtils } from 'three/examples/jsm/utils/SkeletonUtils.js';
-import Player from './objects/Player';
-import GameObjectManager from './objects/GameObjectManager';
-import InputManager from './objects/InputManager';
-import WorldManager from './objects/WorldManager';
-import CameraInfo from './objects/CameraInfo';
 import Stats from 'stats.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const main = () => {
   console.log('three loaded');
@@ -17,7 +11,7 @@ const main = () => {
 
   // SETUP THREEJS //
   const canvas = document.querySelector('#three-canvas');
-  const renderer = new THREE.WebGLRenderer({ canvas });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const fov = 50;
@@ -28,7 +22,8 @@ const main = () => {
 
   globals.canvas = canvas;
   globals.camera = camera;
-
+  // var controls = new OrbitControls(camera, renderer.domElement);
+  // controls.update();
   camera.position.set(0, 2, 10);
 
   // CANVAS SETUP //

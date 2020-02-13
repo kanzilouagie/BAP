@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import gsap from 'gsap';
 import styled from 'styled-components';
 import CustomizerInputRow from '../../components/CustomizerInputRow';
+import { Power1 } from 'gsap/gsap-core';
 
 const Looks = () => {
   const store = useContext(StoreContext);
@@ -14,11 +15,12 @@ const Looks = () => {
 
   useEffect(() => {
     if (!store.isProfileLoaded) {
-      gsap.to(globals.camera.rotation, 0.25, { x: 0 });
+      gsap.to(globals.camera.rotation, 0.5, { ease: Power1.easeIn, x: 0.3 });
       setTimeout(() => {
         globals.currentScene = new ProfileScene();
         store.setIsProfileLoaded(true);
-      }, 250);
+        globals.camera.rotation.x = 0;
+      }, 600);
     }
   }, [store]);
 
@@ -37,24 +39,39 @@ const Looks = () => {
   return (
     <>
       <h1>Looks</h1>
-      <StyledDiv>
+
+      <StickyContainer id="inhoud">
+        {' '}
         <h1>Personaliseer deelnemer</h1>
         <CustomizerInputRow
           category="head"
           onChange={(val, category) => handleItemChange(val, category)}
-          initialValue={globals.character.head}
         />
-      </StyledDiv>
+        <CustomizerInputRow
+          category="body"
+          onChange={(val, category) => handleItemChange(val, category)}
+        />
+        <CustomizerInputRow
+          category="foot"
+          onChange={(val, category) => handleItemChange(val, category)}
+        />
+      </StickyContainer>
       <SideNavigation />
     </>
   );
 };
 
-const StyledDiv = styled.div`
-  background-color: green;
-  width: 100vw;
+const StickyContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  height: 45vh;
+  width: 50vh;
+  z-index: 100000;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default Looks;
