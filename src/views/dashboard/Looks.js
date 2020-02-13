@@ -68,7 +68,6 @@ const StickyContainer = styled.div`
   color: white;
   height: 45vh;
   width: 50vh;
-  z-index: 100000;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -33,9 +33,9 @@ class Player extends Component {
       transform.translateOnAxis(kForward, moveSpeed * deltaTime);
 
     // move camera with player
-    camera.position.x = transform.position.x + 1;
+    camera.position.x = transform.position.x;
     camera.position.y = transform.position.y + 5;
-    camera.position.z = transform.position.z + 8;
+    camera.position.z = transform.position.z + 10;
 
     globals.light.position.x = transform.position.x + 2;
     globals.light.position.y = transform.position.y + 3;
