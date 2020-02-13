@@ -1,32 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SideNavigation from '../../components/SideNavigation';
 import styled from 'styled-components';
 import PrimaryButton from '../../components/PrimaryButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo_think_pink.png';
-import { useHistory, Redirect } from 'react-router';
-import firebase from '../../authentication/base';
-const MyTeam = () => {
+import { useHistory } from 'react-router';
+
+const JoinTeam = () => {
   const history = useHistory();
-  const [teamId, setTeamId] = useState();
-
-  useEffect(() => {
-    const getTeamId = async () => {
-      const ref = await firebase
-        .firestore()
-        .collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .get();
-      setTeamId(ref.data().teamId);
-    };
-    getTeamId();
-  }, [teamId]);
-
-  if (teamId != null && teamId != '' && teamId != undefined) {
-    console.log(teamId);
-    return <Redirect to="/teampage" />;
-  }
-
   return (
     <Background>
       <TopNavigation>
@@ -39,7 +20,7 @@ const MyTeam = () => {
       </TopNavigation>
       <HomeBody>
         <SecondaryButton
-          onClick={() => history.push('/')}
+          onClick={() => history.push('/home')}
           height={'30px'}
           width={'auto'}
           padding={'0 10px'}
@@ -51,11 +32,13 @@ const MyTeam = () => {
         >
           Terug
         </SecondaryButton>
+        <h2>STAP 1/5</h2>
         <Steps>
-          <h1>Alleen is ook maar alleen… Maar als team sta je sterk!</h1>
+          <h1>Wandelen of toch liever lopen?</h1>
           <p>
-            Maak nu een team aan of sluit je aan bij een bestaand team en loop
-            samen naar een virtuele overwinning!
+            Net zoals op Race for the Cure kan je kiezen om te wandelen of te
+            lopen. <br />
+            Waar heb jij zin in?
           </p>
           <Choices>
             <div>
@@ -87,7 +70,8 @@ const MyTeam = () => {
   );
 };
 
-export default MyTeam;
+export default JoinTeam;
+
 
 const Background = styled.div`
   position: absolute;
@@ -130,7 +114,7 @@ const RightNav = styled.div`
 
 const Steps = styled.div`
   position: relative;
-  top: -20px;
+  top: -60px;
   width: 100%;
   display: flex;
   flex-direction: column;
