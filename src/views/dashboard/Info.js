@@ -1,19 +1,13 @@
 import React, { useCallback } from 'react';
 import globals from '../../three/globals';
 
-import CustomizerInputRow from '../../components/CustomizerInputRow';
 import firebase from '../../authentication/base';
 import ProfileWrapper from '../../components/ProfileWrapper';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const Looks = () => {
+const Info = () => {
   const [isSaving, setIsSaving] = useState(false);
-
-  const handleItemChange = (val, category) => {
-    globals.character[category] = val;
-    globals.currentScene.changeLook(); // update
-  };
 
   const handleSave = useCallback(() => {
     setIsSaving(true);
@@ -29,19 +23,8 @@ const Looks = () => {
   return (
     <ProfileWrapper>
       <Container>
-        <h1>Personaliseer deelnemer</h1>
-        <CustomizerInputRow
-          category="head"
-          onChange={(val, category) => handleItemChange(val, category)}
-        />
-        <CustomizerInputRow
-          category="body"
-          onChange={(val, category) => handleItemChange(val, category)}
-        />
-        <CustomizerInputRow
-          category="foot"
-          onChange={(val, category) => handleItemChange(val, category)}
-        />
+        <h1>Info</h1>
+
         <button disabled={isSaving} onClick={() => handleSave()}>
           Opslaan
         </button>
@@ -60,4 +43,4 @@ const Container = styled.div`
   }
 `;
 
-export default Looks;
+export default Info;

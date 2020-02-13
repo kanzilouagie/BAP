@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import app from '../authentication/base';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -38,7 +38,7 @@ const SideNavigation = () => {
       <MainNavigation showNav={showNav}>
         <TopNavigation>
           <button>
-            <Link to={firebase.auth().currentUser ? '/looks' : '/login'}>
+            <Link to={firebase.auth().currentUser ? '/profile/info' : '/login'}>
               Mijn profiel
             </Link>
           </button>
@@ -83,6 +83,7 @@ const MainNavigation = styled.nav`
   justify-content: center;
   align-items: flex-start;
   transition: 0.5s ease-in-out;
+  z-index: 1000;
 `;
 
 const TopNavigation = styled.div`

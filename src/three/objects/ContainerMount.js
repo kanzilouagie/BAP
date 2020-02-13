@@ -8,6 +8,10 @@ class ContainerMount {
     this.container = false;
   }
 
+  updateElement = () => {
+    this.container = document.querySelector('#inhoud');
+  };
+
   update() {
     const { pos } = this;
     const { canvas } = globals;
@@ -23,7 +27,7 @@ class ContainerMount {
     if (!this.container) {
       this.container = document.querySelector('#inhoud');
     } else {
-      this.container.style.transform = `translate(38%, -85%) translate(${x /
+      this.container.style.transform = `translate(38%, -88%) translate(${x /
         10}rem,${y / 10}rem)`;
     }
   }

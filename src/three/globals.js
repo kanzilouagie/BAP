@@ -28,7 +28,7 @@ const globals = {
     foot: 0
   },
   looks: {
-    head: ['none', 'piercing', 'hoofdband'],
+    head: ['none', 'piercing', 'hoofdbandje'],
     body: ['none', 'zwembandjes', 'bril', 'zweetbandjes'],
     foot: ['none', 'SOCKS']
   }
