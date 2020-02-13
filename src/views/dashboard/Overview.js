@@ -1,25 +1,40 @@
 import React, { useEffect, useContext } from 'react';
 import SideNavigation from '../../components/SideNavigation';
-import { useHistory } from 'react-router';
 import globals from '../../three/globals';
-import loadThree from '../../three/setup';
+import { useHistory } from 'react-router';
+import OverviewScene from '../../three/scenes/OverviewScene';
 import { StoreContext } from '../../store/StoreProvider';
+import gsap from 'gsap';
 import styled from 'styled-components';
 import PrimaryButton from '../../components/PrimaryButton';
 
 const Overview = () => {
-  // pass history to threejs scene
+  const store = useContext(StoreContext);
   const history = useHistory();
   globals.history = history;
 
-  const store = useContext(StoreContext);
-
   useEffect(() => {
-    if (!store.isWorldLoaded) {
-      loadThree();
-      store.setIsWorldLoaded(true);
+    if (!store.isOverviewLoaded) {
+      gsap.to(globals.camera.rotation, 0.25, { x: -1 });
+      setTimeout(() => {
+        globals.currentScene = new OverviewScene();
+      }, 250);
+      store.setIsOverviewLoaded(true);
     }
   }, [store]);
+
+  useEffect(() => {
+    return () => {
+      console.log(history.location.pathname);
+      if (
+        !history.location.pathname.includes('/detail') &&
+        !history.location.pathname.includes('/newmessage')
+      ) {
+        store.setIsOverviewLoaded(false);
+        globals.currentScene.scene.dispose();
+      }
+    };
+  }, [history]);
   return (
     <>
       <SideNavigation />

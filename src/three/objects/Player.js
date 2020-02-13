@@ -8,17 +8,19 @@ const kForward = new THREE.Vector3(0, 0, 0);
 class Player extends Component {
   constructor(gameObject, models) {
     super(gameObject);
-    const model = models.breast;
+    const model = models.walker;
     this.skinInstance = gameObject.addComponent(SkinInstance, model);
-    // this.skinInstance.setAnimation('Run');
+    this.isRunning = false;
     this.turnSpeed = globals.moveSpeed;
     this.offscreenTimer = 0;
     this.maxTimeOffScreen = 1;
     this.maxDistanceFromCamera = -20;
+    this.skinInstance.setAnimation('animation_0');
     globals.playerRadius = model.size / 2;
   }
 
   update() {
+    // this.skinInstance.update();
     const { deltaTime, moveSpeed, camera, cameraInfo, floor } = globals;
     const { transform } = this.gameObject;
     const { inputManager } = this;
@@ -31,10 +33,9 @@ class Player extends Component {
       transform.translateOnAxis(kForward, moveSpeed * deltaTime);
 
     // move camera with player
-    camera.position.x = transform.position.x + 1;
-    camera.position.y = transform.position.y + 4;
-    camera.position.z = transform.position.z + 5;
-    camera.rotation.x = -0.5;
+    camera.position.x = transform.position.x;
+    camera.position.y = transform.position.y + 5;
+    camera.position.z = transform.position.z + 10;
 
     globals.light.position.x = transform.position.x + 2;
     globals.light.position.y = transform.position.y + 3;
