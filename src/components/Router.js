@@ -15,6 +15,9 @@ import ChooseRunner from '../views/registration/ChooseRunner';
 import CustomizeRunner from '../views/registration/CustomizeRunner';
 import PersonalInformation from '../views/registration/PersonalInformation';
 import ShareMessage from '../views/registration/ShareMessage';
+import CreateTeam from '../views/teams/CreateTeam';
+import JoinTeam from '../views/teams/JoinTeam';
+import TeamPage from '../views/teams/TeamPage';
 // import ThreeCanvas from './ThreeCanvas';
 import Detail from '../views/Detail';
 import NewMessage from '../views/dashboard/NewMessage';
@@ -37,6 +40,9 @@ const Router = () => {
             <PrivateRoute exact path="/looks" component={Looks} />
             <PrivateRoute exact path="/myteam" component={MyTeam} />
             <PrivateRoute exact path="/statistics" component={Statistics} />
+            <PrivateRoute exact path="/createteam" component={CreateTeam} />
+            <PrivateRoute exact path="/jointeam" component={JoinTeam} />
+            <PrivateRoute exact path="/teampage" component={TeamPage} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
