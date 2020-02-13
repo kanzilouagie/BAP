@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import globals from '../three/globals';
+import Button from './Button';
 
 const CustomizerInputRow = ({ category, onChange }) => {
   const [value, setValue] = useState(globals.character[category]);
@@ -13,16 +14,16 @@ const CustomizerInputRow = ({ category, onChange }) => {
 
   return (
     <Container>
-      <button onClick={() => handleChange(-1)} disabled={value === 0}>
+      <Button onClick={() => handleChange(-1)} disabled={value === 0}>
         Left
-      </button>{' '}
+      </Button>{' '}
       <p>{value}</p>{' '}
-      <button
+      <Button
         onClick={() => handleChange(1)}
         disabled={value >= globals.looks[category].length - 1}
       >
         Right
-      </button>
+      </Button>
     </Container>
   );
 };
@@ -33,6 +34,10 @@ const Container = styled.div`
   width: 80%;
   justify-content: space-between;
   /* background-color: green; */
+
+  & > * {
+    margin-bottom: 2rem;
+  }
 `;
 
 export default CustomizerInputRow;
