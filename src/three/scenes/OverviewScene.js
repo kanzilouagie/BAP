@@ -15,7 +15,7 @@ class OverviewScene {
     this.scene = new THREE.Scene();
     globals.scene = this.scene;
     this.scene.background = new THREE.Color('#ffdde1');
-
+    this.modelsLoaded = false;
     const addLight = (...pos) => {
       const color = 0xffffff;
       const intensity = 0.8;
@@ -113,6 +113,7 @@ class OverviewScene {
     };
 
     const init = () => {
+      this.modelsLoaded = true;
       // add camera object
       prepModelsAndAnimations();
       globals.camera.rotation.x = 0;
@@ -140,9 +141,11 @@ class OverviewScene {
   }
 
   update() {
-    this.gameObjectManager.update();
-    this.inputManager.update();
-    this.world.update();
+    if (this.modelsLoaded) {
+      this.gameObjectManager.update();
+      this.inputManager.update();
+      this.world.update();
+    }
   }
 }
 

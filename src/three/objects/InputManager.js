@@ -14,6 +14,7 @@
 // Keys are 'left', 'right', 'a', 'b', 'up', 'down'
 class InputManager {
   constructor() {
+    console.log('inputmanager loaded');
     this.keys = {};
     const keyMap = new Map();
 
@@ -28,7 +29,7 @@ class InputManager {
       keyMap.set(keyCode, name);
     };
 
-    const setKeyFromKeyCode = (keyCode, pressed) => {
+    this.setKeyFromKeyCode = (keyCode, pressed) => {
       const keyName = keyMap.get(keyCode);
       if (!keyName) {
         return;
@@ -44,18 +45,30 @@ class InputManager {
     addKey(90, 'a');
     addKey(88, 'b');
 
-    window.addEventListener('keydown', e => {
-      setKeyFromKeyCode(e.keyCode, true);
-    });
-    window.addEventListener('keyup', e => {
-      setKeyFromKeyCode(e.keyCode, false);
-    });
+    this.handleKeyDown = e => {
+      this.setKeyFromKeyCode(e.keyCode, true);
+    };
+    this.handleKeyUp = e => {
+      this.setKeyFromKeyCode(e.keyCode, false);
+    };
+
+    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keyup', this.handleKeyUp);
   }
+
   update() {
     for (const keyState of Object.values(this.keys)) {
       if (keyState.justPressed) {
         keyState.justPressed = false;
       }
+    }
+    if (
+      window.location.pathname !== '/' &&
+      !window.location.pathname.includes('/detail') &&
+      !window.location.pathname.includes('/newmessage')
+    ) {
+      window.removeEventListener('keydown', this.handleKeyDown);
+      window.removeEventListener('keyup', this.handleKeyUp);
     }
   }
 }
