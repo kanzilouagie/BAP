@@ -40,11 +40,15 @@ const Overview = () => {
     <>
       <SideNavigation />
       <Overlay>
-        <Button onClick={() => history.push('/')}>Bericht lezen</Button>
-        <Button onClick={() => history.push('/newmessage')}>
+        <Button color="#FF9FAA" active onClick={() => history.push('/')}>
+          Bericht lezen
+        </Button>
+        <Button color="#FF9FAA" onClick={() => history.push('/newmessage')}>
           Bericht plaatsen
         </Button>
-        <Button onClick={() => history.push('/myteam')}>Mijn team</Button>
+        <Button color="#FF9FAA" onClick={() => history.push('/myteam')}>
+          Mijn team
+        </Button>
       </Overlay>
     </>
   );

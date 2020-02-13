@@ -6,6 +6,7 @@ import firebase from '../../authentication/base';
 import ProfileWrapper from '../../components/ProfileWrapper';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Button from '../../components/Button';
 
 const Looks = () => {
   const [isSaving, setIsSaving] = useState(false);
@@ -42,9 +43,13 @@ const Looks = () => {
           category="foot"
           onChange={(val, category) => handleItemChange(val, category)}
         />
-        <button disabled={isSaving} onClick={() => handleSave()}>
+        <Button
+          border="#343988"
+          disabled={isSaving}
+          onClick={() => handleSave()}
+        >
           Opslaan
-        </button>
+        </Button>
       </Container>
     </ProfileWrapper>
   );
@@ -55,7 +60,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  & * {
+  & > * {
     margin-top: 2rem;
   }
 `;

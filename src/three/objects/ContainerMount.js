@@ -27,8 +27,8 @@ class ContainerMount {
     if (!this.container) {
       this.container = document.querySelector('#inhoud');
     } else {
-      this.container.style.transform = `translate(38%, -88%) translate(${x /
-        10}rem,${y / 10}rem)`;
+      // this.container.style.transform = `translate(-50rem, -60rem) translate(${x /
+      //   10}rem,${y / 10}rem)`;
     }
   }
 }

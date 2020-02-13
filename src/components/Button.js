@@ -8,27 +8,43 @@ const Button = ({ children, ...otherProps }) => {
 
 const StyledButton = styled.button`
   padding: 1rem 1.5rem;
-  color: black;
+  width: ${({ width }) => (width ? width : 'auto')};
+  color: ${({ border }) => (border ? border : 'black')};
   font-size: 1.6rem;
-  background-color: ${({ color }) => (color ? color : '#ff9faa')};
+  background-color: ${({ color }) => (color ? color : 'transparent')};
   border: solid black 0.2rem;
   border-color: ${({ border }) => (border ? border : 'black')};
   border-radius: 1rem;
   position: relative;
-  transition: 0.3s;
+  transition: 0.1s;
+  top: ${props => (props.active ? '0.6rem' : '0')};
+  cursor: pointer;
 
   &::after {
     content: '';
     display: inline-block;
-    background-color: ${({ color }) => (color ? color : '#ff9faa')};
+    background-color: ${({ color }) => (color ? color : 'transparent')};
     border: solid black 0.2rem;
-    border-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-color: ${({ border }) => (border ? border : 'black')};
+    border-top: none;
     position: absolute;
-    top: ${props => (props.active ? '0.2rem' : '0.5rem')};
+    top: ${props => (props.active ? '0.4rem' : '1rem')};
     left: -0.2rem;
     width: 100%;
     height: 100%;
     z-index: -1;
+    transition: 0.1s;
+  }
+
+  &:active {
+    top: 0.6rem;
+    &::after {
+      top: 0.4rem;
+    }
   }
 `;
 

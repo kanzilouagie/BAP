@@ -1,33 +1,57 @@
-import React, { useCallback } from 'react';
-import globals from '../../three/globals';
+import React, { useEffect } from 'react';
 
 import firebase from '../../authentication/base';
 import ProfileWrapper from '../../components/ProfileWrapper';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Button from '../../components/Button';
 
 const Info = () => {
-  const [isSaving, setIsSaving] = useState(false);
+  const [userData, setUserData] = useState({});
 
-  const handleSave = useCallback(() => {
-    setIsSaving(true);
-    const localData = { ...globals.character };
-    firebase
-      .firestore()
-      .collection('users')
-      .doc(firebase.auth().currentUser.uid)
-      .update({ character: localData });
-    setIsSaving(false);
-  }, [globals.character]);
+  useEffect(() => {
+    const getUserData = async () => {
+      const data = await (
+        await firebase
+          .firestore()
+          .collection('users')
+          .doc(firebase.auth().currentUser.uid)
+          .get()
+      ).data();
+      setUserData(data);
+    };
+    getUserData();
+  }, []);
 
   return (
     <ProfileWrapper>
       <Container>
-        <h1>Info</h1>
-
-        <button disabled={isSaving} onClick={() => handleSave()}>
-          Opslaan
-        </button>
+        <h1>Mijn gegevens</h1>
+        <Form>
+          <fieldset>
+            <label>Gebruikersnaam</label>
+            <input
+              type="text"
+              name="username"
+              placeholder={userData.username || ''}
+            />
+          </fieldset>
+          <fieldset>
+            <label>E-mailadres</label>
+            <input
+              type="email"
+              name="email"
+              placeholder={userData.email || 'example@example.com'}
+            />
+          </fieldset>
+          <fieldset>
+            <label>Verander wachtwoord</label>
+            <input type="password" name="password" />
+          </fieldset>
+          <Button onClick={e => e.preventDefault()} border="#343988">
+            gegevens opslaan
+          </Button>
+        </Form>
       </Container>
     </ProfileWrapper>
   );
@@ -35,11 +59,46 @@ const Info = () => {
 
 const Container = styled.div`
   display: flex;
+  width: 80%;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
+  margin-left: 3rem;
 
-  & * {
+  & h1 {
+    margin-bottom: 2rem;
     margin-top: 2rem;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+`;
+
+const Form = styled.form`
+  & fieldset {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  & label {
+    margin-bottom: 0.5rem;
+  }
+
+  & input {
+    background: none;
+    border: 0.2rem solid black;
+    padding: 0.5rem 1rem;
+    width: 30rem;
+    color: black;
+    border-radius: 10px;
+
+    &::placeholder {
+      color: black;
+    }
+  }
+
+  & button {
+    margin-top: 3rem;
   }
 `;
 

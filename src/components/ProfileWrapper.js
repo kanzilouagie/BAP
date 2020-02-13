@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import SideNavigation from './SideNavigation';
 import globals from '../three/globals';
 import ProfileScene from '../three/scenes/ProfileScene';
@@ -9,14 +9,15 @@ import styled from 'styled-components';
 import { Power1 } from 'gsap/gsap-core';
 import firebase from '../authentication/base';
 import { node } from 'prop-types';
+import Button from './Button';
 
 const ProfileWrapper = ({ children }) => {
   const store = useContext(StoreContext);
   const history = useHistory();
-  const [isDataLoaded, setIsDataLoaded] = useState();
 
   useEffect(() => {
     if (!store.isProfileLoaded) {
+      gsap.set(document.getElementById('inhoud'), { opacity: 0 });
       gsap.to(globals.camera.rotation, 0.5, { ease: Power1.easeIn, x: 0.3 });
       setTimeout(() => {
         globals.currentScene = new ProfileScene();
@@ -30,9 +31,13 @@ const ProfileWrapper = ({ children }) => {
               .doc(firebase.auth().currentUser.uid)
               .get()
           ).data();
+          setTimeout(() => {
+            gsap.to(document.getElementById('inhoud'), 0.5, {
+              opacity: 1
+            });
+          }, 700);
           if (lookData.character) globals.character = lookData.character;
           globals.currentScene.changeLook(); // update
-          setIsDataLoaded(true);
           // this.skinInstance.setAnimation('Run');
         };
         setCharacterLook();
@@ -41,12 +46,18 @@ const ProfileWrapper = ({ children }) => {
   }, [store]);
 
   useEffect(() => {
-    gsap.set(document.getElementById('inhoud'), { opacity: 0.1 });
-    gsap.to(document.getElementById('inhoud'), 0.5, { opacity: 1 });
+    if (
+      history.location.pathname.includes('/profile') &&
+      store.isProfileLoaded
+    ) {
+      gsap.set(document.getElementById('inhoud'), { opacity: 0 });
+      gsap.to(document.getElementById('inhoud'), 0.5, { opacity: 1 });
+    }
     if (globals.currentScene.historyUpdate)
       globals.currentScene.historyUpdate();
     return () => {
       if (!history.location.pathname.includes('/profile')) {
+        gsap.set(document.getElementById('inhoud'), { opacity: 0 });
         globals.currentScene.scene.dispose();
         store.setIsProfileLoaded(false);
       }
@@ -57,31 +68,50 @@ const ProfileWrapper = ({ children }) => {
     if (path !== history.location.pathname) {
       gsap.to(document.getElementById('inhoud'), 0.3, { opacity: 0 });
     }
-    setTimeout(() => {
-      history.push(path);
-    }, 500);
+
+    history.push(path);
   };
 
   return (
     <Container>
       <SideNavigation />
-
       <StickyContainer id="inhoud">{children}</StickyContainer>
-      <ProfileNav>
-        <ul>
-          <li>
-            <a onClick={() => handleExit('/profile/info')}>mijn gegevens</a>
-          </li>
-          <li>
-            <a onClick={() => handleExit('/profile/looks')}>personaliseren</a>
-          </li>
-          <li>
-            <a onClick={() => handleExit('/profile/looks')}>mijn berichten</a>
-          </li>
-          <li>
-            <a onClick={() => handleExit('/profile/looks')}>ik loop voor</a>
-          </li>
-        </ul>
+      <ProfileNav id="profile-nav">
+        <Button
+          border="#343988"
+          width="20rem"
+          active={history.location.pathname === '/profile/info'}
+          onClick={() => handleExit('/profile/info')}
+        >
+          mijn gegevens
+        </Button>
+
+        <Button
+          border="#343988"
+          width="20rem"
+          active={history.location.pathname === '/profile/looks'}
+          onClick={() => handleExit('/profile/looks')}
+        >
+          personaliseren
+        </Button>
+
+        <Button
+          border="#343988"
+          width="20rem"
+          active={history.location.pathname === '/profile/messages'}
+          onClick={() => handleExit('/profile/looks')}
+        >
+          mijn berichten
+        </Button>
+
+        <Button
+          border="#343988"
+          width="20rem"
+          active={history.location.pathname === '/profile/supporters'}
+          onClick={() => handleExit('/profile/looks')}
+        >
+          ik loop voor
+        </Button>
       </ProfileNav>
     </Container>
   );
@@ -98,25 +128,19 @@ const Container = styled.div`
 
 const StickyContainer = styled.div`
   position: absolute;
-  top: 0rem;
-  left: 0rem;
+  top: 22rem;
+  left: 67.5rem;
   color: white;
   height: 55vh;
   width: 53vh;
 `;
 
 const ProfileNav = styled.nav`
-  & > ul {
-    width: 100vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 6rem;
-  }
-
-  & > a {
-    cursor: pointer;
-  }
+  width: 102vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 6rem;
 `;
 
 ProfileWrapper.propTypes = {
