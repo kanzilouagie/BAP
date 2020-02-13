@@ -14,6 +14,7 @@ class OverviewScene {
     this.name = 'overview';
     this.scene = new THREE.Scene();
     globals.scene = this.scene;
+    this.listeners = false;
     this.scene.background = new THREE.Color('#ffdde1');
     this.modelsLoaded = false;
     const addLight = (...pos) => {
@@ -145,6 +146,13 @@ class OverviewScene {
       this.gameObjectManager.update();
       this.inputManager.update();
       this.world.update();
+    }
+    if (!this.listeners && window.location.pathname === '/') {
+      this.inputManager.addListeners();
+      this.listeners = true;
+    } else if (window.location.pathname !== '/') {
+      this.inputManager.removeListeners();
+      this.listeners = false;
     }
   }
 }
