@@ -23,6 +23,7 @@ class OverviewScene {
       const light = new THREE.PointLight(color, intensity);
       light.position.set(...pos);
       light.castShadow = true;
+      light.shadow.radius = 10;
       this.scene.add(light);
       // scene.add(light.target);
       globals.light = light;
@@ -34,7 +35,7 @@ class OverviewScene {
     this.scene.add(hemiLight);
 
     const addFloor = () => {
-      const planeGeometry = new THREE.PlaneBufferGeometry(20, 20, 32, 32);
+      const planeGeometry = new THREE.PlaneBufferGeometry(40, 40, 32);
       const planeMaterial = new THREE.ShadowMaterial({
         color: '#111111',
         wireframe: false

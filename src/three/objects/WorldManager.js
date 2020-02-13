@@ -22,6 +22,12 @@ class WorldManager {
     getParticipants();
   }
 
+  isClose(obj1, obj1Radius, obj2, obj2Radius) {
+    const minDist = obj1Radius + obj2Radius;
+    const dist = obj1.position.distanceTo(obj2.position);
+    return dist < minDist;
+  }
+
   update() {
     // check if stored participants are still alive
     this.aliveParticipants.forEach(alive => {
@@ -30,7 +36,7 @@ class WorldManager {
       }
     });
 
-    if (this.aliveParticipants.length < 6 && this.allParticipants.length > 0) {
+    if (this.aliveParticipants.length < 12 && this.allParticipants.length > 0) {
       if (this.loadedParticipants === this.allParticipants.length)
         this.loadedParticipants = 0;
       const gameObject = this.gameObjectManager.createGameObject(
@@ -43,11 +49,26 @@ class WorldManager {
         globals.inputManager,
         this.gameObjectManager
       );
-      gameObject.transform.position.x = (Math.random() - 0.5) * 20;
-      gameObject.transform.position.x += globals.camera.position.x;
-      gameObject.transform.position.z = (Math.random() - 0.5) * 20;
-      gameObject.transform.position.z += globals.camera.position.z - 5;
-      gameObject.transform.rotation.y = (Math.random() - 0.5) * 2;
+      const giveRandomPos = () => {
+        gameObject.transform.position.x = (Math.random() - 0.5) * 20;
+        gameObject.transform.position.x += globals.camera.position.x;
+        gameObject.transform.position.z = (Math.random() - 0.5) * 20;
+        gameObject.transform.position.z += globals.camera.position.z - 5;
+        gameObject.transform.rotation.y = (Math.random() - 0.5) * 2;
+        this.aliveParticipants.forEach(otherObject => {
+          const hitradius = this.model.size / 2;
+          if (
+            this.isClose(
+              gameObject.transform,
+              hitradius,
+              otherObject.transform,
+              hitradius
+            )
+          )
+            giveRandomPos();
+        });
+      };
+      giveRandomPos();
       this.loadedParticipants += 1;
       this.aliveParticipants.push(gameObject);
     }

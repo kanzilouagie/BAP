@@ -22,6 +22,7 @@ class ProfileScene {
       const light = new THREE.PointLight(color, intensity);
       light.position.set(...pos);
       light.castShadow = true;
+      light.shadow.radius = 10;
       console.log(light.shadow);
       this.scene.add(light);
       // scene.add(light.target);
@@ -195,7 +196,6 @@ class ProfileScene {
   }
 
   changeLook() {
-    console.log(globals.character);
     Object.keys(globals.looks).forEach(lookCat => {
       globals.looks[lookCat].forEach(lookName => {
         const currentName = globals.looks[lookCat][globals.character[lookCat]];

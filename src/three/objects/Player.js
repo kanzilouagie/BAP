@@ -2,21 +2,69 @@ import Component from './Component';
 import * as THREE from 'three';
 import SkinInstance from './SkinInstance';
 import globals from '../globals';
+import firebase from '../../authentication/base';
 
 const kForward = new THREE.Vector3(0, 0, 0);
 
 class Player extends Component {
   constructor(gameObject, models) {
     super(gameObject);
-    const model = models.walker;
-    this.skinInstance = gameObject.addComponent(SkinInstance, model);
+    const model = models.stretcher;
     this.isRunning = false;
     this.turnSpeed = globals.moveSpeed;
     this.offscreenTimer = 0;
     this.maxTimeOffScreen = 1;
     this.maxDistanceFromCamera = -20;
-    this.skinInstance.setAnimation('animation_0');
+    // this.skinInstance.setAnimation('animation_0');
     globals.playerRadius = model.size / 2;
+
+    const clearObjectLook = characterData => {
+      const character = characterData.character || {};
+      Object.keys(globals.looks).forEach(lookCat => {
+        const wearedItemKey = character[lookCat] || 0;
+        globals.looks[lookCat].forEach((itemName, key) => {
+          if (key !== wearedItemKey) {
+            const object = model.gltf.scene.getObjectByName(itemName, true);
+            if (object) {
+              object.visible = false;
+            }
+          }
+        });
+      });
+    };
+
+    const dressUp = async () => {
+      const characterData = await (
+        await firebase
+          .firestore()
+          .collection('users')
+          .doc(firebase.auth().currentUser.uid)
+          .get()
+      ).data();
+      clearObjectLook(characterData);
+
+      if (characterData.character) {
+        const character = characterData.character;
+        Object.keys(globals.looks).forEach(lookCat => {
+          globals.looks[lookCat].forEach(lookName => {
+            const currentName = globals.looks[lookCat][character[lookCat]];
+            if (lookName !== currentName) {
+              const object = model.gltf.scene.getObjectByName(lookName, true);
+              if (object) {
+                object.visible = false;
+              }
+            } else {
+              const object = model.gltf.scene.getObjectByName(lookName, true);
+              if (object) {
+                object.visible = true;
+              }
+            }
+          });
+        });
+      }
+      this.skinInstance = gameObject.addComponent(SkinInstance, model);
+    };
+    dressUp();
   }
 
   update() {

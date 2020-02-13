@@ -30,7 +30,7 @@ const globals = {
   looks: {
     head: ['none', 'piercing', 'hoofdband'],
     body: ['none', 'zwembandjes', 'bril', 'zweetbandjes'],
-    foot: ['none', 'kousen']
+    foot: ['none', 'SOCKS']
   }
 };
 export default globals;

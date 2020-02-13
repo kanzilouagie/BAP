@@ -4,8 +4,8 @@ import globals from '../globals';
 class ContainerMount {
   constructor(gameObject) {
     this.gameObject = gameObject;
-    this.container = document.querySelector('#inhoud');
     this.pos = new THREE.Vector3();
+    this.container = false;
   }
 
   update() {
@@ -20,8 +20,12 @@ class ContainerMount {
     const x = (pos.x * 0.5 + 0.5) * canvas.clientWidth;
     const y = (pos.y * -0.5 + 0.5) * canvas.clientHeight;
     // move the elem to that position
-    this.container.style.transform = `translate(38%, -85%) translate(${x /
-      10}rem,${y / 10}rem)`;
+    if (!this.container) {
+      this.container = document.querySelector('#inhoud');
+    } else {
+      this.container.style.transform = `translate(38%, -85%) translate(${x /
+        10}rem,${y / 10}rem)`;
+    }
   }
 }
 

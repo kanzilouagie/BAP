@@ -2,12 +2,13 @@ import Component from './Component';
 import SkinInstance from './SkinInstance';
 import globals from '../globals';
 import gsap from 'gsap';
+import firebase from '../../authentication/base';
 
 class Participant extends Component {
   constructor(gameObject, model, inputManager, gameObjectManager) {
     super(gameObject);
-    const skinInstance = gameObject.addComponent(SkinInstance, model);
-    skinInstance.mixer.timeScale = globals.moveSpeed / 4;
+    this.modelScene = model.gltf.scene;
+    this.modelScene.getObjectByName('bril', true).visible = true;
     // skinInstance.setAnimation('Idle');
     this.offscreenTimer = 0;
     this.maxTimeOffScreen = 1;
@@ -22,6 +23,55 @@ class Participant extends Component {
     this.transform.scale.x = 0.1;
     this.transform.scale.y = 0.1;
     gsap.to(this.transform.scale, 0.5, { x: 1, y: 1 });
+
+    const clearObjectLook = characterData => {
+      const character = characterData.character || {};
+      Object.keys(globals.looks).forEach(lookCat => {
+        const wearedItemKey = character[lookCat] || 0;
+        globals.looks[lookCat].forEach((itemName, key) => {
+          if (key !== wearedItemKey) {
+            const object = this.modelScene.getObjectByName(itemName, true);
+            if (object) {
+              object.visible = false;
+            }
+          }
+        });
+      });
+    };
+
+    const dressUp = async () => {
+      const characterData = await (
+        await firebase
+          .firestore()
+          .collection('users')
+          .doc(this.name)
+          .get()
+      ).data();
+      clearObjectLook(characterData);
+
+      if (characterData.character) {
+        const character = characterData.character;
+        Object.keys(globals.looks).forEach(lookCat => {
+          globals.looks[lookCat].forEach(lookName => {
+            const currentName = globals.looks[lookCat][character[lookCat]];
+            if (lookName !== currentName) {
+              const object = this.modelScene.getObjectByName(lookName, true);
+              if (object) {
+                object.visible = false;
+              }
+            } else {
+              const object = this.modelScene.getObjectByName(lookName, true);
+              if (object) {
+                object.visible = true;
+              }
+            }
+          });
+        });
+      }
+      const skinInstance = gameObject.addComponent(SkinInstance, model);
+      skinInstance.mixer.timeScale = globals.moveSpeed / 4;
+    };
+    dressUp();
   }
 
   isClose(obj1, obj1Radius, obj2, obj2Radius) {
