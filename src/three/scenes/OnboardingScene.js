@@ -9,12 +9,13 @@ import gsap from 'gsap';
 import ContainerMount from '../objects/ContainerMount';
 import { Power1 } from 'gsap/gsap-core';
 
-class ProfileScene {
+class OnboardingScene {
   constructor() {
     this.name = 'overview';
     this.scene = new THREE.Scene();
     globals.scene = this.scene;
     this.scene.background = new THREE.Color('#ffdde1');
+    console.log(globals);
 
     const addLight = (...pos) => {
       const color = 0xffffff;
@@ -71,29 +72,6 @@ class ProfileScene {
       mroot.position.copy(cent).multiplyScalar(-1);
       mroot.position.y -= size.y * 0.5;
     };
-    // add cube
-    let stage;
-    const gltfLoader = new GLTFLoader();
-    gltfLoader.load(stageModel, gltf => {
-      repositionModel(gltf.scene);
-
-      gltf.scene.traverse(node => {
-        if (node instanceof THREE.Mesh) {
-          node.castShadow = true;
-          node.receiveShadow = true;
-        }
-      });
-      stage = gltf.scene;
-      stage.scale.x = 0.01;
-      stage.scale.y = 0.01;
-      stage.scale.z = 0.01;
-      stage.position.x = 0.5;
-      stage.position.y = -1.2;
-      stage.position.z = -0.5;
-      console.log(stage);
-      globals.scene.add(gltf.scene);
-      this.containerMount = new ContainerMount(stage, '#inhoud');
-    });
     // var geometry = new THREE.BoxGeometry(2.5, 2, 1);
     // var material = new THREE.MeshBasicMaterial({ color: 0x555555 });
     // var cube = new THREE.Mesh(geometry, material);
@@ -115,7 +93,7 @@ class ProfileScene {
 
       const gltfLoader = new GLTFLoader(loadingManager);
 
-      gltfLoader.load(globals.models.stretcher, gltf => {
+      gltfLoader.load(globals.models.stretcher.file, gltf => {
         repositionModel(gltf.scene);
 
         gltf.scene.traverse(node => {
@@ -167,8 +145,6 @@ class ProfileScene {
       prepModelsAndAnimations();
       globals.camera.rotation.x = 0;
       globals.camera.position.set(1.7, -2.5, 5);
-
-      gsap.to(globals.camera.position, 0.8, { ease: Power1.easeOut, y: 0 });
       {
         const gameObject = this.gameObjectManager.createGameObject(
           globals.camera,
@@ -177,6 +153,8 @@ class ProfileScene {
         );
         globals.cameraInfo = gameObject.addComponent(CameraInfo);
       }
+      gsap.set(globals.camera.position, { y: 2, z: 7, x: 1.8 });
+      gsap.set(globals.camera.rotation, { x: 1 });
       // add user object
       {
         const gameObject = this.gameObjectManager.createGameObject(
@@ -187,7 +165,31 @@ class ProfileScene {
         globals.user = gameObject.addComponent(User, globals.models.stretcher);
         globals.user.inputManager = this.inputManager;
       }
+      let stage;
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.load(stageModel, gltf => {
+        repositionModel(gltf.scene);
+
+        gltf.scene.traverse(node => {
+          if (node instanceof THREE.Mesh) {
+            node.castShadow = true;
+            node.receiveShadow = true;
+          }
+        });
+        stage = gltf.scene;
+        stage.scale.x = 0.01;
+        stage.scale.y = 0.01;
+        stage.scale.z = 0.01;
+        stage.position.x = 0.5;
+        stage.position.y = -1.2;
+        stage.position.z = -0.5;
+        console.log(stage);
+        globals.scene.add(gltf.scene);
+        this.containerMount = new ContainerMount(stage, '#vast');
+      });
       clearObjectLook();
+      gsap.to(globals.camera.rotation, { x: 0 });
+      gsap.to(globals.camera.position, 1, { ease: Power1.easeOut, y: 0.6 });
     };
     if (loadingManager) {
       loadingManager.onLoad = init;
@@ -223,8 +225,10 @@ class ProfileScene {
     if (this.containerMount) {
       this.containerMount.update();
     }
-    globals.user.update();
+    if (globals.user) {
+      globals.user.update();
+    }
   }
 }
 
-export default ProfileScene;
+export default OnboardingScene;

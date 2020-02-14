@@ -1,39 +1,62 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Redirect, useHistory } from 'react-router';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import PrimaryButton from '../../components/PrimaryButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo_think_pink.png';
-import { FacebookIcon, TwitterIcon } from 'react-share';
+import { StoreContext } from '../../store/StoreProvider';
+import globals from '../../three/globals';
+import DashBoardScene from '../../three/scenes/OnboardingScene.js';
+import Button from '../../components/Button';
+import CustomizerInputRow from '../../components/CustomizerInputRow';
+import gsap from 'gsap';
+import SideNavigation from '../../components/SideNavigation';
 
 const CustomizeRunner = () => {
   const history = useHistory();
+  globals.history = history;
+
+  const store = useContext(StoreContext);
+
+  const handleItemChange = (val, category) => {
+    globals.character[category] = val;
+    globals.currentScene.changeLook(); // update
+  };
+
+  useEffect(() => {
+    if (!store.isOnboardingLoaded) {
+      gsap.set(document.getElementById('vast'), { opacity: 0 });
+      globals.currentScene = new DashBoardScene();
+      store.setIsOnboardingLoaded(true);
+      setTimeout(() => {
+        gsap.to(document.getElementById('vast'), 0.5, { opacity: 1 });
+      }, 800);
+    }
+  }, [store]);
+
+  useEffect(() => {
+    return () => {
+      console.log('test');
+      globals.currentScene.scene.dispose();
+      store.setIsOnboardingLoaded(false);
+      globals.currentScene = null;
+    };
+  }, [history]);
 
   return (
     <Background>
       <TopNavigation>
         <img src={logo} />
         <RightNav>
-          <PrimaryButton height={'50px'} width={'auto'} padding={'0 20px'}>
+          <Button color="#FF9FAA" border="#E86565" width="5rem">
             ?
-          </PrimaryButton>
+          </Button>
         </RightNav>
       </TopNavigation>
       <HomeBody>
-        <SecondaryButton
-          onClick={() => history.push('/step2')}
-          height={'30px'}
-          width={'auto'}
-          padding={'0 10px'}
-          style={{
-            fontSize: '16px',
-            marginBottom: '2rem',
-            position: 'relative'
-          }}
-        >
+        <Button border="#343988" onClick={() => history.push('/step2')}>
           Terug
-        </SecondaryButton>
+        </Button>
         <h2>STAP 3/5</h2>
         <Steps>
           <h1>
@@ -45,16 +68,31 @@ const CustomizeRunner = () => {
             <br /> Personaliseer jouw deelnemer naar de stijl die jij wilt.
           </p>
           <Choices>
+            <StickyContainer id="vast">
+              <Container>
+                <CustomizerInputRow
+                  category="head"
+                  onChange={(val, category) => handleItemChange(val, category)}
+                />
+                <CustomizerInputRow
+                  category="body"
+                  onChange={(val, category) => handleItemChange(val, category)}
+                  f
+                />
+                <CustomizerInputRow
+                  category="foot"
+                  onChange={(val, category) => handleItemChange(val, category)}
+                />
+              </Container>
+            </StickyContainer>
             <div>
-              <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <Button
+                width="20rem"
+                color="#FF9FAA"
                 onClick={() => history.push('/step4')}
               >
                 Volgende
-              </PrimaryButton>
+              </Button>
             </div>
           </Choices>
         </Steps>
@@ -65,12 +103,30 @@ const CustomizeRunner = () => {
 
 export default CustomizeRunner;
 
+const StickyContainer = styled.div`
+  position: fixed;
+  top: 40rem;
+  left: 64rem;
+  color: white;
+  height: 35vh;
+  width: 35vh;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > div + div {
+    margin-top: 2rem;
+  }
+`;
+
 const Background = styled.div`
-  position: absolute;
+  /* position: relative; */
   z-index: -1;
   width: 100%;
   height: 100vh;
-  background: #ffdde1;
 `;
 
 const HomeBody = styled.div`
@@ -82,6 +138,7 @@ const HomeBody = styled.div`
     font-weight: bold;
     color: #343988;
     margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 `;
 
@@ -96,8 +153,6 @@ const TopNavigation = styled.nav`
 `;
 
 const RightNav = styled.div`
-  width: 187.05px;
-  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -105,8 +160,7 @@ const RightNav = styled.div`
 `;
 
 const Steps = styled.div`
-  position: relative;
-  top: -60px;
+  margin-top: -10rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -128,23 +182,6 @@ const Steps = styled.div`
 `;
 
 const Choices = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90vw;
-  height: auto;
-
-  & div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    & div {
-      background: #fd7b7c;
-      width: 400px;
-      height: 300px;
-      margin-bottom: 3rem;
-    }
-  }
+  position: absolute;
+  bottom: 5rem;
 `;

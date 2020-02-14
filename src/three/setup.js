@@ -1,13 +1,9 @@
 import * as THREE from 'three';
 import globals from './globals';
-import Stats from 'stats.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const main = () => {
   console.log('three loaded');
-  const stats = new Stats();
-  stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-  document.body.appendChild(stats.dom);
 
   // SETUP THREEJS //
   const canvas = document.querySelector('#three-canvas');
@@ -22,8 +18,8 @@ const main = () => {
 
   globals.canvas = canvas;
   globals.camera = camera;
-  // var controls = new OrbitControls(camera, renderer.domElement);
-  // controls.update();
+  var controls = new OrbitControls(camera, renderer.domElement);
+  controls.update();
   camera.position.set(0, 2, 10);
 
   // CANVAS SETUP //
@@ -38,10 +34,10 @@ const main = () => {
     }
     return needResize;
   };
+  let emptyScene = new THREE.Scene();
+  emptyScene.background = new THREE.Color('#ffdde1');
   let then = 0;
   const render = now => {
-    stats.begin();
-
     // convert to seconds
     globals.time = now * 0.001;
     // make sure delta time isn't too big.
@@ -58,8 +54,9 @@ const main = () => {
       //   World.update();
       globals.currentScene.update();
       renderer.render(globals.currentScene.scene, camera);
+    } else {
+      renderer.render(emptyScene, camera);
     }
-    stats.end();
 
     // limit fps
     setTimeout(() => {

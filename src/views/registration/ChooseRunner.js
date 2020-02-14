@@ -124,8 +124,7 @@ const RightNav = styled.div`
 `;
 
 const Steps = styled.div`
-  position: relative;
-  top: -60px;
+  margin-top: -10rem;
   width: 100%;
   display: flex;
   flex-direction: column;
