@@ -21,6 +21,7 @@ import TeamPage from '../views/teams/TeamPage';
 // import ThreeCanvas from './ThreeCanvas';
 import Detail from '../views/Detail';
 import NewMessage from '../views/dashboard/NewMessage';
+import Info from '../views/dashboard/Info';
 
 const Router = () => {
   return (
@@ -37,7 +38,8 @@ const Router = () => {
             <PrivateRoute exact path="/" component={Overview} />
             <PrivateRoute exact path="/newmessage" component={NewMessage} />
             <PrivateRoute exact path="/messages" component={Messages} />
-            <PrivateRoute exact path="/looks" component={Looks} />
+            <PrivateRoute exact path="/profile/info" component={Info} />
+            <PrivateRoute exact path="/profile/looks" component={Looks} />
             <PrivateRoute exact path="/myteam" component={MyTeam} />
             <PrivateRoute exact path="/statistics" component={Statistics} />
             <PrivateRoute exact path="/createteam" component={CreateTeam} />

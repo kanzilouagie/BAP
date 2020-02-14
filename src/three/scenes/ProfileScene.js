@@ -30,7 +30,7 @@ class ProfileScene {
     };
     addLight(1, 3, 2);
     const light = new THREE.PointLight(0xffffff, 0.4);
-    light.position.set(-1, 2, 2);
+    light.position.set(-1, 2, 5);
     this.scene.add(light);
 
     const addFloor = () => {
@@ -165,7 +165,7 @@ class ProfileScene {
       // add camera object
       prepModelsAndAnimations();
       globals.camera.rotation.x = 0;
-      globals.camera.position.set(1.5, -2.5, 5);
+      globals.camera.position.set(1.7, -2.5, 5);
 
       gsap.to(globals.camera.position, 0.8, { ease: Power1.easeOut, y: 0 });
       {
@@ -193,6 +193,10 @@ class ProfileScene {
     } else {
       init();
     }
+  }
+
+  historyUpdate() {
+    this.containerMount.updateElement();
   }
 
   changeLook() {

@@ -124,6 +124,8 @@ section {
 }
 
 body {
+  width: 100%;
+  position: relative;
   overflow-x: hidden;
   line-height: 1.5;
   font-size: 1.8rem;

@@ -7,6 +7,7 @@ import { StoreContext } from '../../store/StoreProvider';
 import gsap from 'gsap';
 import styled from 'styled-components';
 import PrimaryButton from '../../components/PrimaryButton';
+import Button from '../../components/Button';
 
 const Overview = () => {
   const store = useContext(StoreContext);
@@ -39,34 +40,15 @@ const Overview = () => {
     <>
       <SideNavigation />
       <Overlay>
-        <PrimaryButton
-          active={true}
-          height={'50px'}
-          width={'auto'}
-          padding={'0 20px'}
-          style={{ fontSize: '16px' }}
-          onClick={() => history.push('/')}
-        >
+        <Button color="#FF9FAA" active onClick={() => history.push('/')}>
           Bericht lezen
-        </PrimaryButton>
-        <PrimaryButton
-          height={'50px'}
-          width={'auto'}
-          padding={'0 20px'}
-          style={{ fontSize: '16px' }}
-          onClick={() => history.push('/newmessage')}
-        >
+        </Button>
+        <Button color="#FF9FAA" onClick={() => history.push('/newmessage')}>
           Bericht plaatsen
-        </PrimaryButton>
-        <PrimaryButton
-          height={'50px'}
-          width={'auto'}
-          padding={'0 20px'}
-          style={{ fontSize: '16px' }}
-          onClick={() => history.push('/myteam')}
-        >
+        </Button>
+        <Button color="#FF9FAA" onClick={() => history.push('/myteam')}>
           Mijn team
-        </PrimaryButton>
+        </Button>
       </Overlay>
     </>
   );
