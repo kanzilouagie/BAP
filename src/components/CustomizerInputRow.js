@@ -3,14 +3,36 @@ import styled from 'styled-components';
 import globals from '../three/globals';
 import Button from './Button';
 import arrow from '../assets/icons/arrow.svg';
+import bril from '../assets/images/bril.png';
+import SOCKS from '../assets/images/sportsokken.png';
+import hoofdbandje from '../assets/images/hoofdband.png';
+import piercing from '../assets/images/piercing.png';
+import zwembandjes from '../assets/images/zwem-armbandjes.png';
+import zweetbandjes from '../assets/images/zweetbandjes.png';
 
 const CustomizerInputRow = ({ category, onChange }) => {
   const [value, setValue] = useState(globals.character[category]);
+
+  const items = {
+    head: {
+      piercing,
+      hoofdbandje
+    },
+    body: {
+      zwembandjes,
+      bril,
+      zweetbandjes
+    },
+    foot: {
+      SOCKS
+    }
+  };
 
   const handleChange = val => {
     const newValue = value + val;
     setValue(newValue);
     onChange(newValue, category);
+    console.log(items[category][globals.looks[category][value]]);
   };
 
   return (
@@ -22,7 +44,7 @@ const CustomizerInputRow = ({ category, onChange }) => {
       >
         <img style={{ marginTop: 0 }} src={arrow} />
       </Button>{' '}
-      <p>{value}</p>{' '}
+      <Item src={items[category][globals.looks[category][value]] || null} />
       <Button
         border="#343988"
         onClick={() => handleChange(1)}
@@ -42,6 +64,11 @@ const Container = styled.div`
   display: flex;
   width: 80%;
   justify-content: space-between;
+`;
+
+const Item = styled.img`
+  width: auto;
+  height: 6rem;
 `;
 
 export default CustomizerInputRow;

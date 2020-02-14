@@ -6,7 +6,6 @@ import OverviewScene from '../../three/scenes/OverviewScene';
 import { StoreContext } from '../../store/StoreProvider';
 import gsap from 'gsap';
 import styled from 'styled-components';
-import PrimaryButton from '../../components/PrimaryButton';
 import Button from '../../components/Button';
 
 const Overview = () => {
