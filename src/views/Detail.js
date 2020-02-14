@@ -6,6 +6,8 @@ import { FacebookIcon, TwitterIcon } from 'react-share';
 import { loadMessages } from '../views/dashboard/store/index';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
+import walker from '../assets/images/walker.png';
+import Button from '../components/Button';
 
 const Detail = () => {
   const { id } = useParams();
@@ -42,16 +44,19 @@ const Detail = () => {
       <FadedWrapper></FadedWrapper>
       <DarkWrapper></DarkWrapper>
       <PopupWrapper>
-        <SecondaryButton
-          style={{ position: 'absolute', right: 20, top: 20, fontSize: '30px' }}
-          width={'auto'}
-          padding={'0 20px'}
-          onClick={() => handleExit()}
-        >
-          x
-        </SecondaryButton>
+        <div style={{ position: 'absolute', right: 20, top: 20 }}>
+          <Button
+            style={{
+              fontWeight: 'bold'
+            }}
+            border="#343988"
+            width="5rem"
+          >
+            x
+          </Button>
+        </div>
         <PopupLeft>
-          <p>test</p>
+          <img src={walker} />
         </PopupLeft>
 
         <PopupRight>
@@ -75,26 +80,42 @@ const Detail = () => {
               <DetailText>{messagesData[0].message}</DetailText>
             ) : null}
             {userData ? (
-              <PrimaryButton width={'auto'} height={'40px'} padding={'0 20px'}>
-                Ik loop voor {userData.username || ''}!
-              </PrimaryButton>
+              <div>
+                <Button color="#FF9FAA">
+                  Ik loop voor {userData.username || ''}!
+                </Button>
+
+                <Button
+                  style={{
+                    fontSize: '1.6rem',
+                    width: '4rem',
+                    height: '4rem',
+                    marginLeft: '1rem'
+                  }}
+                  color="#FF9FAA"
+                  border="#E86565"
+                  width="5rem"
+                >
+                  ?
+                </Button>
+              </div>
             ) : null}
           </DetailBody>
           <SocialMediaButtons>
-            <SecondaryButton padding={'0'}>
+            <Button color="#343988">
               <FacebookIcon
                 width={'40px'}
                 height={'40px'}
                 bgStyle={{ fill: 'none' }}
               />
-            </SecondaryButton>
-            <SecondaryButton padding={'0'}>
+            </Button>
+            <Button color="#343988">
               <TwitterIcon
                 width={'40px'}
                 height={'40px'}
                 bgStyle={{ fill: 'none' }}
               />
-            </SecondaryButton>
+            </Button>
           </SocialMediaButtons>
         </PopupRight>
       </PopupWrapper>
@@ -142,6 +163,10 @@ const PopupLeft = styled.div`
   height: 100%;
   background-color: #f69796;
   border-radius: 30px;
+
+  & img {
+    width: 100%;
+  }
 `;
 
 const PopupRight = styled.div`
@@ -183,7 +208,7 @@ const DetailText = styled.p`
 `;
 
 const SocialMediaButtons = styled.div`
-  width: 100px;
+  width: 18rem;
   display: flex;
   flex: 1;
   justify-content: space-between;

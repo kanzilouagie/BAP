@@ -45,7 +45,6 @@ const Looks = () => {
         />
         <Button
           border="#343988"
-          width="10rem"
           disabled={isSaving}
           onClick={() => handleSave()}
           style={{ marginTop: '8rem' }}

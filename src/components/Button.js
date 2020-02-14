@@ -16,6 +16,7 @@ const StyledButton = styled.button`
   border: solid black 0.2rem;
   border-color: ${({ border }) => (border ? border : 'black')};
   border-radius: 1rem;
+  font-size: 2rem;
   position: relative;
   transition: 0.1s;
   top: ${props => (props.active || props.disabled ? '0.6rem' : '0')};

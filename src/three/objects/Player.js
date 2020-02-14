@@ -33,6 +33,7 @@ class Player extends Component {
     };
 
     const dressUp = async () => {
+      if (!firebase.auth().currentUser) return;
       const characterData = await (
         await firebase
           .firestore()

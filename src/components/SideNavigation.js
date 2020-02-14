@@ -38,6 +38,9 @@ const SideNavigation = () => {
       <MainNavigation showNav={showNav}>
         <TopNavigation>
           <button>
+            <Link to={firebase.auth().currentUser ? '/' : '/login'}>Home</Link>
+          </button>
+          <button>
             <Link to={firebase.auth().currentUser ? '/profile/info' : '/login'}>
               Mijn profiel
             </Link>
