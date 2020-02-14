@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import SecondaryButton from '../../components/SecondaryButton';
+import runner from '../../assets/images/runner.png';
 
 const NewMessage = () => {
   const history = useHistory();
@@ -82,7 +83,7 @@ const NewMessage = () => {
           x
         </Button>
         <PopupLeft>
-          <p>test</p>
+          <img src={runner} />
         </PopupLeft>
 
         <PopupRight>
@@ -168,6 +169,10 @@ const PopupLeft = styled.div`
   height: 100%;
   background-color: #f69796;
   border-radius: 30px;
+
+  & img {
+    width: 100%;
+  }
 `;
 
 const PopupRight = styled.div`

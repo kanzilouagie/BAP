@@ -126,7 +126,7 @@ const LeftBottomNav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 320px;
+  width: 40rem;
   height: auto;
 `;
 

@@ -132,7 +132,7 @@ const Steps = styled.div`
 
 const Choices = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 70vw;
   height: auto;
@@ -147,7 +147,7 @@ const Choices = styled.div`
   & div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     & div {

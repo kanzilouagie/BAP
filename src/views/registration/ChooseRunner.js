@@ -154,7 +154,7 @@ const Choices = styled.div`
 
     & img {
       width: auto;
-      height: 300px;
+      height: 40rem;
       margin-bottom: 3rem;
     }
   }
