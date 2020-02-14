@@ -15,7 +15,6 @@ class Player extends Component {
     this.offscreenTimer = 0;
     this.maxTimeOffScreen = 1;
     this.maxDistanceFromCamera = -20;
-    // this.skinInstance.setAnimation('animation_0');
     globals.playerRadius = model.size / 2;
 
     const clearObjectLook = characterData => {
@@ -63,6 +62,7 @@ class Player extends Component {
         });
       }
       this.skinInstance = gameObject.addComponent(SkinInstance, model);
+      // this.skinInstance.setAnimation('animation_0');
     };
     dressUp();
   }
