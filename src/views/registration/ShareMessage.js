@@ -62,7 +62,11 @@ const ShareMessage = () => {
         </RightNav>
       </TopNavigation>
       <HomeBody>
-        <Button border="#343988" onClick={() => history.push('/step3')}>
+        <Button
+          style={{ zIndex: 10 }}
+          border="#343988"
+          onClick={() => history.push('/step3')}
+        >
           Terug
         </Button>
         <h2>STAP 4/5</h2>
