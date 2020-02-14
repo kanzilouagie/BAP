@@ -50,7 +50,7 @@ const CreateTeam = () => {
   return (
     <Background>
       <TopNavigation>
-        <img src={logo} />
+        <img src={logo} alt="logo" />
         <RightNav>
           <Button color="#FF9FAA">?</Button>
         </RightNav>

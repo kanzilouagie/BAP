@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SideNavigation from '../../components/SideNavigation';
 import styled from 'styled-components';
 import Button from '../../components/Button';
-import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import { useHistory, Redirect } from 'react-router';
 import firebase from '../../authentication/base';
@@ -22,7 +20,7 @@ const MyTeam = () => {
     getTeamId();
   }, [teamId]);
 
-  if (teamId != null && teamId != '' && teamId != undefined) {
+  if (teamId !== null && teamId !== '' && teamId !== undefined) {
     console.log(teamId);
     return <Redirect to="/teampage" />;
   }
@@ -30,7 +28,7 @@ const MyTeam = () => {
   return (
     <Background>
       <TopNavigation>
-        <img src={logo} />
+        <img src={logo} alt="logo" />
         <RightNav>
           <Button color="#FF9FAA">?</Button>
         </RightNav>

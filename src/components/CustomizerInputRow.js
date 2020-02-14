@@ -9,6 +9,7 @@ import hoofdbandje from '../assets/images/hoofdband.png';
 import piercing from '../assets/images/piercing.png';
 import zwembandjes from '../assets/images/zwem-armbandjes.png';
 import zweetbandjes from '../assets/images/zweetbandjes.png';
+import { string, func } from 'prop-types';
 
 const CustomizerInputRow = ({ category, onChange }) => {
   const [value, setValue] = useState(globals.character[category]);
@@ -42,7 +43,7 @@ const CustomizerInputRow = ({ category, onChange }) => {
         onClick={() => handleChange(-1)}
         disabled={value === 0}
       >
-        <img style={{ marginTop: 0 }} src={arrow} />
+        <img style={{ marginTop: 0 }} src={arrow} alt="arrow" />
       </Button>{' '}
       <Item src={items[category][globals.looks[category][value]] || null} />
       <Button
@@ -53,6 +54,7 @@ const CustomizerInputRow = ({ category, onChange }) => {
         <img
           style={{ marginTop: 0, transform: 'rotate(180deg)' }}
           src={arrow}
+          alt="arrow"
         />
       </Button>
     </Container>
@@ -70,5 +72,10 @@ const Item = styled.img`
   width: auto;
   height: 6rem;
 `;
+
+CustomizerInputRow.proptTypes = {
+  category: string.isRequired,
+  onChange: func.isRequired
+};
 
 export default CustomizerInputRow;

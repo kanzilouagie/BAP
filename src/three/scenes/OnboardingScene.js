@@ -26,7 +26,6 @@ class OnboardingScene {
       light.shadow.radius = 10;
       console.log(light.shadow);
       this.scene.add(light);
-      // scene.add(light.target);
       globals.light = light;
     };
     addLight(1, 3, 2);
@@ -62,23 +61,15 @@ class OnboardingScene {
       const size = bbox.getSize(new THREE.Vector3());
 
       // Rescale the object to normalized space
-      // const maxAxis = Math.max(size.x, size.y, size.z);
       mroot.scale.multiplyScalar(1.0 / 200);
       bbox.setFromObject(mroot);
       bbox.getCenter(cent);
       bbox.getSize(size);
 
-      //Reposition to 0,halfY,0
+      //Reposition to 0
       mroot.position.copy(cent).multiplyScalar(-1);
       mroot.position.y -= size.y * 0.5;
     };
-    // var geometry = new THREE.BoxGeometry(2.5, 2, 1);
-    // var material = new THREE.MeshBasicMaterial({ color: 0x555555 });
-    // var cube = new THREE.Mesh(geometry, material);
-    // cube.position.set(2.5, -0.3, 0);
-    // cube.castShadow = true;
-    // cube.receiveShadow = true;
-    // globals.scene.add(cube);
 
     // load model
 
@@ -155,6 +146,7 @@ class OnboardingScene {
       }
       gsap.set(globals.camera.position, { y: 2, z: 7, x: 1.8 });
       gsap.set(globals.camera.rotation, { x: 1 });
+
       // add user object
       {
         const gameObject = this.gameObjectManager.createGameObject(

@@ -72,7 +72,6 @@ class WorldManager {
       this.loadedParticipants += 1;
       this.aliveParticipants.push(gameObject);
     }
-    // console.log(globals.camera.position.x);
   }
 }
 

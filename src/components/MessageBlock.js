@@ -1,6 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PropTypes } from 'mobx-react';
+import { array } from 'prop-types';
+
+const MessageBlock = ({ post, userinfo }) => {
+  // const [userInfo, setUserInfo] = useState([]);
+
+  // useEffect(() => {
+  //   getUserWithId(firebase.auth().currentUser.uid).then(info => {
+  //     setUserInfo(info);
+  //   });
+  // }, []);
+  // console.log('messageblok: ' + post.message);
+  return (
+    <MessageWrapper>
+      <MessageTitle>{userinfo.username}</MessageTitle>
+      <MessageBody>{post.message}</MessageBody>
+    </MessageWrapper>
+  );
+};
 
 const MessageWrapper = styled.div`
   width: 60rem;
@@ -24,26 +41,9 @@ const MessageBody = styled.p`
   font-size: 1.6rem;
 `;
 
-const MessageBlock = ({ post, userinfo }) => {
-  // const [userInfo, setUserInfo] = useState([]);
-
-  // useEffect(() => {
-  //   getUserWithId(firebase.auth().currentUser.uid).then(info => {
-  //     setUserInfo(info);
-  //   });
-  // }, []);
-  // console.log('messageblok: ' + post.message);
-  return (
-    <MessageWrapper>
-      <MessageTitle>{userinfo.username}</MessageTitle>
-      <MessageBody>{post.message}</MessageBody>
-    </MessageWrapper>
-  );
-};
-
 MessageBlock.propTypes = {
-  post: PropTypes.array,
-  userinfo: PropTypes.array
+  post: array,
+  userinfo: array
 };
 
 export default MessageBlock;

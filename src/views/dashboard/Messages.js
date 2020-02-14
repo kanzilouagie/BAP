@@ -10,7 +10,6 @@ import {
 } from './store/index';
 import firebase from 'firebase';
 
-// setMessagesData(r)
 const Messages = () => {
   const [posts, setPosts] = useState([]);
   const [reposts, setReposts] = useState([]);
@@ -24,7 +23,7 @@ const Messages = () => {
 
     loadReposts(firebase.auth().currentUser.uid).then(reposts => {
       setReposts(reposts);
-      reposts.map(post => {
+      reposts.forEach(post => {
         getPostWithUserId(post.data().userId, post.data().postId).then(post => {
           setPostData(oldArray => [...oldArray, post]);
         });
@@ -63,6 +62,7 @@ const Messages = () => {
                 />
               );
             }
+            return null;
           })}
         </RepostsWrapper>
       </MessageContainer>

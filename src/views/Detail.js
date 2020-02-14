@@ -4,8 +4,6 @@ import firebase from '../authentication/base';
 import styled from 'styled-components';
 import { FacebookIcon, TwitterIcon } from 'react-share';
 import { loadMessages } from '../views/dashboard/store/index';
-import PrimaryButton from '../components/PrimaryButton';
-import SecondaryButton from '../components/SecondaryButton';
 import walker from '../assets/images/walker.png';
 import Button from '../components/Button';
 
@@ -57,7 +55,7 @@ const Detail = () => {
           </Button>
         </div>
         <PopupLeft>
-          <img src={walker} />
+          <img src={walker} alt="walker" />
         </PopupLeft>
 
         <PopupRight>

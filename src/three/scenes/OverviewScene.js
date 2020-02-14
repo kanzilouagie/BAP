@@ -25,7 +25,6 @@ class OverviewScene {
       light.castShadow = true;
       light.shadow.radius = 10;
       this.scene.add(light);
-      // scene.add(light.target);
       globals.light = light;
     };
     addLight(2, 3, 2);
@@ -66,13 +65,12 @@ class OverviewScene {
       const size = bbox.getSize(new THREE.Vector3());
 
       //Rescale the object to normalized space
-      // const maxAxis = Math.max(size.x, size.y, size.z);
       mroot.scale.multiplyScalar(1.0 / 200);
       bbox.setFromObject(mroot);
       bbox.getCenter(cent);
       bbox.getSize(size);
 
-      //Reposition to 0,halfY,0
+      //Reposition to 0
       mroot.position.copy(cent).multiplyScalar(-1);
       mroot.position.y -= size.y * 0.5;
     };
@@ -116,6 +114,7 @@ class OverviewScene {
 
     const init = () => {
       this.modelsLoaded = true;
+
       // add camera object
       prepModelsAndAnimations();
       globals.camera.rotation.x = 0;
@@ -128,6 +127,7 @@ class OverviewScene {
         );
         globals.cameraInfo = gameObject.addComponent(CameraInfo);
       }
+
       // add player object
       {
         const gameObject = this.gameObjectManager.createGameObject(

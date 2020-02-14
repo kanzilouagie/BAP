@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import PrimaryButton from '../../components/PrimaryButton';
 import Button from '../../components/Button';
 import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import { useHistory } from 'react-router';
@@ -56,7 +55,7 @@ const JoinTeam = () => {
   return (
     <Background>
       <TopNavigation>
-        <img src={logo} />
+        <img src={logo} alt="logo" />
         <RightNav>
           <Button color="#FF9FAA">?</Button>
         </RightNav>

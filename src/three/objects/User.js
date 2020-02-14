@@ -15,10 +15,7 @@ class User extends Component {
     gsap.to(this.gameObject.transform.scale, 0.5, { x: 1, y: 1, z: 1 });
   }
 
-  update() {
-    // const { transform } = this.gameObject;
-    // transform.rotation.y += 0.01;
-  }
+  update() {}
 }
 
 export default User;

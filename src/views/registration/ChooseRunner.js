@@ -1,11 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import PrimaryButton from '../../components/PrimaryButton';
-import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo-think-pink-Europe.svg';
-import { FacebookIcon, TwitterIcon } from 'react-share';
 import Button from '../../components/Button';
 import character1 from '../../assets/images/character1.png';
 import character2 from '../../assets/images/character2.png';
@@ -17,7 +13,7 @@ const ChooseRunner = () => {
   return (
     <Background>
       <TopNavigation>
-        <img src={logo} />
+        <img src={logo} alt="logo" />
         <RightNav>
           <Button color="#FF9FAA" border="#E86565" width="5rem">
             ?
@@ -41,7 +37,7 @@ const ChooseRunner = () => {
           </p>
           <Choices>
             <div>
-              <img src={character1} />
+              <img src={character1} alt="character1" />
               <Button
                 width="20rem"
                 onClick={() => history.push('/step3')}
@@ -51,7 +47,7 @@ const ChooseRunner = () => {
               </Button>
             </div>
             <div>
-              <img src={character2} />
+              <img src={character2} alt="character2" />
               <Button
                 width="20rem"
                 onClick={() => history.push('/step3')}
@@ -61,7 +57,7 @@ const ChooseRunner = () => {
               </Button>
             </div>
             <div>
-              <img src={character3} />
+              <img src={character3} alt="character3" />
               <Button
                 width="20rem"
                 onClick={() => history.push('/step3')}

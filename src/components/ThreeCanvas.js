@@ -14,7 +14,6 @@ const ThreeCanvas = () => {
 
   const handleClick = e => {
     clickedCanvas(e, threeCanvas);
-    // console.log(intersects[0].object);
     const interectedScene = getSelectedObject();
     if (interectedScene) {
       objectIsClicked(interectedScene, history);

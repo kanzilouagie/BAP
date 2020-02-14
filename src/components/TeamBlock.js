@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 import Button from '../components/Button';
@@ -33,9 +33,6 @@ const TeamBlock = ({ team, teamCount, teamId }) => {
   return (
     <BlockWrapper>
       <BlockInfo>
-        <div className="img">
-          <img />
-        </div>
         <div className="info">
           <p>{team.name}</p>
           <p>{teamCount} leden</p>

@@ -16,6 +16,7 @@ class GameObjectManager {
   removeGameObject(gameObject) {
     this.gameObjects.remove(gameObject);
     const removeObject = globals.scene.getObjectByName(gameObject.name);
+
     // dispose before removing
     removeObject.parent.dispose();
     globals.scene.remove(removeObject);

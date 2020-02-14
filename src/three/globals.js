@@ -13,9 +13,7 @@ const globals = {
   moveSpeed: 4,
   deltaTime: 0,
   player: null,
-  labelContainerElem: '#labels', // document.querySelector("#labels")
   kForward: new THREE.Vector3(0, 0, 1),
-  congaLine: [],
   closeCharacter: [],
   models: {
     runner: { file: player },

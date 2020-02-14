@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import globals from './globals';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const main = () => {
   console.log('three loaded');
@@ -18,8 +17,6 @@ const main = () => {
 
   globals.canvas = canvas;
   globals.camera = camera;
-  // var controls = new OrbitControls(camera, renderer.domElement);
-  // controls.update();
   camera.position.set(0, 2, 10);
 
   // CANVAS SETUP //
@@ -40,7 +37,6 @@ const main = () => {
   const render = now => {
     // convert to seconds
     globals.time = now * 0.001;
-    // make sure delta time isn't too big.
     globals.deltaTime = Math.min(globals.time - then, 1 / 20);
     then = globals.time;
     if (resizeRendererToDisplaySize(renderer)) {
@@ -48,10 +44,8 @@ const main = () => {
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
     }
-    // gameObjectManager.update();
-    // inputManager.update();
+
     if (globals.currentScene) {
-      //   World.update();
       globals.currentScene.update();
       renderer.render(globals.currentScene.scene, camera);
     } else {

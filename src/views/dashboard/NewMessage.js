@@ -5,32 +5,10 @@ import moment from 'moment';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import Button from '../../components/Button';
-import SecondaryButton from '../../components/SecondaryButton';
 import runner from '../../assets/images/runner.png';
 
 const NewMessage = () => {
   const history = useHistory();
-  // const handleAddMessage = useCallback(
-  //   async event => {
-  //     event.preventDefault();
-  //     const { message } = event.target.elements;
-  //     try {
-  //       await firebase
-  //         .firestore()
-  //         .collection('users')
-  //         .doc(firebase.auth().currentUser.uid)
-  //         .collection('messages')
-  //         .add({
-  //           timestamp: moment().format('DD/MM/YYYY HH:mm:ss'),
-  //           message: message.value
-  //         });
-  //       history.push('/messages');
-  //     } catch (error) {
-  //       alert(error);
-  //     }
-  //   },
-  //   [history]
-  // );
 
   const handleAddMessage = useCallback(
     async event => {
@@ -83,7 +61,7 @@ const NewMessage = () => {
           x
         </Button>
         <PopupLeft>
-          <img src={runner} />
+          <img src={runner} alt="runner" />
         </PopupLeft>
 
         <PopupRight>
@@ -120,16 +98,6 @@ const NewMessage = () => {
 };
 
 export default NewMessage;
-
-const Overlay = styled.div`
-  margin: 0 auto;
-  box-sizing: border-box;
-  width: 690px;
-  height: 90vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-`;
 
 const FadedWrapper = styled.div`
   position: absolute;
@@ -228,63 +196,4 @@ const DetailTitle = styled.h1`
   font-weight: bold;
   align-self: start;
   flex: 1;
-`;
-
-const SubmitButton = styled.button`
-  cursor: pointer;
-  text-shadow: 0 -2px 0 #ff3353, 0 1px 1px #fff;
-  box-sizing: border-box;
-  font-size: 1em;
-  font-family: Helvetica, Arial, Sans-Serif;
-  text-decoration: none;
-  font-weight: bold;
-  color: #ff667e;
-  height: ${props => props.height || '40px'};
-  line-height: ${props => props.height || '40px'};
-  display: inline-block;
-  width: ${props => props.width || '40px'};
-  background: linear-gradient(to bottom, #ffe6ea 0%, #ffd6dd 26%, #ff99a9 100%);
-  padding: ${props => props.padding || '40px'};
-  border-radius: 5px;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  top: 0;
-  transition: all 0.06s ease-out;
-  position: relative;
-
-  &:visited {
-    color: #ff667e;
-  }
-  &:hover {
-    background: linear-gradient(
-      to bottom,
-      #fff0f2 0%,
-      #ffe0e5 26%,
-      #ffa3b2 100%
-    );
-  }
-  &:active {
-    top: 6px;
-    text-shadow: 0 -2px 0 #ff99a9, 0 1px 1px #fff, 0 0 4px white;
-    color: #ffb3bf;
-  }
-  &:active:before {
-    top: 0;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.7), 0 3px 9px rgba(0, 0, 0, 0.2);
-  }
-  &:before {
-    display: inline-block;
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    top: 6px;
-    border-radius: 5px;
-    height: ${props => props.height || '38px'};
-    background: linear-gradient(to top, #cc0020 0%, #ff1a3e 6px);
-    transition: all 0.078s ease-out;
-    box-shadow: 0 1px 0 2px rgba(0, 0, 0, 0.3), 0 5px 2.4px rgba(0, 0, 0, 0.5),
-      0 10.8px 9px rgba(0, 0, 0, 0.2);
-  }
 `;

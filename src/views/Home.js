@@ -1,9 +1,7 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Redirect, useHistory } from 'react-router';
-import app from '../authentication/base';
 import styled from 'styled-components';
 import Button from '../components/Button';
-import SecondaryButton from '../components/SecondaryButton';
 import logo from '../assets/images/logo-think-pink-Europe.svg';
 import { FacebookIcon, TwitterIcon } from 'react-share';
 import { AuthContext } from '../authentication/Auth';
@@ -24,7 +22,7 @@ const Home = () => {
       <SideNavigation />
       <Background>
         <TopNavigation>
-          <img src={logo} />
+          <img src={logo} alt="logo" />
         </TopNavigation>
         <HomeBody>
           <h1>Verhalen delen, elkaar inspireren.</h1>

@@ -47,10 +47,10 @@ const SideNavigation = () => {
           </button>
         </TopNavigation>
         <BottomNavigation>
-          <a href="">Wat doen wij?</a>
-          <a href="">Race for the Cure</a>
-          <a href="">Help &amp; FAQs</a>
-          <a href="">Informeren borstkanker</a>
+          <a href="#wat">Wat doen wij?</a>
+          <a href="#rfc">Race for the Cure</a>
+          <a href="#faq">Help &amp; FAQs</a>
+          <a href="#info">Informeren borstkanker</a>
         </BottomNavigation>
       </MainNavigation>
     </>
@@ -125,28 +125,3 @@ const BottomNavigation = styled.div`
     margin-bottom: 2rem;
   }
 `;
-
-{
-  /* <nav>
-<h1>Home</h1>
-<button>
-  <Link to="/newmessage">Nieuw bericht</Link>
-</button>
-<button>
-  <Link to="/">Overzicht</Link>
-</button>
-<button>
-  <Link to="/myteam">Mijn Team</Link>
-</button>
-<button>
-  <Link to="/looks">Look aanpassen</Link>
-</button>
-<button>
-  <Link to="/messages">Berichten bekijken</Link>
-</button>
-<button>
-  <Link to="/statistics">statistieken</Link>
-</button>
-<button onClick={() => app.auth().signOut()}>Sign out</button>
-</nav> */
-}

@@ -2,10 +2,8 @@ import React, { useCallback, useContext } from 'react';
 import { Redirect, useHistory } from 'react-router';
 import app from '../authentication/base';
 import { AuthContext } from '../authentication/Auth';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/Button';
-import SecondaryButton from '../components/SecondaryButton';
 import LoginImage from '../assets/images/login.png';
 
 const Login = () => {
@@ -41,7 +39,7 @@ const Login = () => {
       <DarkWrapper></DarkWrapper>
       <PopupWrapper>
         <Button
-          style={{ position: 'absolute', right: 20, top: 20}}
+          style={{ position: 'absolute', right: 20, top: 20 }}
           border="#343988"
           onClick={() => handleExit()}
         >
@@ -69,14 +67,14 @@ const Login = () => {
               Log in
             </Button>
           </form>
-          <a className="forgot" href="#">
+          <a className="forgot" href="#forgot">
             Wachtwoord vergeten?
           </a>
         </PopupLeft>
 
         <PopupRight>
           <h2>Nog geen account?</h2>
-          <img src={LoginImage} width="600" height="auto" />
+          <img src={LoginImage} width="600" height="auto" alt="three breasts" />
           <div className="buttons">
             <Button color="#FF9FAA" onClick={() => history.push('/step1')}>
               Ik wil meedoen
@@ -90,33 +88,6 @@ const Login = () => {
 };
 
 export default Login;
-
-{
-  /* <div>
-<h1>Log in</h1>
-<form onSubmit={handleLogin}>
-  <label>
-    Email
-    <input name="email" type="email" placeholder="Email" />
-  </label>
-  <label>
-    Password
-    <input name="password" type="password" placeholder="Password" />
-  </label>
-  <button type="submit">Log in</button>
-  <button>
-    <Link to="/step1">Register</Link>
-  </button>
-</form>
-</div> */
-}
-
-const FadedWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  backdrop-filter: blur(10px);
-`;
 
 const DarkWrapper = styled.div`
   position: absolute;

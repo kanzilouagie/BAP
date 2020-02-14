@@ -83,6 +83,7 @@ class Participant extends Component {
   update() {
     const { camera } = globals;
     const { transform } = this.gameObject;
+
     // If object is too far from camera;
     const zPos = transform.position.z;
     const xPos = transform.position.x;
@@ -97,20 +98,9 @@ class Participant extends Component {
       distanceCameraX < -this.maxDistanceFromCamera ||
       distanceCameraX > this.maxDistanceFromCamera
     ) {
-      //   transform.position.set(0, 0, 0);
       this.gameObjectManager.removeGameObject(this.gameObject);
     }
-    // if object is out of camera view
-    // const { frustum } = cameraInfo;
-    // if (frustum.containsPoint(transform.position)) {
-    //   this.offscreenTimer = 0;
-    // } else {
-    //   this.offscreenTimer += deltaTime;
-    //   if (this.offscreenTimer >= this.maxTimeOffScreen) {
-    //     this.gameObjectManager.removeGameObject(this.gameObject);
-    //     // transform.position.set(0, 0, 0);
-    //   }
-    // }
+
     if (
       this.isClose(
         this.transform,
@@ -138,12 +128,6 @@ class Participant extends Component {
         globals.closeCharacter.push(this.name);
         console.log(globals.closeCharacter);
         globals.history.push(`/detail/${this.name}`);
-        //   if (
-        //     this.inputManager.keys.spacebar.justPressed &&
-        //     this.name === globals.closeCharacter[0]
-        //   ) {
-        //     console.log('pressed', globals.closeCharacter);
-        //   }
       } else if (
         !this.isClose(
           this.transform,

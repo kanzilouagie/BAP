@@ -25,7 +25,7 @@ const Looks = () => {
       .doc(firebase.auth().currentUser.uid)
       .update({ character: localData });
     setIsSaving(false);
-  }, [globals.character]);
+  }, []);
 
   return (
     <ProfileWrapper>

@@ -34,7 +34,6 @@ const Overview = () => {
       store.setIsFirstTime(false);
     }
     return () => {
-      console.log(history.location.pathname);
       if (
         !history.location.pathname.includes('/detail') &&
         !history.location.pathname.includes('/newmessage') &&
@@ -49,7 +48,7 @@ const Overview = () => {
     <>
       <SideNavigation />
       <Buttons id="preview">
-        <img src={buttons} />
+        <img src={buttons} alt="controls" />
       </Buttons>
       <Overlay>
         <Button color="#FF9FAA" active onClick={() => history.push('/')}>
