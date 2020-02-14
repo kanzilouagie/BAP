@@ -22,8 +22,8 @@ const main = () => {
 
   globals.canvas = canvas;
   globals.camera = camera;
-  // var controls = new OrbitControls(camera, renderer.domElement);
-  // controls.update();
+  var controls = new OrbitControls(camera, renderer.domElement);
+  controls.update();
   camera.position.set(0, 2, 10);
 
   // CANVAS SETUP //
@@ -38,6 +38,8 @@ const main = () => {
     }
     return needResize;
   };
+  let emptyScene = new THREE.Scene();
+  emptyScene.background = new THREE.Color('#ffdde1');
   let then = 0;
   const render = now => {
     stats.begin();
@@ -58,6 +60,8 @@ const main = () => {
       //   World.update();
       globals.currentScene.update();
       renderer.render(globals.currentScene.scene, camera);
+    } else {
+      renderer.render(emptyScene, camera);
     }
     stats.end();
 

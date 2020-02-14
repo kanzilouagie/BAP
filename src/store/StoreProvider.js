@@ -9,6 +9,10 @@ export const StoreProvider = ({ children }) => {
   const store = useLocalStore(() => ({
     isOverviewLoaded: false,
     isProfileLoaded: false,
+    isOnboardingLoaded: false,
+    setIsOnboardingLoaded: bool => {
+      store.isOnboardingLoaded = bool;
+    },
     setIsOverviewLoaded: bool => {
       store.isOverviewLoaded = bool;
     },

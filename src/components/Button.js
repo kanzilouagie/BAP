@@ -8,6 +8,7 @@ const Button = ({ children, ...otherProps }) => {
 
 const StyledButton = styled.button`
   padding: 1rem 1.5rem;
+  height: ${({ height }) => (height ? height : 'auto')};
   width: ${({ width }) => (width ? width : 'auto')};
   color: ${({ border }) => (border ? border : 'black')};
   font-size: 1.6rem;
