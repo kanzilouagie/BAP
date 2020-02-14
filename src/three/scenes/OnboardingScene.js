@@ -15,7 +15,6 @@ class OnboardingScene {
     this.scene = new THREE.Scene();
     globals.scene = this.scene;
     this.scene.background = new THREE.Color('#ffdde1');
-    console.log(globals);
 
     const addLight = (...pos) => {
       const color = 0xffffff;
@@ -24,7 +23,6 @@ class OnboardingScene {
       light.position.set(...pos);
       light.castShadow = true;
       light.shadow.radius = 10;
-      console.log(light.shadow);
       this.scene.add(light);
       globals.light = light;
     };
@@ -175,7 +173,7 @@ class OnboardingScene {
         stage.position.x = 0.5;
         stage.position.y = -1.2;
         stage.position.z = -0.5;
-        console.log(stage);
+
         globals.scene.add(gltf.scene);
         this.containerMount = new ContainerMount(stage, '#vast');
       });

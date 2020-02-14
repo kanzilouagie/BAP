@@ -20,11 +20,9 @@ class SkinInstance extends Component {
     }
     // get or create existing action for clip
     const action = this.mixer.clipAction(clip);
-    console.log(action);
     action.enabled = true;
     action.reset();
     action.play();
-    console.log(action);
     this.actions[animName] = action;
   }
 

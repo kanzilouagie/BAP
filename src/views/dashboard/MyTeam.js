@@ -21,7 +21,6 @@ const MyTeam = () => {
   }, [teamId]);
 
   if (teamId !== null && teamId !== '' && teamId !== undefined) {
-    console.log(teamId);
     return <Redirect to="/teampage" />;
   }
 

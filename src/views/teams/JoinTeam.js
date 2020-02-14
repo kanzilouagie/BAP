@@ -39,9 +39,7 @@ const JoinTeam = () => {
     async event => {
       event.preventDefault();
       const { q } = event.target.elements;
-      console.log(q.value);
       var teamNames = teams.filter(team => {
-        console.log(team.data());
         return team
           .data()
           .name.toLowerCase()

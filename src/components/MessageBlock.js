@@ -3,14 +3,6 @@ import styled from 'styled-components';
 import { array } from 'prop-types';
 
 const MessageBlock = ({ post, userinfo }) => {
-  // const [userInfo, setUserInfo] = useState([]);
-
-  // useEffect(() => {
-  //   getUserWithId(firebase.auth().currentUser.uid).then(info => {
-  //     setUserInfo(info);
-  //   });
-  // }, []);
-  // console.log('messageblok: ' + post.message);
   return (
     <MessageWrapper>
       <MessageTitle>{userinfo.username}</MessageTitle>

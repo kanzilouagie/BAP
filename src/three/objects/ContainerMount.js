@@ -28,7 +28,6 @@ class ContainerMount {
     // move container to that position
     if (!this.container) {
       this.container = document.querySelector(this.id);
-      console.log(this.container);
     } else {
       this.container.style.transform = `translate(-50rem, -65rem) translate(${x /
         10}rem,${y / 10}rem)`;

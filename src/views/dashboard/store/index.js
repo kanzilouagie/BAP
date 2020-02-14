@@ -17,7 +17,6 @@ export const loadMessages = async userId => {
     .catch(function(error) {
       console.log('Error getting documents: ', error);
     });
-    // console.log(messageData);
   return messageData;
 };
 
@@ -50,7 +49,6 @@ export const getPostWithUserId = async (userId, postId) => {
     .collection('messages')
     .doc(postId)
     .get();
-  // console.log(postInfo.data());
   return postInfo.data();
 };
 
@@ -60,6 +58,5 @@ export const getUserWithId = async userId => {
     .collection('users')
     .doc(userId)
     .get();
-  // console.log(userInfo.data());
   return userInfo.data();
 };

@@ -10,7 +10,6 @@ import gsap from 'gsap';
 
 class OverviewScene {
   constructor() {
-    console.log('loadScene');
     this.name = 'overview';
     this.scene = new THREE.Scene();
     globals.scene = this.scene;
@@ -53,7 +52,6 @@ class OverviewScene {
 
     // Load models
     const manager = new THREE.LoadingManager();
-    console.log('testjes');
     manager.onProgress = (url, itemsLoaded, itemsTotal) => {
       const percent = ((itemsLoaded / itemsTotal) * 100) | 0;
       console.log('loading:', `${percent}%`);

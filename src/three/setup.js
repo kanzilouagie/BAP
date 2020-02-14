@@ -2,8 +2,6 @@ import * as THREE from 'three';
 import globals from './globals';
 
 const main = () => {
-  console.log('three loaded');
-
   // SETUP THREEJS //
   const canvas = document.querySelector('#three-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });

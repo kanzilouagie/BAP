@@ -88,7 +88,6 @@ class ProfileScene {
       stage.position.x = 0.5;
       stage.position.y = -1.2;
       stage.position.z = -0.5;
-      console.log(stage);
       globals.scene.add(gltf.scene);
       this.containerMount = new ContainerMount(stage, '#inhoud');
     });

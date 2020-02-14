@@ -126,7 +126,6 @@ class Participant extends Component {
         !globals.closeCharacter.includes(this.name)
       ) {
         globals.closeCharacter.push(this.name);
-        console.log(globals.closeCharacter);
         globals.history.push(`/detail/${this.name}`);
       } else if (
         !this.isClose(

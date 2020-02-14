@@ -33,7 +33,6 @@ const CustomizerInputRow = ({ category, onChange }) => {
     const newValue = value + val;
     setValue(newValue);
     onChange(newValue, category);
-    console.log(items[category][globals.looks[category][value]]);
   };
 
   return (
