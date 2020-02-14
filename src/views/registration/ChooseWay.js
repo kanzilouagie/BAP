@@ -6,6 +6,9 @@ import PrimaryButton from '../../components/PrimaryButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import { FacebookIcon, TwitterIcon } from 'react-share';
+import Button from '../../components/Button';
+import runner from '../../assets/images/runner.png';
+import walker from '../../assets/images/walker.png';
 
 const ChooseWay = () => {
   const history = useHistory();
@@ -15,25 +18,19 @@ const ChooseWay = () => {
       <TopNavigation>
         <img src={logo} />
         <RightNav>
-          <PrimaryButton height={'50px'} width={'auto'} padding={'0 20px'}>
+          <Button color="#FF9FAA" border="#E86565" width="5rem">
             ?
-          </PrimaryButton>
+          </Button>
         </RightNav>
       </TopNavigation>
       <HomeBody>
-        <SecondaryButton
+        <Button
+          style={{ zIndex: 10 }}
+          border="#343988"
           onClick={() => history.push('/home')}
-          height={'30px'}
-          width={'auto'}
-          padding={'0 10px'}
-          style={{
-            fontSize: '16px',
-            marginBottom: '2rem',
-            position: 'relative'
-          }}
         >
           Terug
-        </SecondaryButton>
+        </Button>
         <h2>STAP 1/5</h2>
         <Steps>
           <h1>Wandelen of toch liever lopen?</h1>
@@ -44,26 +41,24 @@ const ChooseWay = () => {
           </p>
           <Choices>
             <div>
-              <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <img src={runner} />
+              <Button
+                width="20rem"
                 onClick={() => history.push('/step2')}
+                color="#FF9FAA"
               >
-                Hup, wandeling.
-              </PrimaryButton>
+                hup, wandelen
+              </Button>
             </div>
             <div>
-              <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <img src={walker} />
+              <Button
+                width="20rem"
                 onClick={() => history.push('/step2')}
+                color="#FF9FAA"
               >
-                vroem, lopen!
-              </PrimaryButton>
+                hup, lopen
+              </Button>
             </div>
           </Choices>
         </Steps>
@@ -91,6 +86,7 @@ const HomeBody = styled.div`
     font-weight: bold;
     color: #343988;
     margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 `;
 
@@ -115,7 +111,7 @@ const RightNav = styled.div`
 
 const Steps = styled.div`
   position: relative;
-  top: -60px;
+  top: -10rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -136,10 +132,17 @@ const Steps = styled.div`
 
 const Choices = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 70vw;
   height: auto;
+
+  & img {
+    height: 30rem;
+    width: auto;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+  }
 
   & div {
     display: flex;

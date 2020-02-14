@@ -28,7 +28,8 @@ const Overview = () => {
       console.log(history.location.pathname);
       if (
         !history.location.pathname.includes('/detail') &&
-        !history.location.pathname.includes('/newmessage')
+        !history.location.pathname.includes('/newmessage') &&
+        !history.location.pathname.includes('/team')
       ) {
         store.setIsOverviewLoaded(false);
         globals.currentScene.scene.dispose();
@@ -45,7 +46,7 @@ const Overview = () => {
         <Button color="#FF9FAA" onClick={() => history.push('/newmessage')}>
           Bericht plaatsen
         </Button>
-        <Button color="#FF9FAA" onClick={() => history.push('/myteam')}>
+        <Button color="#FF9FAA" onClick={() => history.push('/')}>
           Mijn team
         </Button>
       </Overlay>

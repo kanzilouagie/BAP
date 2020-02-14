@@ -6,6 +6,10 @@ import PrimaryButton from '../../components/PrimaryButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import { FacebookIcon, TwitterIcon } from 'react-share';
+import Button from '../../components/Button';
+import character1 from '../../assets/images/character1.png';
+import character2 from '../../assets/images/character2.png';
+import character3 from '../../assets/images/character3.png';
 
 const ChooseRunner = () => {
   const history = useHistory();
@@ -15,25 +19,19 @@ const ChooseRunner = () => {
       <TopNavigation>
         <img src={logo} />
         <RightNav>
-          <PrimaryButton height={'50px'} width={'auto'} padding={'0 20px'}>
+          <Button color="#FF9FAA" border="#E86565" width="5rem">
             ?
-          </PrimaryButton>
+          </Button>
         </RightNav>
       </TopNavigation>
       <HomeBody>
-        <SecondaryButton
+        <Button
+          style={{ zIndex: 10 }}
+          border="#343988"
           onClick={() => history.push('/step1')}
-          height={'30px'}
-          width={'auto'}
-          padding={'0 10px'}
-          style={{
-            fontSize: '16px',
-            marginBottom: '2rem',
-            position: 'relative'
-          }}
         >
           Terug
-        </SecondaryButton>
+        </Button>
         <h2>STAP 2/5</h2>
         <Steps>
           <h1>Welke deelnemer kies jij?</h1>
@@ -43,37 +41,34 @@ const ChooseRunner = () => {
           </p>
           <Choices>
             <div>
-              <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <img src={character1} />
+              <Button
+                width="20rem"
                 onClick={() => history.push('/step3')}
+                color="#FF9FAA"
               >
-                Kies mij!
-              </PrimaryButton>
+                kies mij!
+              </Button>
             </div>
             <div>
-              <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <img src={character2} />
+              <Button
+                width="20rem"
                 onClick={() => history.push('/step3')}
+                color="#FF9FAA"
               >
-                Nee, mij!
-              </PrimaryButton>
+                nee, mij!
+              </Button>
             </div>
             <div>
-              <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <img src={character3} />
+              <Button
+                width="20rem"
                 onClick={() => history.push('/step3')}
+                color="#FF9FAA"
               >
                 of mij?
-              </PrimaryButton>
+              </Button>
             </div>
           </Choices>
         </Steps>
@@ -101,6 +96,7 @@ const HomeBody = styled.div`
     font-weight: bold;
     color: #343988;
     margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 `;
 
@@ -145,7 +141,7 @@ const Steps = styled.div`
 
 const Choices = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 90vw;
   height: auto;
@@ -153,12 +149,11 @@ const Choices = styled.div`
   & div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 
-    & div {
-      background: #fd7b7c;
-      width: 400px;
+    & img {
+      width: auto;
       height: 300px;
       margin-bottom: 3rem;
     }

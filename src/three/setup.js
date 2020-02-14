@@ -18,8 +18,8 @@ const main = () => {
 
   globals.canvas = canvas;
   globals.camera = camera;
-  var controls = new OrbitControls(camera, renderer.domElement);
-  controls.update();
+  // var controls = new OrbitControls(camera, renderer.domElement);
+  // controls.update();
   camera.position.set(0, 2, 10);
 
   // CANVAS SETUP //
