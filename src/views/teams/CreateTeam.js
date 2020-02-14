@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import SecondaryButton from '../../components/SecondaryButton';
-import logo from '../../assets/images/logo_think_pink.png';
+import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import { useHistory } from 'react-router';
 import firebase from '../../authentication/base';
 

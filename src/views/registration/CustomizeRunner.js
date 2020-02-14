@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import PrimaryButton from '../../components/PrimaryButton';
 import SecondaryButton from '../../components/SecondaryButton';
-import logo from '../../assets/images/logo_think_pink.png';
+import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import { StoreContext } from '../../store/StoreProvider';
 import globals from '../../three/globals';
 import DashBoardScene from '../../three/scenes/OnboardingScene.js';

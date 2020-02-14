@@ -27,7 +27,11 @@ const SideNavigation = () => {
             {firebase.auth().currentUser ? 'Afmelden' : 'Aanmelden'}
           </Link>
         </button>
-        <Button border="#343988" onClick={() => setShowNav(!showNav)}>
+        <Button
+          border="#343988"
+          color="#FFDDE1"
+          onClick={() => setShowNav(!showNav)}
+        >
           Menu
         </Button>
       </NavigationButton>

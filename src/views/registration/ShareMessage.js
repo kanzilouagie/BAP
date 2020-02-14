@@ -4,7 +4,7 @@ import { StoreContext } from '../../store/StoreProvider';
 import styled from 'styled-components';
 import PrimaryButton from '../../components/PrimaryButton';
 import SecondaryButton from '../../components/SecondaryButton';
-import logo from '../../assets/images/logo_think_pink.png';
+import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import IdleScene from '../../three/scenes/IdleScene';
 import globals from '../../three/globals';
 import Button from '../../components/Button';

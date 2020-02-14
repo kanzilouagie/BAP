@@ -4,8 +4,9 @@ import app from '../authentication/base';
 import { AuthContext } from '../authentication/Auth';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import PrimaryButton from '../components/PrimaryButton';
+import Button from '../components/Button';
 import SecondaryButton from '../components/SecondaryButton';
+import LoginImage from '../assets/images/login.png';
 
 const Login = () => {
   const history = useHistory();
@@ -39,14 +40,13 @@ const Login = () => {
     <>
       <DarkWrapper></DarkWrapper>
       <PopupWrapper>
-        <SecondaryButton
-          style={{ position: 'absolute', right: 20, top: 20, fontSize: '30px' }}
-          width={'auto'}
-          padding={'0 20px'}
+        <Button
+          style={{ position: 'absolute', right: 20, top: 20}}
+          border="#343988"
           onClick={() => handleExit()}
         >
           x
-        </SecondaryButton>
+        </Button>
         <PopupLeft>
           <h2>
             Welkom terug!
@@ -57,17 +57,17 @@ const Login = () => {
             <input name="email" type="email" />
             <label>Wachtwoord</label>
             <input name="password" type="password" />
-            <PrimaryButton
-              height={'50px'}
-              width={'100%'}
-              padding={'0 20px'}
+            <Button
+              color="#FF9FAA"
+              width={'322px'}
+              style={{
+                marginTop: '4rem',
+                height: '50px'
+              }}
               type="submit"
             >
               Log in
-            </PrimaryButton>
-            <button>
-              <Link to="/step1">Register</Link>
-            </button>
+            </Button>
           </form>
           <a className="forgot" href="#">
             Wachtwoord vergeten?
@@ -76,25 +76,12 @@ const Login = () => {
 
         <PopupRight>
           <h2>Nog geen account?</h2>
-          <div className="loginPic">foto</div>
+          <img src={LoginImage} width="600" height="auto" />
           <div className="buttons">
-            <PrimaryButton
-              height={'50px'}
-              width={'auto'}
-              padding={'0 20px'}
-              style={{ top: '0px' }}
-              onClick={() => history.push('/step1')}
-            >
+            <Button color="#FF9FAA" onClick={() => history.push('/step1')}>
               Ik wil meedoen
-            </PrimaryButton>
-            <SecondaryButton
-              height={'50px'}
-              width={'auto'}
-              padding={'0 20px'}
-              style={{ fontSize: '20px' }}
-            >
-              Hoe werkt het?
-            </SecondaryButton>
+            </Button>
+            <Button border="#343988">Hoe werkt het?</Button>
           </div>
         </PopupRight>
       </PopupWrapper>
@@ -187,7 +174,7 @@ const PopupLeft = styled.div`
   }
 
   .forgot {
-    margin-top: 4rem;
+    margin-top: 2rem;
     color: black;
     text-decoration: none;
     text-decoration: underline;
@@ -212,7 +199,7 @@ const PopupRight = styled.div`
   align-items: center;
   flex: 3;
   height: 100%;
-  padding: 100px 40px;
+  padding: 200px 40px;
   background-color: #f69796;
   z-index: -1000;
   border-radius: 30px;
@@ -224,7 +211,7 @@ const PopupRight = styled.div`
   }
 
   .buttons {
-    width: 400px;
+    width: 350px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
