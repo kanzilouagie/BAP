@@ -60,7 +60,7 @@ const Overview = () => {
         <Button
           style={{ fontSize: '2rem' }}
           color="#FF9FAA"
-          onClick={() => history.push('/')}
+          onClick={() => history.push('/myteam')}
         >
           Mijn team
         </Button>
