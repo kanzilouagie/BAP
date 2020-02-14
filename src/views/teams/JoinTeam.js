@@ -78,6 +78,7 @@ const JoinTeam = () => {
           </LeftContainer>
           <RightContainer>
             <form onSubmit={handleSearchTeam}>
+              <label>team zoeken</label>
               <input type="search" name="q" />
             </form>
             <ScrollDiv>
@@ -184,13 +185,15 @@ const RightContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-end;
+  align-items: flex-end;
 
   form {
+    box-sizing: border-box;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-start;
   }
 

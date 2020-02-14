@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import { Redirect, useHistory } from 'react-router';
 import app from '../authentication/base';
 import styled from 'styled-components';
-import PrimaryButton from '../components/PrimaryButton';
+import Button from '../components/Button';
 import SecondaryButton from '../components/SecondaryButton';
 import logo from '../assets/images/logo_think_pink.png';
 import { FacebookIcon, TwitterIcon } from 'react-share';
@@ -41,40 +41,27 @@ const Home = () => {
         </HomeBody>
         <BottomNavigation>
           <LeftBottomNav>
-            <PrimaryButton
-              height={'50px'}
-              width={'auto'}
-              padding={'0 20px'}
-              style={{ fontSize: '16px' }}
-              onClick={() => history.push('/step1')}
-            >
+            <Button color="#FF9FAA" onClick={() => history.push('/step1')}>
               Ik wil meedoen
-            </PrimaryButton>
-            <SecondaryButton
-              height={'50px'}
-              width={'auto'}
-              padding={'0 20px'}
-              style={{ fontSize: '16px' }}
-            >
-              Hoe werkt het?
-            </SecondaryButton>
+            </Button>
+            <Button border="#343988">Hoe werkt het?</Button>
           </LeftBottomNav>
           <RightBottomNav>
             <SocialMediaButtons>
-              <SecondaryButton padding={'0'}>
+              <Button border="#343988">
                 <FacebookIcon
-                  width={'40px'}
-                  height={'40px'}
+                  size={40}
+                  iconFillColor={'#343988'}
                   bgStyle={{ fill: 'none' }}
                 />
-              </SecondaryButton>
-              <SecondaryButton padding={'0'}>
+              </Button>
+              <Button border="#343988">
                 <TwitterIcon
-                  width={'40px'}
-                  height={'40px'}
+                  size={40}
+                  iconFillColor={'#343988'}
                   bgStyle={{ fill: 'none' }}
                 />
-              </SecondaryButton>
+              </Button>
             </SocialMediaButtons>
           </RightBottomNav>
         </BottomNavigation>
@@ -129,7 +116,7 @@ const BottomNavigation = styled.footer`
   padding: 40px;
 `;
 
-const LeftBottomNav = styled.footer`
+const LeftBottomNav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -137,7 +124,7 @@ const LeftBottomNav = styled.footer`
   height: auto;
 `;
 
-const RightBottomNav = styled.footer`
+const RightBottomNav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -153,24 +140,8 @@ const TopNavigation = styled.nav`
   align-items: flex-start;
 `;
 
-const RightNav = styled.div`
-  width: 187.05px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
-const SecondaryNav = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
 const SocialMediaButtons = styled.div`
-  width: 100px;
+  width: 170px;
   display: flex;
   flex: 1;
   justify-content: space-between;
