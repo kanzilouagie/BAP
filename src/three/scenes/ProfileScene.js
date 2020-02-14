@@ -92,7 +92,7 @@ class ProfileScene {
       stage.position.z = -0.5;
       console.log(stage);
       globals.scene.add(gltf.scene);
-      this.containerMount = new ContainerMount(stage);
+      this.containerMount = new ContainerMount(stage, '#inhoud');
     });
     // var geometry = new THREE.BoxGeometry(2.5, 2, 1);
     // var material = new THREE.MeshBasicMaterial({ color: 0x555555 });

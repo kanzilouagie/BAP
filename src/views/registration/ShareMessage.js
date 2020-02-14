@@ -1,11 +1,13 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import firebase from '../../authentication/base';
 import { StoreContext } from '../../store/StoreProvider';
 import styled from 'styled-components';
 import PrimaryButton from '../../components/PrimaryButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo_think_pink.png';
+import IdleScene from '../../three/scenes/IdleScene';
+import globals from '../../three/globals';
+import Button from '../../components/Button';
 
 const ShareMessage = () => {
   const history = useHistory();
@@ -32,35 +34,39 @@ const ShareMessage = () => {
     },
     [store, history]
   );
+
+  useEffect(() => {
+    if (!store.isIdleLoaded) {
+      globals.currentScene = new IdleScene();
+      store.setIsIdleLoaded(true);
+    }
+  }, [store]);
+
+  useEffect(() => {
+    return () => {
+      if (!history.location.pathname.includes('step5')) {
+        globals.currentScene.scene.dispose();
+        store.setIsIdleLoaded(false);
+        globals.currentScene = null;
+      }
+    };
+  }, [history]);
   return (
     <Background>
       <TopNavigation>
         <img src={logo} />
         <RightNav>
-          <PrimaryButton height={'50px'} width={'auto'} padding={'0 20px'}>
+          <Button color="#FF9FAA" border="#E86565" width="5rem">
             ?
-          </PrimaryButton>
+          </Button>
         </RightNav>
       </TopNavigation>
       <HomeBody>
-        <SecondaryButton
-          onClick={() => history.push('/step3')}
-          height={'30px'}
-          width={'auto'}
-          padding={'0 10px'}
-          style={{
-            fontSize: '16px',
-            marginBottom: '2rem',
-            position: 'relative'
-          }}
-        >
+        <Button border="#343988" onClick={() => history.push('/step3')}>
           Terug
-        </SecondaryButton>
+        </Button>
         <h2>STAP 4/5</h2>
         <Steps>
-          <ImageDiv>
-            <p>Hier komt een image</p>
-          </ImageDiv>
           <FormDiv>
             <h1>Samen zijn we sterk, laat je horen!</h1>
             <p>
@@ -79,15 +85,13 @@ const ShareMessage = () => {
                 name="message"
                 placeholder="Schrijf hier jouw bericht en stuur hem de wereld in!"
               />
-              <SubmitButton
-                style={{ alignSelf: 'flex-end' }}
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <Button
                 type="submit"
+                color="#FF9FAA"
+                style={{ alignSelf: 'flex-end' }}
               >
                 We zijn er bijna
-              </SubmitButton>
+              </Button>
             </form>
           </FormDiv>
         </Steps>
@@ -103,11 +107,11 @@ const Background = styled.div`
   z-index: -1;
   width: 100%;
   height: 100vh;
-  background: #ffdde1;
+  /* background: #ffdde1; */
 `;
 
 const HomeBody = styled.div`
-  padding: 0 40px;
+  padding: 0 15rem 0 40px;
 
   h2 {
     position: relative;
@@ -115,15 +119,16 @@ const HomeBody = styled.div`
     font-weight: bold;
     color: #343988;
     margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 `;
 
 const Steps = styled.div`
-  position: relative;
-  top: -60px;
+  margin-top: -10rem;
+  margin-right: 20rem;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   h1 {
     font-size: 35px;
@@ -134,8 +139,6 @@ const Steps = styled.div`
     width: 500px;
   }
 `;
-
-const ImageDiv = styled.div``;
 
 const FormDiv = styled.div`
   display: flex;

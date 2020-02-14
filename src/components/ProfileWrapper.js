@@ -127,7 +127,7 @@ const Container = styled.div`
 `;
 
 const StickyContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 22rem;
   left: 67.5rem;
   color: white;

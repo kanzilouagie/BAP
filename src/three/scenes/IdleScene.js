@@ -1,21 +1,18 @@
 import * as THREE from 'three';
-import stageModel from '../../assets/models/stage.gltf';
 import globals from '../globals';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import GameObjectManager from '../objects/GameObjectManager';
 import CameraInfo from '../objects/CameraInfo';
 import User from '../objects/User';
 import gsap from 'gsap';
-import ContainerMount from '../objects/ContainerMount';
 import { Power1 } from 'gsap/gsap-core';
 
-class OnboardingScene {
+class IdleScene {
   constructor() {
     this.name = 'overview';
     this.scene = new THREE.Scene();
     globals.scene = this.scene;
     this.scene.background = new THREE.Color('#ffdde1');
-    console.log(globals);
 
     const addLight = (...pos) => {
       const color = 0xffffff;
@@ -24,7 +21,6 @@ class OnboardingScene {
       light.position.set(...pos);
       light.castShadow = true;
       light.shadow.radius = 10;
-      console.log(light.shadow);
       this.scene.add(light);
       // scene.add(light.target);
       globals.light = light;
@@ -123,20 +119,6 @@ class OnboardingScene {
       model.animations = animsByName;
     };
 
-    const clearObjectLook = () => {
-      Object.keys(globals.looks).forEach(lookCat => {
-        const wearedItemKey = globals.character[lookCat];
-        globals.looks[lookCat].forEach((itemName, key) => {
-          if (key !== wearedItemKey) {
-            const object = this.scene.getObjectByName(itemName, true);
-            if (object) {
-              object.visible = false;
-            }
-          }
-        });
-      });
-    };
-
     // add model to scene
     this.gameObjectManager = new GameObjectManager();
 
@@ -153,8 +135,8 @@ class OnboardingScene {
         );
         globals.cameraInfo = gameObject.addComponent(CameraInfo);
       }
-      gsap.set(globals.camera.position, { y: 2, z: 7, x: 1.8 });
-      gsap.set(globals.camera.rotation, { x: 1 });
+      gsap.set(globals.camera.position, { y: 2, z: 4, x: 1.8 });
+      gsap.set(globals.camera.rotation, { x: 0 });
       // add user object
       {
         const gameObject = this.gameObjectManager.createGameObject(
@@ -165,41 +147,17 @@ class OnboardingScene {
         globals.user = gameObject.addComponent(User, globals.models.stretcher);
         globals.user.inputManager = this.inputManager;
       }
-      let stage;
-      const gltfLoader = new GLTFLoader();
-      gltfLoader.load(stageModel, gltf => {
-        repositionModel(gltf.scene);
 
-        gltf.scene.traverse(node => {
-          if (node instanceof THREE.Mesh) {
-            node.castShadow = true;
-            node.receiveShadow = true;
-          }
-        });
-        stage = gltf.scene;
-        stage.scale.x = 0.01;
-        stage.scale.y = 0.01;
-        stage.scale.z = 0.01;
-        stage.position.x = 0.5;
-        stage.position.y = -1.2;
-        stage.position.z = -0.5;
-        console.log(stage);
-        globals.scene.add(gltf.scene);
-        this.containerMount = new ContainerMount(stage, '#vast');
-      });
-      clearObjectLook();
       gsap.to(globals.camera.rotation, { x: 0 });
-      gsap.to(globals.camera.position, 1, { ease: Power1.easeOut, y: 0.6 });
+      gsap.to(globals.camera.position, 1, { ease: Power1.easeOut, y: -0 });
+      this.changeLook();
     };
+
     if (loadingManager) {
       loadingManager.onLoad = init;
     } else {
       init();
     }
-  }
-
-  historyUpdate() {
-    this.containerMount.updateElement();
   }
 
   changeLook() {
@@ -222,13 +180,11 @@ class OnboardingScene {
   }
 
   update() {
-    if (this.containerMount) {
-      this.containerMount.update();
-    }
     if (globals.user) {
       globals.user.update();
+      globals.user.gameObject.transform.rotation.y += 0.01;
     }
   }
 }
 
-export default OnboardingScene;
+export default IdleScene;

@@ -10,6 +10,7 @@ import DashBoardScene from '../../three/scenes/OnboardingScene.js';
 import Button from '../../components/Button';
 import CustomizerInputRow from '../../components/CustomizerInputRow';
 import gsap from 'gsap';
+import SideNavigation from '../../components/SideNavigation';
 
 const CustomizeRunner = () => {
   const history = useHistory();
@@ -24,17 +25,18 @@ const CustomizeRunner = () => {
 
   useEffect(() => {
     if (!store.isOnboardingLoaded) {
-      gsap.set(document.getElementById('inhoud'), { opacity: 0 });
+      gsap.set(document.getElementById('vast'), { opacity: 0 });
       globals.currentScene = new DashBoardScene();
       store.setIsOnboardingLoaded(true);
       setTimeout(() => {
-        gsap.to(document.getElementById('inhoud'), 0.5, { opacity: 1 });
+        gsap.to(document.getElementById('vast'), 0.5, { opacity: 1 });
       }, 800);
     }
   }, [store]);
 
   useEffect(() => {
     return () => {
+      console.log('test');
       globals.currentScene.scene.dispose();
       store.setIsOnboardingLoaded(false);
       globals.currentScene = null;
@@ -66,7 +68,7 @@ const CustomizeRunner = () => {
             <br /> Personaliseer jouw deelnemer naar de stijl die jij wilt.
           </p>
           <Choices>
-            <StickyContainer id="inhoud">
+            <StickyContainer id="vast">
               <Container>
                 <CustomizerInputRow
                   category="head"
@@ -102,9 +104,9 @@ const CustomizeRunner = () => {
 export default CustomizeRunner;
 
 const StickyContainer = styled.div`
-  position: absolute;
-  top: -44rem;
-  left: -22rem;
+  position: fixed;
+  top: 40rem;
+  left: 64rem;
   color: white;
   height: 35vh;
   width: 35vh;
@@ -114,9 +116,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-
-  height: 100%;
 
   & > div + div {
     margin-top: 2rem;
@@ -124,7 +123,7 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-  position: relative;
+  /* position: relative; */
   z-index: -1;
   width: 100%;
   height: 100vh;

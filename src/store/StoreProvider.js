@@ -13,6 +13,10 @@ export const StoreProvider = ({ children }) => {
     setIsOnboardingLoaded: bool => {
       store.isOnboardingLoaded = bool;
     },
+    isIdleLoaded: false,
+    setIsIdleLoaded: bool => {
+      store.isIdleLoaded = bool;
+    },
     setIsOverviewLoaded: bool => {
       store.isOverviewLoaded = bool;
     },

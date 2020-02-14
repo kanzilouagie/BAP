@@ -18,7 +18,7 @@ const StyledButton = styled.button`
   border-radius: 1rem;
   position: relative;
   transition: 0.1s;
-  top: ${props => (props.active ? '0.6rem' : '0')};
+  top: ${props => (props.active || props.disabled ? '0.6rem' : '0')};
   cursor: pointer;
 
   &::after {
@@ -33,7 +33,7 @@ const StyledButton = styled.button`
     border-color: ${({ border }) => (border ? border : 'black')};
     border-top: none;
     position: absolute;
-    top: ${props => (props.active ? '0.4rem' : '1rem')};
+    top: ${props => (props.active || props.disabled ? '0.4rem' : '1rem')};
     left: -0.2rem;
     width: 100%;
     height: 100%;

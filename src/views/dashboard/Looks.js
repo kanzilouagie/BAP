@@ -45,8 +45,10 @@ const Looks = () => {
         />
         <Button
           border="#343988"
+          width="10rem"
           disabled={isSaving}
           onClick={() => handleSave()}
+          style={{ marginTop: '8rem' }}
         >
           Opslaan
         </Button>
@@ -59,6 +61,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & h1 {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: bold;
+  }
 
   & > * {
     margin-top: 2rem;
