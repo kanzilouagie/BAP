@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SideNavigation from '../../components/SideNavigation';
 import styled from 'styled-components';
-import PrimaryButton from '../../components/PrimaryButton';
+import Button from '../../components/Button';
 import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo_think_pink.png';
 import { useHistory, Redirect } from 'react-router';
@@ -32,25 +32,13 @@ const MyTeam = () => {
       <TopNavigation>
         <img src={logo} />
         <RightNav>
-          <PrimaryButton height={'50px'} width={'auto'} padding={'0 20px'}>
-            ?
-          </PrimaryButton>
+          <Button color="#FF9FAA">?</Button>
         </RightNav>
       </TopNavigation>
       <HomeBody>
-        <SecondaryButton
-          onClick={() => history.push('/')}
-          height={'30px'}
-          width={'auto'}
-          padding={'0 10px'}
-          style={{
-            fontSize: '16px',
-            marginBottom: '2rem',
-            position: 'relative'
-          }}
-        >
+        <Button onClick={() => history.push('/')} border="#343988">
           Terug
-        </SecondaryButton>
+        </Button>
         <Steps>
           <h1>Alleen is ook maar alleen… Maar als team sta je sterk!</h1>
           <p>
@@ -60,25 +48,18 @@ const MyTeam = () => {
           <Choices>
             <div>
               <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+              <Button
+                color="#FF9FAA"
                 onClick={() => history.push('/createteam')}
               >
                 Creër een team
-              </PrimaryButton>
+              </Button>
             </div>
             <div>
               <div>hier komt een image</div>
-              <PrimaryButton
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
-                onClick={() => history.push('/jointeam')}
-              >
+              <Button color="#FF9FAA" onClick={() => history.push('/jointeam')}>
                 Aansluiten bij team
-              </PrimaryButton>
+              </Button>
             </div>
           </Choices>
         </Steps>

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import PrimaryButton from '../../components/PrimaryButton';
+import Button from '../../components/Button';
 import SecondaryButton from '../../components/SecondaryButton';
 import logo from '../../assets/images/logo_think_pink.png';
 import { useHistory } from 'react-router';
@@ -52,9 +52,7 @@ const CreateTeam = () => {
       <TopNavigation>
         <img src={logo} />
         <RightNav>
-          <PrimaryButton height={'50px'} width={'auto'} padding={'0 20px'}>
-            ?
-          </PrimaryButton>
+          <Button color="#FF9FAA">?</Button>
         </RightNav>
       </TopNavigation>
       <HomeBody>
@@ -94,34 +92,20 @@ const CreateTeam = () => {
                 teamcaptain)
               </p>
               <div className="buttons">
-                <PublicButton
-                  isPublic={isPublic}
+                <StyledButton
+                  active={isPublic}
                   onClick={() => setIsPublic(true)}
-                  height={'30px'}
-                  width={'auto'}
-                  padding={'0 10px'}
-                  style={{
-                    fontSize: '16px',
-                    marginBottom: '2rem',
-                    position: 'relative'
-                  }}
+                  border="#343988"
                 >
                   openbaar
-                </PublicButton>
-                <PrivateButton
-                  isPublic={isPublic}
+                </StyledButton>
+                <StyledButton
+                  active={!isPublic}
                   onClick={() => setIsPublic(false)}
-                  height={'30px'}
-                  width={'auto'}
-                  padding={'0 10px'}
-                  style={{
-                    fontSize: '16px',
-                    marginBottom: '2rem',
-                    position: 'relative'
-                  }}
+                  border="#343988"
                 >
                   gesloten
-                </PrivateButton>
+                </StyledButton>
               </div>
               <SubmitButton
                 style={{ alignSelf: 'flex-end' }}
@@ -264,131 +248,45 @@ const RightContainer = styled.div`
   }
 `;
 
-const PublicButton = styled.a`
-  cursor: pointer;
-  text-shadow: ${props =>
-    props.isPublic
-      ? '0 -2px 0 #343988, 0 1px 1px #6066c2, 0 0 4px white'
-      : '0 -2px 0 #181a3e, 0 1px 1px #6066c2'};
-  box-sizing: border-box;
-  font-size: 2em;
-  font-family: Helvetica, Arial, Sans-Serif;
-  text-decoration: none;
-  font-weight: bold;
-  color: ${props => (props.isPublic ? '#262a63' : '#262a63')};
-  height: ${props => props.height || '40px'};
-  line-height: ${props => props.height || '40px'};
-  display: inline-block;
-  width: ${props => props.width || '40px'};
-  padding: ${props => props.padding || '40px'};
-  background: linear-gradient(to bottom, #222ee6 0%, #323bc7 26%, #343988 100%);
-  border-radius: 5px;
-  border-top: 1px solid #676dc5;
-  border-bottom: 1px solid #6066c2;
-  top: ${props => (props.isPublic ? '0' : '6px')};
-  transition: all 0.06s ease-out;
+const StyledButton = styled.a`
+  padding: 0.5rem 1.2rem;
+  width: ${({ width }) => (width ? width : 'auto')};
+  color: ${({ border }) => (border ? border : 'black')};
+  font-size: 1.6rem;
+  background-color: ${({ color }) => (color ? color : 'transparent')};
+  border: solid black 0.2rem;
+  border-color: ${({ border }) => (border ? border : 'black')};
+  border-radius: 1rem;
   position: relative;
-
-  &:visited {
-    color: #262a63;
-  }
-  &:hover {
-    background: linear-gradient(
-      to bottom,
-      #2c37e7 0%,
-      #3740cc 26%,
-      #373c8f 100%
-    );
-  }
-  &:active {
-    top: 6px;
-    text-shadow: 0 -2px 0 #343988, 0 1px 1px #6066c2, 0 0 4px white;
-    color: #3b419a;
-  }
-  &:active:before {
-    top: 0;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.7), 0 3px 9px rgba(0, 0, 0, 0.2);
-  }
-  &:before {
-    display: inline-block;
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    top: ${props => (props.isPublic ? '0' : '6px')};
-    border-radius: 5px;
-    height: ${props => props.height || '38px'};
-    background: linear-gradient(to top, #000 0%, #0e102f 6px);
-    transition: all 0.078s ease-out;
-    box-shadow: ${props =>
-      props.isPublic
-        ? '0 3px 3px rgba(0, 0, 0, 0.7), 0 3px 9px rgba(0, 0, 0, 0.2)'
-        : '0 1px 0 2px rgba(0, 0, 0, 0.3), 0 5px 2.4px rgba(0, 0, 0, 0.5),0 10.8px 9px rgba(0, 0, 0, 0.2)'};
-  }
-`;
-
-const PrivateButton = styled.a`
+  transition: 0.1s;
+  top: ${props => (props.active ? '0.6rem' : '0')};
   cursor: pointer;
-  text-shadow: ${props =>
-    !props.isPublic
-      ? '0 -2px 0 #343988, 0 1px 1px #6066c2, 0 0 4px white'
-      : '0 -2px 0 #181a3e, 0 1px 1px #6066c2'};
-  box-sizing: border-box;
-  font-size: 2em;
-  font-family: Helvetica, Arial, Sans-Serif;
-  text-decoration: none;
-  font-weight: bold;
-  color: ${props => (!props.isPublic ? '#262a63' : '#262a63')};
-  height: ${props => props.height || '40px'};
-  line-height: ${props => props.height || '40px'};
-  display: inline-block;
-  width: ${props => props.width || '40px'};
-  padding: ${props => props.padding || '40px'};
-  background: linear-gradient(to bottom, #222ee6 0%, #323bc7 26%, #343988 100%);
-  border-radius: 5px;
-  border-top: 1px solid #676dc5;
-  border-bottom: 1px solid #6066c2;
-  top: ${props => (props.isPublic ? '0' : '6px')};
-  transition: all 0.06s ease-out;
-  position: relative;
 
-  &:visited {
-    color: #262a63;
-  }
-  &:hover {
-    background: linear-gradient(
-      to bottom,
-      #2c37e7 0%,
-      #3740cc 26%,
-      #373c8f 100%
-    );
-  }
-  &:active {
-    top: 6px;
-    text-shadow: 0 -2px 0 #343988, 0 1px 1px #6066c2, 0 0 4px white;
-    color: #3b419a;
-  }
-  &:active:before {
-    top: 0;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.7), 0 3px 9px rgba(0, 0, 0, 0.2);
-  }
-  &:before {
-    display: inline-block;
+  &::after {
     content: '';
+    display: inline-block;
+    background-color: ${({ color }) => (color ? color : 'transparent')};
+    border: solid black 0.2rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-color: ${({ border }) => (border ? border : 'black')};
+    border-top: none;
     position: absolute;
-    left: 0;
-    right: 0;
+    top: ${props => (props.active ? '0.4rem' : '1rem')};
+    left: -0.2rem;
+    width: 100%;
+    height: 100%;
     z-index: -1;
-    top: ${props => (!props.isPublic ? '0' : '6px')};
-    border-radius: 5px;
-    height: ${props => props.height || '38px'};
-    background: linear-gradient(to top, #000 0%, #0e102f 6px);
-    transition: all 0.078s ease-out;
-    box-shadow: ${props =>
-      !props.isPublic
-        ? '0 3px 3px rgba(0, 0, 0, 0.7), 0 3px 9px rgba(0, 0, 0, 0.2)'
-        : '0 1px 0 2px rgba(0, 0, 0, 0.3), 0 5px 2.4px rgba(0, 0, 0, 0.5),0 10.8px 9px rgba(0, 0, 0, 0.2)'};
+    transition: 0.1s;
+  }
+
+  &:active {
+    top: 0.6rem;
+    &::after {
+      top: 0.4rem;
+    }
   }
 `;
 

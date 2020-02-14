@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import app from '../authentication/base';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import SecondaryButton from './SecondaryButton';
+import Button from './Button';
 import firebase from '../authentication/base';
 const SideNavigation = () => {
   const [showNav, setShowNav] = useState(false);
@@ -11,6 +11,7 @@ const SideNavigation = () => {
     <>
       <NavigationButton>
         <button
+          className="loginButton"
           onClick={() =>
             firebase.auth().currentUser ? app.auth().signOut() : null
           }
@@ -26,14 +27,9 @@ const SideNavigation = () => {
             {firebase.auth().currentUser ? 'Afmelden' : 'Aanmelden'}
           </Link>
         </button>
-        <SecondaryButton
-          height={'50px'}
-          width={'auto'}
-          padding={'0 20px'}
-          onClick={() => setShowNav(!showNav)}
-        >
+        <Button border="#343988" onClick={() => setShowNav(!showNav)}>
           Menu
-        </SecondaryButton>
+        </Button>
       </NavigationButton>
       <MainNavigation showNav={showNav}>
         <TopNavigation>
@@ -61,12 +57,12 @@ const NavigationButton = styled.div`
   position: absolute;
   right: 20px;
   top: 20px;
-  width: 270px;
+  width: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  button {
+  .loginButton {
     background: none;
     border: none;
   }

@@ -4,7 +4,7 @@ import firebase from '../../authentication/base';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import PrimaryButton from '../../components/PrimaryButton';
+import Button from '../../components/Button';
 import SecondaryButton from '../../components/SecondaryButton';
 
 const NewMessage = () => {
@@ -74,14 +74,13 @@ const NewMessage = () => {
       <FadedWrapper></FadedWrapper>
       <DarkWrapper></DarkWrapper>
       <PopupWrapper>
-        <SecondaryButton
-          style={{ position: 'absolute', right: 20, top: 20, fontSize: '30px' }}
-          width={'auto'}
-          padding={'0 20px'}
+        <Button
+          border="#343988"
+          style={{ position: 'absolute', right: 20, top: 20 }}
           onClick={() => handleExit()}
         >
           x
-        </SecondaryButton>
+        </Button>
         <PopupLeft>
           <p>test</p>
         </PopupLeft>
@@ -103,15 +102,13 @@ const NewMessage = () => {
                 rows="10"
                 placeholder="Schrijf hier jouw bericht en stuur hem de wereld in!"
               />
-              <SubmitButton
+              <Button
                 style={{ alignSelf: 'flex-end' }}
-                height={'50px'}
-                width={'auto'}
-                padding={'0 20px'}
+                color="#FF9FAA"
                 type="submit"
               >
                 Bericht delen
-              </SubmitButton>
+              </Button>
             </form>
           </DetailBody>
         </PopupRight>
