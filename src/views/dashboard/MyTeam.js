@@ -3,7 +3,7 @@ import SideNavigation from '../../components/SideNavigation';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import SecondaryButton from '../../components/SecondaryButton';
-import logo from '../../assets/images/logo_think_pink.png';
+import logo from '../../assets/images/logo-think-pink-Europe.svg';
 import { useHistory, Redirect } from 'react-router';
 import firebase from '../../authentication/base';
 const MyTeam = () => {

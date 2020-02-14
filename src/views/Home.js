@@ -4,10 +4,11 @@ import app from '../authentication/base';
 import styled from 'styled-components';
 import Button from '../components/Button';
 import SecondaryButton from '../components/SecondaryButton';
-import logo from '../assets/images/logo_think_pink.png';
+import logo from '../assets/images/logo-think-pink-Europe.svg';
 import { FacebookIcon, TwitterIcon } from 'react-share';
 import { AuthContext } from '../authentication/Auth';
 import SideNavigation from '../components/SideNavigation';
+import BackgroundImage from '../assets/images/homepage-groepsfoto-bg.png';
 
 const Home = () => {
   const history = useHistory();
@@ -44,18 +45,20 @@ const Home = () => {
             <Button color="#FF9FAA" onClick={() => history.push('/step1')}>
               Ik wil meedoen
             </Button>
-            <Button border="#343988">Hoe werkt het?</Button>
+            <Button border="#343988" color="#FFDDE1">
+              Hoe werkt het?
+            </Button>
           </LeftBottomNav>
           <RightBottomNav>
             <SocialMediaButtons>
-              <Button border="#343988">
+              <Button border="#343988" color="#FFDDE1">
                 <FacebookIcon
                   size={40}
                   iconFillColor={'#343988'}
                   bgStyle={{ fill: 'none' }}
                 />
               </Button>
-              <Button border="#343988">
+              <Button border="#343988" color="#FFDDE1">
                 <TwitterIcon
                   size={40}
                   iconFillColor={'#343988'}
@@ -77,7 +80,10 @@ const Background = styled.div`
   z-index: -1001;
   width: 100%;
   height: 100vh;
-  background: #ffdde1;
+  background-image: url(${BackgroundImage});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right bottom;
 `;
 
 const HomeBody = styled.div`
@@ -88,14 +94,14 @@ const HomeBody = styled.div`
     width: 500px;
     font-size: 60px;
     font-weight: bold;
-    color: #e86565;
+    color: white;
     margin-bottom: 5rem;
   }
 
   h2 {
     font-size: 20px;
     font-weight: bold;
-    color: #e86565;
+    color: #343988;
     margin-bottom: 2rem;
   }
 
