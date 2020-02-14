@@ -51,6 +51,7 @@ const Detail = () => {
             }}
             border="#343988"
             width="5rem"
+            onClick={() => handleExit()}
           >
             x
           </Button>
